@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { useEffect, useState } from "react";
 
@@ -214,7 +213,7 @@ export default function EmbarazadasPage() {
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -430,4 +429,4 @@ export default function EmbarazadasPage() {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)
+

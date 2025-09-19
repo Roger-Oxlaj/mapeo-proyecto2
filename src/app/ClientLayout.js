@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -142,7 +142,7 @@ export default function ClientLayout({ children }) {
     </div>
   );
 }
-=======
+
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -286,4 +286,3 @@ export default function ClientLayout({ children }) {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)

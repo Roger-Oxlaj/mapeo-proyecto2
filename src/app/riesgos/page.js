@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { useEffect, useState } from "react";
 
@@ -143,7 +142,7 @@ export default function RiesgosPage() {
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -288,4 +287,3 @@ export default function RiesgosPage() {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { useEffect, useState } from "react";
 
@@ -172,7 +171,7 @@ export default function UbicacionesPage() {
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -346,4 +345,3 @@ export default function UbicacionesPage() {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)

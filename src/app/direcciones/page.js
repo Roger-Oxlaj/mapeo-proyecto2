@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -138,7 +138,7 @@ fetch
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -278,4 +278,4 @@ fetch
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)
+

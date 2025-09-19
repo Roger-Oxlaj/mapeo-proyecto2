@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
@@ -128,7 +127,7 @@ export default function Reportes() {
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
@@ -258,4 +257,3 @@ export default function Reportes() {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)

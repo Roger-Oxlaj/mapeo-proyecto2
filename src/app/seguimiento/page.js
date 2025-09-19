@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { useEffect, useState } from "react";
 
@@ -137,7 +136,7 @@ export default function SeguimientosPage() {
     </div>
   );
 }
-=======
+
 "use client";
 import { useEffect, useState } from "react";
 
@@ -276,4 +275,3 @@ export default function SeguimientosPage() {
     </div>
   );
 }
->>>>>>> 4f8914e (actualizado)
