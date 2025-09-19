@@ -1,4 +1,3 @@
-
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,9 +14,10 @@ export default function ClientLayout({ children }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/check-session", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://backend-demo-xowfm.ondigitalocean.app/check-session",
+          { credentials: "include" }
+        );
         const data = await res.json();
 
         if (data.loggedIn) {
@@ -38,7 +38,7 @@ export default function ClientLayout({ children }) {
 
   async function handleLogout() {
     try {
-      await fetch("/api/logout", {
+      await fetch("https://backend-demo-xowfm.ondigitalocean.app/logout", {
         method: "POST",
         credentials: "include",
       });
