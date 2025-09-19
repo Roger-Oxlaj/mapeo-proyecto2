@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export default function PaypalDonateButton() {
   return (
     <form
@@ -31,7 +30,7 @@ export default function PaypalDonateButton() {
     </form>
   );
 }
-=======
+
 export default function PaypalDonateButton() {
   return (
     <form
@@ -64,4 +63,4 @@ export default function PaypalDonateButton() {
     </form>
   );
 }
->>>>>>> 4f8914e (actualizado)
+
