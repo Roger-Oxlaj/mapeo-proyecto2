@@ -15,7 +15,7 @@ export default function ClientLayout({ children }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/check-session", {
+        const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/api/check-session", {
           credentials: "include",
         });
         const data = await res.json();
@@ -125,7 +125,7 @@ export default function ClientLayout({ children }) {
           </nav>
         </aside>
       )}
-
+      
       {/* Contenido principal */}
       <main className="flex-1 bg-gray-100 p-6">{children}</main>
 
