@@ -8,7 +8,7 @@ export default function DireccionesPage() {
   const [editando, setEditando] = useState(null);
 fetch
   const cargarDirecciones = () => {
-    fetch("http://localhost:3001/direcciones")
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/direcciones")
       .then((res) => {
         if (!res.ok) throw new Error("Error al obtener direcciones");
         return res.json();
@@ -33,7 +33,7 @@ fetch
     const ciudad = e.target.ciudad.value;
     const depto = e.target.departamento.value;
 
-    const res = await fetch("http://localhost:3001/direcciones", {
+    const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/direcciones", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Calle: calle, Ciudad: ciudad, Departamento: depto }),
@@ -50,7 +50,7 @@ fetch
 
   const eliminarDireccion = async (id) => {
     if (!confirm("¿Eliminar esta dirección?")) return;
-    const res = await fetch(`http://localhost:3001/direcciones/${id}`, { method: "DELETE" });
+    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/direcciones/${id}`, { method: "DELETE" });
     if (res.ok) {
       alert("🗑️ Dirección eliminada");
       cargarDirecciones();
@@ -65,7 +65,7 @@ fetch
     const ciudad = e.target.ciudad.value;
     const depto = e.target.departamento.value;
 
-    const res = await fetch(`http://localhost:3001/direcciones/${editando.ID_Direccion}`, {
+    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/direcciones/${editando.ID_Direccion}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Calle: calle, Ciudad: ciudad, Departamento: depto }),

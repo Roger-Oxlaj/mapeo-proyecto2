@@ -8,8 +8,7 @@ export default function RiesgosPage() {
   const [error, setError] = useState("");
 
   //Cargar riesgos
-  const cargarRiesgos = () => {
-    fetch("http://localhost:3001/riesgos")
+  const cargarRiesgos = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/riesgos")
       .then((res) => res.json())
       .then((data) => {
         setRiesgos(data);
@@ -22,8 +21,7 @@ export default function RiesgosPage() {
   };
 
   //Cargar embarazadas
-  const cargarEmbarazadas = () => {
-    fetch("http://localhost:3001/embarazadas")
+  const cargarEmbarazadas = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
@@ -40,7 +38,7 @@ export default function RiesgosPage() {
   //Eliminar riesgo
   const eliminar = async (id) => {
     if (!confirm("¿Seguro de eliminar este riesgo?")) return;
-    const res = await fetch(`http://localhost:3001/riesgos/${id}`, { method: "DELETE" });
+    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/riesgos/${id}`, { method: "DELETE" });
     if (res.ok) cargarRiesgos();
     else alert("⚠ Error al eliminar");
   };
@@ -59,7 +57,7 @@ export default function RiesgosPage() {
             Nivel: e.target.Nivel.value,
           };
 
-          const res = await fetch("http://localhost:3001/riesgos", {
+          const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/riesgos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),

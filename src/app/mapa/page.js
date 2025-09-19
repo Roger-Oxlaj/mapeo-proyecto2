@@ -39,8 +39,7 @@ export default function Mapa() {
   const [tempMarker, setTempMarker] = useState(null);
 
   // Obtener embarazadas con sus coordenadas desde el backend
-  useEffect(() => {
-    fetch("http://localhost:3001/embarazadas-con-direccion")
+  useEffect(() => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));

@@ -38,7 +38,7 @@ export default function RegistrarEmbarazada() {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/embarazadas", {
+      const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

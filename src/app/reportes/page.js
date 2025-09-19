@@ -17,8 +17,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale,
 export default function Reportes() {
   const [riesgos, setRiesgos] = useState({ bajo: 0, medio: 0, alto: 0 });
 
-  useEffect(() => {
-    fetch("http://localhost:3001/reportes/riesgos") // 🔹 Ajusta la URL/puerto de tu backend
+  useEffect(() => {fetch("https://backend-demo-xowfm.ondigitalocean.app/reportes/riesgos") // 🔹 Ajusta la URL/puerto de tu backend
       .then((res) => res.json())
       .then((data) => {
         const conteos = { bajo: 0, medio: 0, alto: 0 };

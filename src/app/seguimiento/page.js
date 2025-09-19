@@ -8,8 +8,7 @@ export default function SeguimientosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchData = () => {
-    fetch("http://localhost:3001/seguimientos")
+  const fetchData = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos")
       .then((res) => res.json())
       .then((data) => {
         setSeguimientos(data);
@@ -22,15 +21,13 @@ export default function SeguimientosPage() {
   };
 
   // ✅ Traer IDs de embarazadas y usuarios
-  const fetchEmbarazadas = () => {
-    fetch("http://localhost:3001/embarazadas")
+  const fetchEmbarazadas = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => setError(err.message));
   };
 
-  const fetchUsuarios = () => {
-    fetch("http://localhost:3001/usuarios")
+  const fetchUsuarios = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/usuarios")
       .then((res) => res.json())
       .then((data) => setUsuarios(data))
       .catch((err) => setError(err.message));
@@ -47,7 +44,7 @@ export default function SeguimientosPage() {
 
   const eliminar = async (id) => {
     if (!confirm("¿Seguro de eliminar este seguimiento?")) return;
-    const res = await fetch(`http://localhost:3001/seguimientos/${id}`, { method: "DELETE" });
+    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/seguimientos/${id}`, { method: "DELETE" });
     if (res.ok) fetchData();
     else alert("⚠ Error al eliminar");
   };
@@ -67,7 +64,7 @@ export default function SeguimientosPage() {
             Observaciones: e.target.Observaciones.value,
             Signos_Alarma: e.target.Signos_Alarma.value,
           };
-          const res = await fetch("http://localhost:3001/seguimientos", {
+          const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),

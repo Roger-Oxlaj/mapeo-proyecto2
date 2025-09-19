@@ -9,8 +9,7 @@ export default function UsuariosPage() {
 
   const rolesDisponibles = ["Usuario", "Admin", "Supervisor"];
 
-  const cargarUsuarios = () => {
-    fetch("https://backend-demo-xowfm.ondigitalocean.app/usuarios")
+  const cargarUsuarios = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/usuarios")
       .then((res) => {
         if (!res.ok) throw new Error("Error al obtener los usuarios");
         return res.json();

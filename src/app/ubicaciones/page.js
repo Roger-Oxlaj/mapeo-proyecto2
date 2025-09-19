@@ -7,8 +7,7 @@ export default function UbicacionesPage() {
   const [error, setError] = useState("");
   const [nombreEmbarazada, setNombreEmbarazada] = useState("");
 
-  const fetchData = () => {
-    fetch("http://localhost:3001/ubicaciones")
+  const fetchData = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/ubicaciones")
       .then((res) => res.json())
       .then((data) => {
         setUbicaciones(data);
@@ -29,7 +28,7 @@ export default function UbicacionesPage() {
 
   const eliminar = async (id) => {
     if (!confirm("¿Seguro de eliminar esta ubicación?")) return;
-    const res = await fetch(`http://localhost:3001/ubicaciones/${id}`, {
+    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/ubicaciones/${id}`, {
       method: "DELETE",
     });
     if (res.ok) fetchData();
@@ -43,7 +42,7 @@ export default function UbicacionesPage() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3001/embarazadas/${id}`);
+      const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/embarazadas/${id}`);
       if (res.ok) {
         const data = await res.json();
         setNombreEmbarazada(data.Nombre);
@@ -68,7 +67,7 @@ export default function UbicacionesPage() {
             Edad: e.target.Edad.value,
             ID_Direccion: e.target.ID_Direccion.value,
           };
-          const res = await fetch("http://localhost:3001/ubicaciones", {
+          const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/ubicaciones", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
