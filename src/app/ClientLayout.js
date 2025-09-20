@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import PaypalDonateButton from "./PaypalDonateButton";
 
 export default function ClientLayout({ children }) {
@@ -10,31 +10,39 @@ export default function ClientLayout({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch(
-          "https://backend-demo-xowfm.ondigitalocean.app/check-session",
-          { credentials: "include" }
-        );
+        const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/check-session", {
+          credentials: "include",
+        });
+
+        if (!res.ok) throw new Error("Error de red en check-session");
+
         const data = await res.json();
 
         if (data.loggedIn) {
           setIsLoggedIn(true);
         } else {
-          router.push("/");
+          // Si no está logueado y NO estamos en login, lo mandamos al login
+          if (pathname !== "/") {
+            router.push("/");
+          }
         }
       } catch (err) {
         console.error("Error verificando sesión:", err);
-        router.push("/");
+        if (pathname !== "/") {
+          router.push("/");
+        }
       } finally {
         setCargando(false);
       }
     };
 
     checkSession();
-  }, [router]);
+  }, [router, pathname]);
 
   async function handleLogout() {
     try {
@@ -53,15 +61,18 @@ export default function ClientLayout({ children }) {
   if (cargando) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-xl text-gray-600">🔄 Cargando...</p>
+        <p className="text-xl text-gray-600">🔄 Verificando sesión...</p>
       </div>
     );
   }
 
+  // Si estamos en login ("/"), no mostramos el menú lateral
+  const showMenu = isLoggedIn && pathname !== "/";
+
   return (
     <div className="min-h-screen flex relative">
-      {/* 🔹 Botón hamburguesa (solo en móvil) */}
-      {isLoggedIn && (
+      {/* Botón hamburguesa */}
+      {showMenu && (
         <button
           className="lg:hidden fixed top-4 left-4 z-50 bg-green-700 text-white p-2 rounded"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -70,7 +81,7 @@ export default function ClientLayout({ children }) {
         </button>
       )}
 
-      {/* 🔹 Overlay oscuro detrás del menú */}
+      {/* Overlay */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -78,8 +89,8 @@ export default function ClientLayout({ children }) {
         ></div>
       )}
 
-      {/* 🔹 Menú lateral */}
-      {isLoggedIn && (
+      {/* Menú lateral */}
+      {showMenu && (
         <aside
           className={`fixed lg:static top-0 left-0 h-full w-64 bg-green-800 text-white p-6 z-[9999]
           transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
@@ -130,15 +141,17 @@ export default function ClientLayout({ children }) {
       <main className="flex-1 bg-gray-100 p-6">{children}</main>
 
       {/* Imagen decorativa */}
-      <div className="absolute bottom-4 right-4">
-        <Image
-          src="/Logotipos.png"
-          alt="Decoración"
-          width={150}
-          height={150}
-          className="hover:hidden transition-all duration-300"
-        />
-      </div>
+      {showMenu && (
+        <div className="absolute bottom-4 right-4">
+          <Image
+            src="/Logotipos.png"
+            alt="Decoración"
+            width={150}
+            height={150}
+            className="hover:hidden transition-all duration-300"
+          />
+        </div>
+      )}
     </div>
   );
 }
