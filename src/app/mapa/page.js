@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "./Mapa.css"; // 👈 Importa los estilos
 
-// Iconos personalizados según el nivel de riesgo
+// Iconos personalizados
 const iconAgregar = new L.Icon({
   iconUrl: "/Agregar.png",
   iconSize: [30, 30],
 });
-
 const iconBajo = new L.Icon({
   iconUrl: "/Bajo.png",
   iconSize: [30, 30],
@@ -38,38 +38,19 @@ export default function Mapa() {
   const [embarazadas, setEmbarazadas] = useState([]);
   const [tempMarker, setTempMarker] = useState(null);
 
-  // Obtener embarazadas con sus coordenadas desde el backend
-  useEffect(() => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
+  // Obtener embarazadas desde el backend
+  useEffect(() => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "100vh", backgroundColor: "#3307f3ff" }}>
-      <h1
-        style={{
-          textAlign: "center",
-          color: "#fdfffdff",
-          padding: "15px",
-          fontSize: "36px",
-          fontWeight: "bold",
-          marginBottom: "15px",
-        }}
-      >
-        MAPA GEORREFERENCIAL
-      </h1>
+    <div className="mapa-container">
+      <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      <MapContainer
-        center={[14.533, -91.503]}
-        zoom={13}
-        style={{
-          height: "80%",
-          width: "100%",
-          zIndex: 0,
-          position: "relative",
-        }}
-      >
+      <MapContainer center={[14.533, -91.503]} zoom={13} className="mapa-leaflet">
         {/* Fondo del mapa */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -83,11 +64,7 @@ export default function Mapa() {
           if (e.Nivel === "Alto") icono = iconAlto;
 
           return (
-            <Marker
-              key={e.ID_Embarazada}
-              position={[e.Latitud, e.Longitud]}
-              icon={icono}
-            >
+            <Marker key={e.ID_Embarazada} position={[e.Latitud, e.Longitud]} icon={icono}>
               <Popup>
                 <b>{e.Nombre}</b> <br />
                 Edad: {e.Edad} años <br />
@@ -97,27 +74,17 @@ export default function Mapa() {
           );
         })}
 
-        {/* Marcador temporal al hacer clic */}
+        {/* Marcador temporal */}
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
               📍 Nueva ubicación seleccionada
               <br />
               <button
-                style={{
-                  marginTop: "5px",
-                  padding: "6px 10px",
-                  backgroundColor: "#2e7d32",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
+                className="popup-button"
                 onClick={() => {
-                  // Guardar coordenadas en localStorage
                   localStorage.setItem("lat", tempMarker.lat);
                   localStorage.setItem("lng", tempMarker.lng);
-                  // Redirigir al registro
                   window.location.href = "/registro";
                 }}
               >

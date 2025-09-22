@@ -1,0 +1,35 @@
+/* Fondo general */
+.mapa-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #3307f3ff;
+}
+
+/* Título */
+.mapa-title {
+  text-align: center;
+  color: #fdfffdff;
+  padding: 15px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Contenedor del mapa */
+.mapa-leaflet {
+  height: 80%;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+}
+
+/* Botón del popup */
+.popup-button {
+  margin-top: 5px;
+  padding: 6px 10px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
