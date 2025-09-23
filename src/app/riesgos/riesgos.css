@@ -1,0 +1,79 @@
+.riesgos-container {
+  padding: 1.5rem;
+}
+
+.riesgos-title {
+  font-size: 1.5rem;
+  color: #111827;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  color: #2563eb;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.riesgos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  border: 1px solid #4b5563;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: #1f2937;
+  width: 100%;
+}
+
+.btn-submit {
+  background-color: #16a34a;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #15803d;
+}
+
+.riesgos-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.riesgos-table thead {
+  background-color: #e5e7eb;
+}
+
+.riesgos-table th,
+.riesgos-table td {
+  border: 1px solid #4b5563;
+  padding: 0.5rem 1rem;
+  color: #1f2937;
+}
+
+.btn-delete {
+  background-color: #dc2626;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #b91c1c;
+}

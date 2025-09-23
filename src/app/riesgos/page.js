@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./riesgos.css"; // 👈 Importamos los estilos
 
 export default function RiesgosPage() {
   const [riesgos, setRiesgos] = useState([]);
@@ -7,8 +8,9 @@ export default function RiesgosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  //Cargar riesgos
-  const cargarRiesgos = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/riesgos")
+  // Cargar riesgos
+  const cargarRiesgos = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/riesgos")
       .then((res) => res.json())
       .then((data) => {
         setRiesgos(data);
@@ -20,8 +22,9 @@ export default function RiesgosPage() {
       });
   };
 
-  //Cargar embarazadas
-  const cargarEmbarazadas = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
+  // Cargar embarazadas
+  const cargarEmbarazadas = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
@@ -32,10 +35,10 @@ export default function RiesgosPage() {
     cargarEmbarazadas();
   }, []);
 
-  if (loading) return <p className="text-blue-600">Cargando datos...</p>;
-  if (error) return <p className="text-red-600">⚠ {error}</p>;
+  if (loading) return <p className="loading">Cargando datos...</p>;
+  if (error) return <p className="error">⚠ {error}</p>;
 
-  //Eliminar riesgo
+  // Eliminar riesgo
   const eliminar = async (id) => {
     if (!confirm("¿Seguro de eliminar este riesgo?")) return;
     const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/riesgos/${id}`, { method: "DELETE" });
@@ -44,10 +47,10 @@ export default function RiesgosPage() {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl text-gray-900 font-bold mb-4">Gestión de Riesgos</h1>
+    <div className="riesgos-container">
+      <h1 className="riesgos-title">Gestión de Riesgos</h1>
 
-      {/*Formulario de nuevo riesgo */}
+      {/* Formulario de nuevo riesgo */}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -71,10 +74,9 @@ export default function RiesgosPage() {
             alert("⚠ Error al agregar: " + errText);
           }
         }}
-        className="space-y-3 mb-6"
+        className="riesgos-form"
       >
-        {/*Select de embarazadas */}
-        <select name="ID_Embarazada" className="border p-2 border-gray-600 text-gray-800 rounded w-full" required>
+        <select name="ID_Embarazada" className="input" required>
           <option value="">Seleccione embarazada</option>
           {embarazadas.map((e) => (
             <option key={e.ID_Embarazada} value={e.ID_Embarazada}>
@@ -83,53 +85,39 @@ export default function RiesgosPage() {
           ))}
         </select>
 
-        <input
-          type="date"
-          name="Fecha_Riesgo"
-          className="border p-2 border-gray-600 text-gray-800 rounded w-full"
-          required
-        />
+        <input type="date" name="Fecha_Riesgo" className="input" required />
 
-        <select
-          name="Nivel"
-          className="border p-2 border-gray-600 text-gray-800 rounded w-full"
-          required
-        >
+        <select name="Nivel" className="input" required>
           <option value="Bajo">Bajo</option>
           <option value="Medio">Medio</option>
           <option value="Alto">Alto</option>
         </select>
 
-        <button className="bg-green-600 text-white px-4 py-2 rounded">
-          Guardar
-        </button>
+        <button className="btn-submit">Guardar</button>
       </form>
 
-      {/*Tabla de riesgos */}
-      <table className="min-w-full border border-gray-300 shadow-lg rounded-lg">
-        <thead className="bg-gray-200">
+      {/* Tabla de riesgos */}
+      <table className="riesgos-table">
+        <thead>
           <tr>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">ID</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Embarazada</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Nombre</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Fecha</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Nivel</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Acciones</th>
+            <th>ID</th>
+            <th>Embarazada</th>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Nivel</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {riesgos.map((r) => (
             <tr key={r.ID_Riesgo}>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{r.ID_Riesgo}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{r.ID_Embarazada}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{r.NombreEmbarazada}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{r.Fecha_Riesgo}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{r.Nivel}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">
-                <button
-                  onClick={() => eliminar(r.ID_Riesgo)}
-                  className="bg-red-600 text-white px-3 py-1 rounded"
-                >
+              <td>{r.ID_Riesgo}</td>
+              <td>{r.ID_Embarazada}</td>
+              <td>{r.NombreEmbarazada}</td>
+              <td>{r.Fecha_Riesgo}</td>
+              <td>{r.Nivel}</td>
+              <td>
+                <button onClick={() => eliminar(r.ID_Riesgo)} className="btn-delete">
                   Eliminar
                 </button>
               </td>
