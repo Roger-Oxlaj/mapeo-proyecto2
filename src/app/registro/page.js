@@ -27,6 +27,10 @@ export default function RegistrarEmbarazada() {
       Calle: e.target.Calle.value,
       Ciudad: e.target.Ciudad.value,
       Departamento: e.target.Departamento.value,
+      Zona: e.target.Zona.value || null,
+      Avenida: e.target.Avenida.value || null,
+      NumeroCasa: e.target.NumeroCasa.value,
+      FotoReferencia: e.target.FotoReferencia.value || null, // ruta o base64
       Latitud: e.target.Latitud.value || null,
       Longitud: e.target.Longitud.value || null,
     };
@@ -74,6 +78,12 @@ export default function RegistrarEmbarazada() {
         <input name="Calle" placeholder="Calle" className="input" required />
         <input name="Ciudad" placeholder="Ciudad" className="input" required />
         <input name="Departamento" placeholder="Departamento" className="input" required />
+
+        {/* 🔹 Nuevos campos */}
+        <input name="Zona" placeholder="Zona (opcional)" className="input" />
+        <input name="Avenida" placeholder="Avenida (opcional)" className="input" />
+        <input name="NumeroCasa" placeholder="Número de casa" className="input" required />
+        <input name="FotoReferencia" placeholder="Foto de referencia (URL o ruta)" className="input" />
 
         <div className="coord-grid">
           <input
