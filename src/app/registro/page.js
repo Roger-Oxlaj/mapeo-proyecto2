@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./registrar.css"; // 👈 Importamos los estilos
 
 export default function RegistrarEmbarazada() {
   const [mensaje, setMensaje] = useState("");
@@ -7,7 +8,6 @@ export default function RegistrarEmbarazada() {
   const [coords, setCoords] = useState({ lat: "", lng: "" });
 
   useEffect(() => {
-    // Al cargar el formulario, traer las coordenadas del mapa si existen
     const lat = localStorage.getItem("lat");
     const lng = localStorage.getItem("lng");
     if (lat && lng) {
@@ -31,7 +31,6 @@ export default function RegistrarEmbarazada() {
       Longitud: e.target.Longitud.value || null,
     };
 
-    // ✅ Validación del teléfono (exactamente 8 dígitos)
     if (!/^\d{8}$/.test(data.Telefono)) {
       setError("⚠ El teléfono debe tener exactamente 8 dígitos numéricos");
       return;
@@ -52,7 +51,7 @@ export default function RegistrarEmbarazada() {
         localStorage.removeItem("lng");
         setCoords({ lat: "", lng: "" });
       } else {
-        const result = await res.json(); // 👈 leer respuesta del backend
+        const result = await res.json();
         setError(result.error || "⚠ Error al registrar embarazada");
       }
     } catch (err) {
@@ -61,33 +60,28 @@ export default function RegistrarEmbarazada() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900">
-        Registrar Embarazada
-      </h1>
+    <div className="form-container">
+      <h1 className="form-title">Registrar Embarazada</h1>
 
-      {mensaje && <p className="text-green-600 mb-4">{mensaje}</p>}
-      {error && <p className="text-red-600 mb-4">{error}</p>}
+      {mensaje && <p className="success-message">{mensaje}</p>}
+      {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Datos personales */}
-        <input name="Nombre" placeholder="Nombre" className="w-full border p-2 rounded text-gray-900" required />
-        <input type="number" name="Edad" placeholder="Edad" className="w-full border p-2 rounded text-gray-900" required />
-        <input type="text" name="Telefono" placeholder="Teléfono" className="w-full border p-2 rounded text-gray-900" required />
+      <form onSubmit={handleSubmit} className="form">
+        <input name="Nombre" placeholder="Nombre" className="input" required />
+        <input type="number" name="Edad" placeholder="Edad" className="input" required />
+        <input type="text" name="Telefono" placeholder="Teléfono" className="input" required />
 
-        {/* Dirección */}
-        <input name="Calle" placeholder="Calle" className="w-full border p-2 rounded text-gray-900" required />
-        <input name="Ciudad" placeholder="Ciudad" className="w-full border p-2 rounded text-gray-900" required />
-        <input name="Departamento" placeholder="Departamento" className="w-full border p-2 rounded text-gray-900" required />
+        <input name="Calle" placeholder="Calle" className="input" required />
+        <input name="Ciudad" placeholder="Ciudad" className="input" required />
+        <input name="Departamento" placeholder="Departamento" className="input" required />
 
-        {/* Coordenadas */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="coord-grid">
           <input
             type="number"
             step="0.000001"
             name="Latitud"
             placeholder="Latitud"
-            className="w-full border p-2 rounded text-gray-900"
+            className="input"
             value={coords.lat}
             onChange={(e) => setCoords({ ...coords, lat: e.target.value })}
           />
@@ -96,13 +90,13 @@ export default function RegistrarEmbarazada() {
             step="0.000001"
             name="Longitud"
             placeholder="Longitud"
-            className="w-full border p-2 rounded text-gray-900"
+            className="input"
             value={coords.lng}
             onChange={(e) => setCoords({ ...coords, lng: e.target.value })}
           />
         </div>
 
-        <button type="submit" className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+        <button type="submit" className="btn-submit">
           Guardar
         </button>
       </form>
