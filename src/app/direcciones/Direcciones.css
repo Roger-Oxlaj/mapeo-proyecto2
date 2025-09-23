@@ -1,0 +1,125 @@
+/* Contenedor principal */
+.direcciones-container {
+  padding: 24px;
+}
+
+/* Títulos */
+.direcciones-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #1f2937; /* gray-900 */
+}
+
+/* Formulario */
+.direcciones-form {
+  margin-bottom: 24px;
+  border: 1px solid #4b5563; /* gray-600 */
+  color: #1f2937; /* gray-800 */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.direcciones-input {
+  border: 1px solid #4b5563;
+  padding: 8px;
+  color: #1f2937;
+  width: 100%;
+}
+
+.direcciones-btn {
+  background-color: #16a34a; /* green-600 */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Tabla */
+.direcciones-table {
+  min-width: 100%;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+.direcciones-th, .direcciones-td {
+  border: 1px solid #4b5563;
+  padding: 8px 16px;
+}
+
+.direcciones-th {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #111827; /* gray-900 */
+}
+
+.direcciones-td {
+  color: #1f2937; /* gray-800 */
+}
+
+/* Botones de acciones */
+.btn-editar {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  padding: 4px 12px;
+  margin-right: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  background-color: #dc2626; /* red-600 */
+  color: white;
+  padding: 4px 12px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+}
+
+.modal-box {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 24rem; /* 96 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.modal-input {
+  border: 1px solid #4b5563;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.modal-btn {
+  padding: 6px 12px;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-btn-cancelar {
+  background-color: #6b7280; /* gray-500 */
+}
+
+.modal-btn-guardar {
+  background-color: #16a34a; /* green-600 */
+}
