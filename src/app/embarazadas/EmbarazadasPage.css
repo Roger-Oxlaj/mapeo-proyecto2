@@ -1,0 +1,118 @@
+/* Contenedor principal */
+.container {
+  padding: 1.5rem;
+}
+
+/* Títulos */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1f2937; /* gris oscuro */
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.table th,
+.table td {
+  border: 1px solid #4b5563; /* gris */
+  padding: 0.5rem 1rem;
+  text-align: left;
+  color: #1f2937;
+}
+
+.table th {
+  background-color: #e5e7eb; /* gris claro */
+}
+
+.table tr:hover {
+  background-color: #f9fafb; /* hover */
+}
+
+/* Botones */
+.btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background: #2563eb; /* azul */
+}
+
+.btn-edit:hover {
+  background: #1d4ed8;
+}
+
+.btn-delete {
+  background: #dc2626; /* rojo */
+}
+
+.btn-delete:hover {
+  background: #b91c1c;
+}
+
+.btn-cancel {
+  background: #6b7280; /* gris */
+}
+
+.btn-cancel:hover {
+  background: #4b5563;
+}
+
+.btn-save {
+  background: #16a34a; /* verde */
+}
+
+.btn-save:hover {
+  background: #15803d;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.modal input {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  color: #111827;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
