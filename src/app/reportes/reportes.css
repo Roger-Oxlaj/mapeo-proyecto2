@@ -1,0 +1,36 @@
+.reportes-container {
+  padding: 40px;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  text-align: left;
+}
+
+.reportes-title {
+  color: #2e7d32;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.reportes-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.report-card {
+  width: 45%;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.report-card-title {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}

@@ -12,12 +12,15 @@ import {
   BarElement,
 } from "chart.js";
 
+import "./reportes.css"; // 👈 Importamos los estilos
+
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, BarElement);
 
 export default function Reportes() {
   const [riesgos, setRiesgos] = useState({ bajo: 0, medio: 0, alto: 0 });
 
-  useEffect(() => {fetch("https://backend-demo-xowfm.ondigitalocean.app/reportes/riesgos") // 🔹 Ajusta la URL/puerto de tu backend
+  useEffect(() => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/reportes/riesgos")
       .then((res) => res.json())
       .then((data) => {
         const conteos = { bajo: 0, medio: 0, alto: 0 };
@@ -55,71 +58,17 @@ export default function Reportes() {
   };
 
   return (
-    <div
-      style={{
-        padding: "40px",
-        backgroundColor: "#f0f4f8",
-        minHeight: "100vh",
-        textAlign: "left",
-      }}
-    >
-      <h1
-        style={{
-          color: "#2e7d32",
-          fontSize: "32px",
-          marginBottom: "30px",
-          fontWeight: "bold",
-        }}
-      >
-        REPORTES Y ESTADISTICAS
-      </h1>
+    <div className="reportes-container">
+      <h1 className="reportes-title">REPORTES Y ESTADISTICAS</h1>
 
-      <div style={{ display: "flex", justifyContent: "space-around", flexWrap: "wrap" }}>
-        <div
-          style={{
-            width: "45%",
-            marginBottom: "30px",
-            background: "white",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3
-            style={{
-              marginBottom: "15px",
-              fontSize: "18px",
-              fontWeight: "bold",
-              color: "#333",
-              textAlign: "Left",
-            }}
-          >
-            Distribución por nivel de riesgo
-          </h3>
+      <div className="reportes-grid">
+        <div className="report-card">
+          <h3 className="report-card-title">Distribución por nivel de riesgo</h3>
           <Bar data={dataBarras} />
         </div>
 
-        <div
-          style={{
-            width: "45%",
-            marginBottom: "30px",
-            background: "white",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3
-            style={{
-              marginBottom: "15px",
-              fontSize: "18px",
-              fontWeight: "bold",
-              color: "#333",
-              textAlign: "Left",
-            }}
-          >
-            Proporción de embarazadas
-          </h3>
+        <div className="report-card">
+          <h3 className="report-card-title">Proporción de embarazadas</h3>
           <Pie data={dataPastel} />
         </div>
       </div>
