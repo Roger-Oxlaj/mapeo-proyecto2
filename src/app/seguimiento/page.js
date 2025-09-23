@@ -1,4 +1,5 @@
 "use client";
+import "./seguimientos.css";
 import { useEffect, useState } from "react";
 
 export default function SeguimientosPage() {
@@ -8,7 +9,8 @@ export default function SeguimientosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchData = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos")
+  const fetchData = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos")
       .then((res) => res.json())
       .then((data) => {
         setSeguimientos(data);
@@ -20,14 +22,15 @@ export default function SeguimientosPage() {
       });
   };
 
-  // ✅ Traer IDs de embarazadas y usuarios
-  const fetchEmbarazadas = () => {fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
+  const fetchEmbarazadas = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
       .then((res) => res.json())
       .then((data) => setEmbarazadas(data))
       .catch((err) => setError(err.message));
   };
 
-  const fetchUsuarios = () => { fetch("https://backend-demo-xowfm.ondigitalocean.app/usuarios")
+  const fetchUsuarios = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/usuarios")
       .then((res) => res.json())
       .then((data) => setUsuarios(data))
       .catch((err) => setError(err.message));
@@ -39,19 +42,22 @@ export default function SeguimientosPage() {
     fetchUsuarios();
   }, []);
 
-  if (loading) return <p className="text-blue-600">Cargando datos...</p>;
-  if (error) return <p className="text-red-600">⚠ {error}</p>;
+  if (loading) return <p style={{ color: "#2563eb" }}>Cargando datos...</p>;
+  if (error) return <p style={{ color: "#dc2626" }}>⚠ {error}</p>;
 
   const eliminar = async (id) => {
     if (!confirm("¿Seguro de eliminar este seguimiento?")) return;
-    const res = await fetch(`https://backend-demo-xowfm.ondigitalocean.app/seguimientos/${id}`, { method: "DELETE" });
+    const res = await fetch(
+      `https://backend-demo-xowfm.ondigitalocean.app/seguimientos/${id}`,
+      { method: "DELETE" }
+    );
     if (res.ok) fetchData();
     else alert("⚠ Error al eliminar");
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl text-gray-900 font-bold mb-4">Seguimientos</h1>
+    <div className="contenedor">
+      <h1 className="titulo">Seguimientos</h1>
 
       {/* Formulario */}
       <form
@@ -64,18 +70,22 @@ export default function SeguimientosPage() {
             Observaciones: e.target.Observaciones.value,
             Signos_Alarma: e.target.Signos_Alarma.value,
           };
-          const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          });
-          if (res.ok) { fetchData(); e.target.reset(); }
-          else alert("⚠ Error al agregar");
+          const res = await fetch(
+            "https://backend-demo-xowfm.ondigitalocean.app/seguimientos",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            }
+          );
+          if (res.ok) {
+            fetchData();
+            e.target.reset();
+          } else alert("⚠ Error al agregar");
         }}
-        className="space-y-3 mb-6"
+        className="formulario"
       >
-        {/* ComboBox Embarazadas */}
-        <select name="ID_Embarazada" className="border p-2 border-gray-600 text-gray-800 rounded w-full" required>
+        <select name="ID_Embarazada" className="select" required>
           <option value="">-- Seleccionar Embarazada --</option>
           {embarazadas.map((e) => (
             <option key={e.ID_Embarazada} value={e.ID_Embarazada}>
@@ -84,8 +94,7 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
-        {/* ComboBox Usuarios */}
-        <select name="ID_Usuario" className="border p-2 border-gray-600 text-gray-800 rounded w-full" required>
+        <select name="ID_Usuario" className="select" required>
           <option value="">-- Seleccionar Usuario --</option>
           {usuarios.map((u) => (
             <option key={u.ID_Usuario} value={u.ID_Usuario}>
@@ -94,37 +103,55 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
-        <input type="date" name="Fecha_Seguimiento" className="border p-2 border-gray-600 text-gray-800 rounded w-full" required />
-        <input name="Observaciones" placeholder="Observaciones" className="border p-2 border-gray-600 text-gray-800 rounded w-full" />
-        <input name="Signos_Alarma" placeholder="Signos de alarma" className="border p-2 border-gray-600 text-gray-800 rounded w-full" />
+        <input
+          type="date"
+          name="Fecha_Seguimiento"
+          className="input"
+          required
+        />
+        <input
+          name="Observaciones"
+          placeholder="Observaciones"
+          className="input"
+        />
+        <input
+          name="Signos_Alarma"
+          placeholder="Signos de alarma"
+          className="input"
+        />
 
-        <button className="bg-green-600 text-white px-4 py-2 border-gray-600 text-gray-800 rounded">Guardar</button>
+        <button className="boton-guardar">Guardar</button>
       </form>
 
       {/* Tabla */}
-      <table className="min-w-full border border-gray-600 shadow-lg rounded-lg">
-        <thead className="bg-gray-200">
+      <table className="tabla">
+        <thead>
           <tr>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">ID</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">ID Embarazada</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Usuario</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Fecha</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Observaciones</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Signos</th>
-            <th className="border border-gray-600 px-4 py-2 text-gray-900">Acciones</th>
+            <th>ID</th>
+            <th>ID Embarazada</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Observaciones</th>
+            <th>Signos</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {seguimientos.map((s) => (
             <tr key={s.ID_Seguimiento}>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.ID_Seguimiento}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.ID_Embarazada}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.ID_Usuario}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.Fecha_Seguimiento}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.Observaciones}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">{s.Signos_Alarma}</td>
-              <td className="border border-gray-600 px-4 py-2 text-gray-800">
-                <button onClick={() => eliminar(s.ID_Seguimiento)} className="bg-red-600 text-white px-3 py-1 rounded">Eliminar</button>
+              <td>{s.ID_Seguimiento}</td>
+              <td>{s.ID_Embarazada}</td>
+              <td>{s.ID_Usuario}</td>
+              <td>{s.Fecha_Seguimiento}</td>
+              <td>{s.Observaciones}</td>
+              <td>{s.Signos_Alarma}</td>
+              <td>
+                <button
+                  onClick={() => eliminar(s.ID_Seguimiento)}
+                  className="boton-eliminar"
+                >
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}
