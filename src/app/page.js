@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import "./login.css"; // 👈 Asegúrate de importar el CSS
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,6 @@ export default function Login() {
         credentials: "include", // para manejar cookies
       });
 
-
       if (!res.ok) {
         const text = await res.text().catch(() => null);
         throw new Error(text || "⚠ Usuario o contraseña incorrectos");
@@ -30,7 +30,6 @@ export default function Login() {
 
       const data = await res.json();
       console.log("✅ Login exitoso:", data);
-
       window.location.href = "/mapa";
     } catch (err) {
       console.error("❌ Error en login:", err.message || err);
@@ -41,62 +40,16 @@ export default function Login() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#e8f5e9",
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "white",
-          padding: "40px",
-          borderRadius: "15px",
-          textAlign: "center",
-          boxShadow: "0 0 15px rgba(0,0,0,0.15)",
-          width: "350px",
-        }}
-      >
-        <h1 style={{ color: "#2e7d32", marginBottom: "25px", fontSize: "25px", fontWeight: "bold"}}>
-          Mapeo de Embarazadas
-        </h1>
-
+    <div className="login-container">
+      <div className="login-box">
+        <h1 className="login-title">Mapeo de Embarazadas</h1>
         <form onSubmit={handleLogin}>
-          <input id="usuario" type="text" placeholder="Usuario" required style={{display: "block", margin: "15px auto", padding: "12px", width: "90%", fontSize: "16px", border: "2px solid #ccc", borderRadius: "8px", color: "#333", fontWeight: "bold", }}/>
-          <input
-            id="contrasena"
-            type="password"
-            placeholder="Contraseña"
-            required
-            style={{
-              display: "block",
-              margin: "15px auto",
-              padding: "12px",
-              width: "90%",
-              fontSize: "16px",
-              border: "2px solid #ccc",
-              borderRadius: "8px",
-              color: "#333",
-              fontWeight: "bold",
-            }}/>
+          <input id="usuario" type="text" placeholder="Usuario" required className="login-input" />
+          <input id="contrasena" type="password" placeholder="Contraseña" required className="login-input" />
           <button
             type="submit"
             disabled={loading}
-            style={{
-              backgroundColor: "#2e7d32",
-              color: "white",
-              fontSize: "16px",
-              padding: "12px 25px",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-              marginTop: "20px",
-              width: "95%",
-              opacity: loading ? 0.7 : 1,
-            }}
+            className="login-button"
           >
             {loading ? "Cargando..." : "Iniciar Sesión"}
           </button>
