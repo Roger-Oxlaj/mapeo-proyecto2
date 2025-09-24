@@ -26,6 +26,7 @@
   padding: 8px;
   color: #1f2937;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .direcciones-btn {
@@ -39,14 +40,16 @@
 
 /* Tabla */
 .direcciones-table {
-  min-width: 100%;
+  width: 100%;
   border: 1px solid #000;
   border-collapse: collapse;
+  table-layout: auto;
 }
 
 .direcciones-th, .direcciones-td {
   border: 1px solid #4b5563;
   padding: 8px 16px;
+  text-align: left;
 }
 
 .direcciones-th {
@@ -107,6 +110,7 @@
   width: 100%;
   margin-bottom: 12px;
   color: #111827;
+  box-sizing: border-box;
 }
 
 .modal-btn {
@@ -123,49 +127,66 @@
 .modal-btn-guardar {
   background-color: #16a34a; /* green-600 */
 }
- @media (max-width: 640px) {
-  .direcciones-table,
-  .direcciones-thead,
-  .direcciones-tbody,
-  .direcciones-tr,
+
+/* ===============================
+   Responsivo para móviles (<640px)
+   =============================== */
+@media (max-width: 640px) {
+  .direcciones-container {
+    padding: 16px;
+  }
+
+  .direcciones-title {
+    font-size: 1.25rem;
+  }
+
+  .direcciones-form {
+    gap: 8px;
+  }
+
+  .direcciones-input,
+  .direcciones-btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+
+  /* Tabla: mantenemos como tabla pero más pequeña */
+  .direcciones-table {
+    font-size: 0.85rem;
+  }
+
   .direcciones-th,
   .direcciones-td {
-    display: block;
+    padding: 4px 6px;
   }
 
-  .direcciones-tr {
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 8px;
+  /* Botones más pequeños */
+  .btn-editar,
+  .btn-eliminar {
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    margin-right: 4px;
   }
 
-  .direcciones-th {
-    display: none; /* ocultamos encabezados */
+  /* Modal */
+  .modal-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 16px;
   }
 
-  .direcciones-td {
-    border: none;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 50%;
+  .modal-title {
+    font-size: 1.125rem;
   }
 
-  .direcciones-td::before {
-    position: absolute;
-    left: 8px;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: bold;
+  .modal-input {
+    font-size: 0.875rem;
+    padding: 6px;
   }
 
-  /* Agregamos etiquetas antes de cada td */
-  .direcciones-td:nth-of-type(1)::before { content: "ID"; }
-  .direcciones-td:nth-of-type(2)::before { content: "Calle"; }
-  .direcciones-td:nth-of-type(3)::before { content: "Ciudad"; }
-  .direcciones-td:nth-of-type(4)::before { content: "Departamento"; }
-  .direcciones-td:nth-of-type(5)::before { content: "Zona"; }
-  .direcciones-td:nth-of-type(6)::before { content: "Avenida"; }
-  .direcciones-td:nth-of-type(7)::before { content: "Número de Casa"; }
-  .direcciones-td:nth-of-type(8)::before { content: "Acciones"; }
+  .modal-btn {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
 }
