@@ -37,6 +37,13 @@
   padding: 0.5rem;
   border-radius: 8px;
   color: #111827;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
 }
 
 .coord-grid {
@@ -54,8 +61,26 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .btn-submit:hover {
   background: #15803d;
+}
+
+/* 🔹 Agrupación visual para dirección */
+.direccion-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.direccion-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #374151;
 }
