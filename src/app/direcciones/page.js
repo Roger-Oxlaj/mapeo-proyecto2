@@ -126,14 +126,14 @@ export default function DireccionesPage() {
         <tbody>
           {direcciones.map((d) => (
             <tr key={d.ID_Direccion}>
-              <td className="direcciones-td">{d.ID_Direccion}</td>
-              <td className="direcciones-td">{d.Calle}</td>
-              <td className="direcciones-td">{d.Ciudad}</td>
-              <td className="direcciones-td">{d.Departamento}</td>
-              <td className="direcciones-td">{d.Zona || "-"}</td>
-              <td className="direcciones-td">{d.Avenida || "-"}</td>
-              <td className="direcciones-td">{d.NumeroCasa || "-"}</td>
-              <td className="direcciones-td">
+              <td className="direcciones-td" data-label="ID">{d.ID_Direccion}</td>
+              <td className="direcciones-td" data-label="Calle">{d.Calle}</td>
+              <td className="direcciones-td" data-label="Ciudad">{d.Ciudad}</td>
+              <td className="direcciones-td" data-label="Departamento">{d.Departamento}</td>
+              <td className="direcciones-td" data-label="Zona">{d.Zona || "-"}</td>
+              <td className="direcciones-td" data-label="Avenida">{d.Avenida || "-"}</td>
+              <td className="direcciones-td" data-label="Número de Casa">{d.NumeroCasa || "-"}</td>
+              <td className="direcciones-td" data-label="Acciones">
                 <button onClick={() => setEditando(d)} className="btn-editar">Editar</button>
                 <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-eliminar">Eliminar</button>
               </td>

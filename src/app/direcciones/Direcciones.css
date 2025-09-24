@@ -40,16 +40,14 @@
 
 /* Tabla */
 .direcciones-table {
-  width: 100%;
+  min-width: 100%;
   border: 1px solid #000;
   border-collapse: collapse;
-  table-layout: auto;
 }
 
 .direcciones-th, .direcciones-td {
   border: 1px solid #4b5563;
   padding: 8px 16px;
-  text-align: left;
 }
 
 .direcciones-th {
@@ -151,22 +149,45 @@
     padding: 6px 8px;
   }
 
-  /* Tabla: mantenemos como tabla pero más pequeña */
-  .direcciones-table {
-    font-size: 0.85rem;
+  /* Convertimos tabla en lista con cuadros */
+  .direcciones-table,
+  .direcciones-thead,
+  .direcciones-tbody,
+  .direcciones-th {
+    display: none; /* Ocultamos la tabla original */
   }
 
-  .direcciones-th,
+  .direcciones-tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
   .direcciones-td {
-    padding: 4px 6px;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    position: relative;
+    border: none;
   }
 
-  /* Botones más pequeños */
+  .direcciones-td::before {
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    content: attr(data-label);
+  }
+
+  /* Botones de acciones dentro del cuadro */
   .btn-editar,
   .btn-eliminar {
-    padding: 2px 6px;
-    font-size: 0.75rem;
     margin-right: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
   }
 
   /* Modal */
