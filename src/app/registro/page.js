@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./registrar.css"; // 👈 Importamos los estilos
+import "./registrar.css";
 
 export default function RegistrarEmbarazada() {
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
+  const [fotoBase64, setFotoBase64] = useState(null);
 
   useEffect(() => {
     const lat = localStorage.getItem("lat");
@@ -14,6 +15,18 @@ export default function RegistrarEmbarazada() {
       setCoords({ lat, lng });
     }
   }, []);
+
+  // 🔹 Convertir imagen a base64 cuando se selecciona
+  const handleFotoChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFotoBase64(reader.result); // Base64 listo
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +43,7 @@ export default function RegistrarEmbarazada() {
       Zona: e.target.Zona.value || null,
       Avenida: e.target.Avenida.value || null,
       NumeroCasa: e.target.NumeroCasa.value,
-      FotoReferencia: e.target.FotoReferencia.value || null, // ruta o base64
+      FotoReferencia: fotoBase64, // 👈 ahora en base64
       Latitud: e.target.Latitud.value || null,
       Longitud: e.target.Longitud.value || null,
     };
@@ -51,6 +64,7 @@ export default function RegistrarEmbarazada() {
         const result = await res.json();
         setMensaje(result.message);
         e.target.reset();
+        setFotoBase64(null);
         localStorage.removeItem("lat");
         localStorage.removeItem("lng");
         setCoords({ lat: "", lng: "" });
@@ -83,7 +97,21 @@ export default function RegistrarEmbarazada() {
         <input name="Zona" placeholder="Zona (opcional)" className="input" />
         <input name="Avenida" placeholder="Avenida (opcional)" className="input" />
         <input name="NumeroCasa" placeholder="Número de casa" className="input" required />
-        <input name="FotoReferencia" placeholder="Foto de referencia (URL o ruta)" className="input" />
+
+        {/* 🔹 Subir o tomar foto */}
+        <input
+          type="file"
+          accept="image/*"
+          capture="environment" // 👈 esto abre cámara en móvil
+          onChange={handleFotoChange}
+          className="input"
+        />
+        {fotoBase64 && (
+          <div className="preview">
+            <p>📸 Vista previa:</p>
+            <img src={fotoBase64} alt="Foto de referencia" style={{ width: "150px", borderRadius: "8px" }} />
+          </div>
+        )}
 
         <div className="coord-grid">
           <input
