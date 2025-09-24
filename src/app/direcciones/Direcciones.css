@@ -39,7 +39,7 @@
 
 /* Tabla */
 .direcciones-table {
-  min-width: 100%;
+  width: 100%;
   border: 1px solid #000;
   border-collapse: collapse;
 }
@@ -124,7 +124,9 @@
   background-color: #16a34a; /* green-600 */
 }
 
-/* Móviles: pantallas menores a 640px */
+/* ===============================
+   Responsivo para móviles (<640px)
+   =============================== */
 @media (max-width: 640px) {
   .direcciones-container {
     padding: 16px;
@@ -134,14 +136,16 @@
     font-size: 1.25rem;
   }
 
-  /* Inputs y botones ocupan todo el ancho */
+  .direcciones-form {
+    gap: 8px;
+  }
+
   .direcciones-input,
   .direcciones-btn {
     width: 100%;
-    box-sizing: border-box;
   }
 
-  /* Tabla: scroll horizontal */
+  /* Tabla scroll horizontal */
   .direcciones-table {
     display: block;
     overflow-x: auto;
@@ -155,7 +159,7 @@
     font-size: 0.875rem;
   }
 
-  /* Modal: ocupa casi toda la pantalla */
+  /* Modal más pequeño y adaptable */
   .modal-box {
     width: 90%;
     max-width: 400px;
