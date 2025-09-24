@@ -130,84 +130,47 @@
    Responsivo para móviles (<640px)
    =============================== */
 @media (max-width: 640px) {
-  .direcciones-container {
-    padding: 16px;
-  }
-
-  .direcciones-title {
-    font-size: 1.25rem;
-  }
-
-  .direcciones-form {
-    gap: 8px;
-  }
-
-  .direcciones-input,
-  .direcciones-btn {
-    width: 100%;
-    font-size: 0.9rem;
-    padding: 6px 8px;
-  }
-
-  /* Convertimos tabla en lista con cuadros */
-  .direcciones-table,
-  .direcciones-thead,
-  .direcciones-tbody,
-  .direcciones-th {
-    display: none; /* Ocultamos la tabla original */
+  .direcciones-table {
+    display: block;
   }
 
   .direcciones-tr {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 12px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .direcciones-th {
+    display: none;
   }
 
   .direcciones-td {
     display: flex;
     justify-content: space-between;
-    padding: 6px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
     position: relative;
-    border: none;
+  }
+
+  .direcciones-td:last-child {
+    border-bottom: none;
   }
 
   .direcciones-td::before {
-    position: absolute;
-    left: 0;
-    font-weight: bold;
     content: attr(data-label);
+    font-weight: bold;
+    flex: 1;
+    margin-right: 8px;
   }
 
-  /* Botones de acciones dentro del cuadro */
   .btn-editar,
   .btn-eliminar {
     margin-right: 4px;
     padding: 4px 8px;
     font-size: 0.75rem;
-  }
-
-  /* Modal */
-  .modal-box {
-    width: 90%;
-    max-width: 400px;
-    padding: 16px;
-  }
-
-  .modal-title {
-    font-size: 1.125rem;
-  }
-
-  .modal-input {
-    font-size: 0.875rem;
-    padding: 6px;
-  }
-
-  .modal-btn {
-    font-size: 0.85rem;
-    padding: 5px 8px;
   }
 }
