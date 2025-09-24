@@ -123,3 +123,56 @@
 .modal-btn-guardar {
   background-color: #16a34a; /* green-600 */
 }
+
+/* Móviles: pantallas menores a 640px */
+@media (max-width: 640px) {
+  .direcciones-container {
+    padding: 16px;
+  }
+
+  .direcciones-title {
+    font-size: 1.25rem;
+  }
+
+  /* Inputs y botones ocupan todo el ancho */
+  .direcciones-input,
+  .direcciones-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Tabla: scroll horizontal */
+  .direcciones-table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .direcciones-th,
+  .direcciones-td {
+    white-space: nowrap;
+    padding: 6px 8px;
+    font-size: 0.875rem;
+  }
+
+  /* Modal: ocupa casi toda la pantalla */
+  .modal-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 16px;
+  }
+
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-input {
+    font-size: 0.875rem;
+    padding: 6px;
+  }
+
+  .modal-btn {
+    font-size: 0.875rem;
+    padding: 6px 10px;
+  }
+}
