@@ -158,6 +158,13 @@
     color: #4e2ecc; /* violeta para resaltar */
   }
 
+  .direcciones-th.acciones,
+  .direcciones-td.acciones {
+    border-left: 3px solid #000; /* línea negra separadora */
+    border-bottom: 3px solid #000;
+  }
+
+
   /* Botones compactos */
   .btn-editar,
   .btn-eliminar {
