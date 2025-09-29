@@ -1,4 +1,13 @@
 /* ============================= */
+/* 🎨 FONDO GENERAL              */
+/* ============================= */
+body {
+  background: #e9ecef; /* gris más oscuro para contraste */
+  font-family: Arial, sans-serif;
+  color: #333; /* texto oscuro */
+}
+
+/* ============================= */
 /* 🎯 ESTILOS DEL FORMULARIO     */
 /* ============================= */
 .form-container {
@@ -7,13 +16,14 @@
   padding: 20px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+  color: #333;
 }
 
 .form-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #222;
 }
 
 .form-group {
@@ -24,6 +34,7 @@
   display: block;
   font-weight: bold;
   margin-bottom: 6px;
+  color: #444;
 }
 
 .form-group input,
@@ -31,9 +42,10 @@
 .form-group textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 8px;
   transition: border-color 0.3s;
+  background: #fafafa;
 }
 
 .form-group input:focus,
@@ -52,6 +64,7 @@ button[type="submit"] {
   border: none;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }
@@ -70,11 +83,12 @@ button[type="submit"]:hover {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+  color: #333;
 }
 
 .direcciones-thead {
-  background: #007bff;
+  background: #0056b3; /* azul más oscuro */
   color: #fff;
 }
 
@@ -82,7 +96,7 @@ button[type="submit"]:hover {
 .direcciones-td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
 }
 
 /* 🎯 Línea negra divisoria solo en la columna Acciones */
@@ -92,7 +106,7 @@ button[type="submit"]:hover {
 }
 
 .direcciones-tr:hover {
-  background: #f1f1f1;
+  background: #f8f9fa;
 }
 
 /* 📌 Botones dentro de la tabla */
@@ -103,6 +117,7 @@ button[type="submit"]:hover {
   border-radius: 6px;
   background: #28a745;
   color: #fff;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }
@@ -117,6 +132,7 @@ button[type="submit"]:hover {
   border-radius: 6px;
   background: #dc3545;
   color: #fff;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }
