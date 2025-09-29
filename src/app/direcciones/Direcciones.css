@@ -73,6 +73,7 @@
 .direcciones-th.acciones,
 .direcciones-td.acciones {
   border-left: 3px solid #000; /* línea negra separadora */
+  border-bottom: 3px solid #000;
 }
 
 .direcciones-tr:hover {
