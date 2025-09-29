@@ -110,40 +110,38 @@ export default function DireccionesPage() {
       </form>
 
       <h1 className="direcciones-title">Direcciones</h1>
-      <table className="direcciones-table">
-        <thead>
-          <tr>
-            <th className="direcciones-th">ID</th>
-            <th className="direcciones-th">Calle</th>
-            <th className="direcciones-th">Ciudad</th>
-            <th className="direcciones-th">Departamento</th>
-            <th className="direcciones-th">Zona</th>
-            <th className="direcciones-th">Avenida</th>
-            <th className="direcciones-th">Número de Casa</th>
-            {/* 👇 Aquí le ponemos la clase acciones */}
-            <th className="direcciones-th acciones">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {direcciones.map((d) => (
-            <tr key={d.ID_Direccion}>
-              <td className="direcciones-td" data-label="ID">{d.ID_Direccion}</td>
-              <td className="direcciones-td" data-label="Calle">{d.Calle}</td>
-              <td className="direcciones-td" data-label="Ciudad">{d.Ciudad}</td>
-              <td className="direcciones-td" data-label="Departamento">{d.Departamento}</td>
-              <td className="direcciones-td" data-label="Zona">{d.Zona || "-"}</td>
-              <td className="direcciones-td" data-label="Avenida">{d.Avenida || "-"}</td>
-              <td className="direcciones-td" data-label="Número de Casa">{d.NumeroCasa || "-"}</td>
-              {/* 👇 Aquí también */}
-              <td className="direcciones-td acciones" data-label="Acciones">
-                <button onClick={() => setEditando(d)} className="btn-editar">Editar</button>
-                <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-eliminar">Eliminar</button>
-              </td>
+        <table className="table table-striped table-bordered table-hover">
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Calle</th>
+              <th>Ciudad</th>
+              <th>Departamento</th>
+              <th>Zona</th>
+              <th>Avenida</th>
+              <th>Número de Casa</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {direcciones.map((d) => (
+              <tr key={d.ID_Direccion}>
+                <td>{d.ID_Direccion}</td>
+                <td>{d.Calle}</td>
+                <td>{d.Ciudad}</td>
+                <td>{d.Departamento}</td>
+                <td>{d.Zona || "-"}</td>
+                <td>{d.Avenida || "-"}</td>
+                <td>{d.NumeroCasa || "-"}</td>
+                <td>
+                  <button className="btn btn-success btn-sm me-2">Editar</button>
+                  <button className="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      </table>
 
       {editando && (
         <div className="modal-overlay">
