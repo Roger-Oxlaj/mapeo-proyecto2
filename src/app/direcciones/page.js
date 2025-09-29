@@ -120,7 +120,8 @@ export default function DireccionesPage() {
             <th className="direcciones-th">Zona</th>
             <th className="direcciones-th">Avenida</th>
             <th className="direcciones-th">Número de Casa</th>
-            <th className="direcciones-th">Acciones</th>
+            {/* 👇 Aquí le ponemos la clase acciones */}
+            <th className="direcciones-th acciones">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -133,13 +134,15 @@ export default function DireccionesPage() {
               <td className="direcciones-td" data-label="Zona">{d.Zona || "-"}</td>
               <td className="direcciones-td" data-label="Avenida">{d.Avenida || "-"}</td>
               <td className="direcciones-td" data-label="Número de Casa">{d.NumeroCasa || "-"}</td>
-              <td className="direcciones-td" data-label="Acciones">
+              {/* 👇 Aquí también */}
+              <td className="direcciones-td acciones" data-label="Acciones">
                 <button onClick={() => setEditando(d)} className="btn-editar">Editar</button>
                 <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-eliminar">Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
+
       </table>
 
       {editando && (

@@ -1,3 +1,7 @@
+/* ============================= */
+/* 📋 ESTILOS DEL FORMULARIO     */
+/* ============================= */
+
 /* Contenedor principal */
 .direcciones-container {
   padding: 24px;
@@ -53,7 +57,7 @@
 }
 
 .direcciones-thead {
-  background: #4e2ecc; /* azul/violeta fuerte como en tu ejemplo */
+  background: #4e2ecc; /* violeta fuerte */
   color: #fff;
   font-weight: bold;
 }
@@ -105,4 +109,58 @@
 
 .btn-eliminar:hover {
   background: #a71d2a;
+}
+
+/* ===============================
+   📱 RESPONSIVE PARA MÓVILES
+   =============================== */
+@media (max-width: 640px) {
+  .direcciones-table,
+  .direcciones-thead,
+  .direcciones-tbody,
+  .direcciones-tr,
+  .direcciones-th,
+  .direcciones-td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Ocultamos encabezados */
+  .direcciones-thead {
+    display: none;
+  }
+
+  .direcciones-tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .direcciones-td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .direcciones-td:last-child {
+    border-bottom: none;
+  }
+
+  .direcciones-td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 8px;
+    color: #4e2ecc; /* violeta para resaltar */
+  }
+
+  /* Botones compactos */
+  .btn-editar,
+  .btn-eliminar {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
 }
