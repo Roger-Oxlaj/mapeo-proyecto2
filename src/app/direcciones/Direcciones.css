@@ -54,8 +54,6 @@
   overflow: hidden;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
   color: #333;
-  table-layout: auto; /* asegura el comportamiento clásico */
-  display: table;     /* fuerza el modo tabla */
 }
 
 .direcciones-thead {
@@ -117,44 +115,52 @@
    📱 RESPONSIVE PARA MÓVILES
    =============================== */
 @media (max-width: 640px) {
-  /* 🔹 Quitamos el comportamiento stacked */
   .direcciones-table,
   .direcciones-thead,
   .direcciones-tbody,
   .direcciones-tr,
   .direcciones-th,
   .direcciones-td {
-    display: table;
-    width: auto;
-  }
-
-  /* 🔹 Permitimos scroll horizontal si no cabe */
-  .direcciones-table {
     display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    width: 100%;
   }
 
-  /* 🔹 Encabezados visibles siempre */
+  /* Ocultamos encabezados */
   .direcciones-thead {
-    display: table-header-group;
+    display: none;
   }
 
-  /* 🔹 Fila y celdas normales */
   .direcciones-tr {
-    display: table-row;
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
   .direcciones-td {
-    display: table-cell;
-    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
     border-bottom: 1px solid #eee;
+  }
+
+  .direcciones-td:last-child {
+    border-bottom: none;
+  }
+
+  .direcciones-td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 8px;
+    color: #4e2ecc; /* violeta para resaltar */
   }
 
   /* Botones compactos */
   .btn-editar,
   .btn-eliminar {
-    font-size: 0.85rem;
-    padding: 5px 10px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
 }
