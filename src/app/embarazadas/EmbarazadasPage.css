@@ -2,11 +2,6 @@
 /* 📋 TABLA DE EMBARAZADAS       */
 /* ============================= */
 
-/* Contenedor principal */
-.container {
-  padding: 24px; /* espacio interno */
-}
-
 /* Tabla general */
 .embarazada-table {
   width: 100%; /* ocupa todo el ancho */
@@ -227,7 +222,6 @@
     border: none;
     border-bottom: 1px solid #eee;
   }
-
   /* Última celda sin borde */
   .embarazada-td:last-child {
     border-bottom: none;

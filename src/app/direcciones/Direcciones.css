@@ -2,11 +2,6 @@
 /* 📋 FORMULARIO DE DIRECCIONES  */
 /* ============================= */
 
-/* Contenedor principal */
-.direcciones-container {
-  padding: 24px; /* espacio interno */
-}
-
 /* Título principal */
 .direcciones-title {
   font-size: 1.8rem; /* 👈 un poco más grande */
@@ -251,26 +246,24 @@
 /* =============================== */
 /* 📱 RESPONSIVO PARA MÓVILES      */
 /* =============================== */
-/* ============================= */
-/* 📱 RESPONSIVO PARA MÓVILES    */
-/* ============================= */
 @media (max-width: 640px) {
-  .custom-table,
-  .custom-thead,
-  .custom-tbody,
-  .custom-tr,
-  .custom-th,
-  .custom-td {
+  .direcciones-table,
+  .direcciones-thead,
+  .direcciones-tbody,
+  .direcciones-tr,
+  .direcciones-th,
+  .direcciones-td {
     display: block;
     width: 100%;
   }
 
-  /* Ocultar encabezados */
-  .custom-thead {
+  /* Encabezado oculto */
+  .direcciones-thead {
     display: none;
   }
 
-  .custom-tr {
+  /* Fila como tarjeta */
+  .direcciones-tr {
     margin-bottom: 16px;
     padding: 12px;
     border-radius: 10px;
@@ -278,23 +271,30 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  .custom-td {
+  /* Celda clave-valor */
+  .direcciones-td {
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
     border: none;
     border-bottom: 1px solid #eee;
   }
-
-  .custom-td:last-child {
+  .direcciones-td:last-child {
     border-bottom: none;
   }
 
-  .custom-td::before {
+  /* Etiquetas visibles */
+  .direcciones-td::before {
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #007bff; /* 👈 Azul para el título */
+    color: #007bff; /* azul igual que editar */
+  }
+
+  /* Botones más compactos */
+  .btn-editar,
+  .btn-eliminar {
+    font-size: 0.85rem;
+    padding: 6px 10px;
   }
 }
-
