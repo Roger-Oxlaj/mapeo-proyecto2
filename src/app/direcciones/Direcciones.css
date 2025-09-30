@@ -61,6 +61,15 @@
   color: #222;
 }
 
+/* Título de la tabla */
+.embarazada-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
 /* Encabezado */
 .direcciones-thead {
   background: #f5f5f5; /* 👈 gris claro */
@@ -154,10 +163,10 @@
 
 /* Título del modal */
 .modal-title {
-  font-size: 24px; /* 👈 más grande */
-  font-weight: 900; /* 👈 más grueso */
-  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 900;
   text-align: center;
+  margin-bottom: 15px;
   color: #1a1a1a;
 }
 
@@ -259,6 +268,7 @@
     border: none;
     border-bottom: 1px solid #eee;
   }
+   /* Última celda sin borde */
   .direcciones-td:last-child {
     border-bottom: none;
   }
@@ -268,6 +278,6 @@
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #007bff; /* azul igual que editar */
+    color: #007bff;
   }
 }

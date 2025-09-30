@@ -4,23 +4,23 @@
 
 /* Tabla general */
 .embarazada-table {
-  width: 100%; /* ocupa todo el ancho */
-  border-collapse: collapse; /* elimina espacios entre celdas */
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
-  color: #222; /* 👈 texto más oscuro */
+  color: #222;
 }
 
 /* Título de la tabla */
 .embarazada-title {
-  font-size: 22px;       /* 👈 tamaño grande */
-  font-weight: bold;     /* 👈 negrita */
-  margin-bottom: 15px;   /* 👈 espacio inferior */
-  text-align: center;    /* 👈 centrado */
-  color: #1a1a1a;        /* 👈 legible */
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #1a1a1a;
 }
 
 /* Encabezado */
@@ -116,8 +116,8 @@
 
 /* Título del modal */
 .modal-title {
-  font-size: 24px;      /* 👈 más grande */
-  font-weight: 900;     /* 👈 más grueso */
+  font-size: 24px;
+  font-weight: 900;
   text-align: center;
   margin-bottom: 15px;
   color: #1a1a1a;
@@ -189,7 +189,6 @@
 /* 📱 RESPONSIVO PARA MÓVILES    */
 /* ============================= */
 @media (max-width: 640px) {
-  /* Tabla en formato "cards" */
   .embarazada-table,
   .embarazada-thead,
   .embarazada-tbody,
@@ -232,6 +231,6 @@
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #007bff; /* 👈 azul */
+    color: #007bff;
   }
 }
