@@ -126,7 +126,7 @@ export default function DireccionesPage() {
         </thead>
         <tbody>
           {direcciones.map((d) => (
-            <tr key={d.ID_Direccion}>
+            <tr key={d.ID_Direccion} className="direcciones-tr">
               <td className="direcciones-td" data-label="ID">{d.ID_Direccion}</td>
               <td className="direcciones-td" data-label="Calle">{d.Calle}</td>
               <td className="direcciones-td" data-label="Ciudad">{d.Ciudad}</td>
@@ -134,7 +134,6 @@ export default function DireccionesPage() {
               <td className="direcciones-td" data-label="Zona">{d.Zona || "-"}</td>
               <td className="direcciones-td" data-label="Avenida">{d.Avenida || "-"}</td>
               <td className="direcciones-td" data-label="Número de Casa">{d.NumeroCasa || "-"}</td>
-              {/* 👇 Aquí también */}
               <td className="direcciones-td acciones" data-label="Acciones">
                 <button onClick={() => setEditando(d)} className="btn-editar">Editar</button>
                 <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-eliminar">Eliminar</button>
@@ -142,6 +141,7 @@ export default function DireccionesPage() {
             </tr>
           ))}
         </tbody>
+
 
       </table>
 
