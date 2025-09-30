@@ -100,6 +100,82 @@
   transition: background 0.3s;
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* 👈 asegura que quede encima de todo */
+}
+
+/* 🔹 Caja del formulario */
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 🔹 Título del modal */
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 🔹 Inputs */
+.modal-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 🔹 Botones */
+.modal-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-btn-cancelar {
+  background: #ccc;
+  color: #333;
+}
+
+.modal-btn-guardar {
+  background: #28a745;
+  color: white;
+}
+
+.modal-btn:hover {
+  opacity: 0.9;
+}
+
+/* 🔹 Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .btn-editar:hover {
   background: #1e7e34; /* verde más oscuro */
 }
