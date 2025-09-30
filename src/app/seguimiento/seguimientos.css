@@ -1,67 +1,173 @@
-/* seguimientos.css */
+/* ============================= */
+/* 📋 SEGUIMIENTOS               */
+/* ============================= */
 
+/* Contenedor */
 .contenedor {
   padding: 24px;
-  font-family: sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+/* Título */
 .titulo {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #1a202c;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #1a1a1a;
 }
 
+/* ============================= */
+/* FORMULARIO */
+/* ============================= */
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 28px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .input,
 .select {
-  border: 1px solid #4b5563;
-  padding: 8px;
-  border-radius: 4px;
-  color: #1f2937;
   width: 100%;
+  padding: 12px;
+  border: 1px solid #888;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #111;
+  background-color: #fafafa;
+  box-sizing: border-box;
 }
 
+.input:focus,
+.select:focus {
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+  outline: none;
+}
+
+/* Botón Guardar */
 .boton-guardar {
   background-color: #16a34a;
   color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border-radius: 6px;
   cursor: pointer;
+  border: none;
+  font-weight: bold;
+  transition: background 0.3s;
   width: fit-content;
 }
 
-.boton-eliminar {
-  background-color: #dc2626;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.boton-guardar:hover {
+  background-color: #128636;
 }
 
+/* ============================= */
+/* TABLA */
+/* ============================= */
 .tabla {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #4b5563;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+  color: #222;
+}
+
+.tabla thead {
+  background: #f5f5f5;
+  color: #222;
+  font-weight: bold;
 }
 
 .tabla th,
 .tabla td {
-  border: 1px solid #4b5563;
-  padding: 8px;
-  color: #1f2937;
+  padding: 12px 15px;
   text-align: left;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
 }
 
-.tabla thead {
-  background-color: #e5e7eb;
+.tabla tr:hover {
+  background: #f9f9f9;
+}
+
+/* Botón Eliminar */
+.boton-eliminar {
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.boton-eliminar:hover {
+  background-color: #a71d2a;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVO PARA MÓVILES      */
+/* =============================== */
+@media (max-width: 768px) {
+  .formulario {
+    padding: 16px;
+  }
+
+  .tabla,
+  .tabla thead,
+  .tabla tbody,
+  .tabla tr,
+  .tabla th,
+  .tabla td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Ocultar encabezado */
+  .tabla thead {
+    display: none;
+  }
+
+  /* Fila como tarjeta */
+  .tabla tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Celda clave-valor */
+  .tabla td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Última celda sin borde */
+  .tabla td:last-child {
+    border-bottom: none;
+  }
+
+  /* Etiquetas visibles en móvil */
+  .tabla td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 8px;
+    color: #007bff;
+  }
 }

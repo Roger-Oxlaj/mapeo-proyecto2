@@ -139,13 +139,13 @@ export default function SeguimientosPage() {
         <tbody>
           {seguimientos.map((s) => (
             <tr key={s.ID_Seguimiento}>
-              <td>{s.ID_Seguimiento}</td>
-              <td>{s.ID_Embarazada}</td>
-              <td>{s.ID_Usuario}</td>
-              <td>{s.Fecha_Seguimiento}</td>
-              <td>{s.Observaciones}</td>
-              <td>{s.Signos_Alarma}</td>
-              <td>
+              <td data-label="ID">{s.ID_Seguimiento}</td>
+              <td data-label="ID Embarazada">{s.ID_Embarazada}</td>
+              <td data-label="Usuario">{s.ID_Usuario}</td>
+              <td data-label="Fecha">{s.Fecha_Seguimiento}</td>
+              <td data-label="Observaciones">{s.Observaciones}</td>
+              <td data-label="Signos">{s.Signos_Alarma}</td>
+              <td data-label="Acciones">
                 <button
                   onClick={() => eliminar(s.ID_Seguimiento)}
                   className="boton-eliminar"
@@ -154,6 +154,7 @@ export default function SeguimientosPage() {
                 </button>
               </td>
             </tr>
+
           ))}
         </tbody>
       </table>
