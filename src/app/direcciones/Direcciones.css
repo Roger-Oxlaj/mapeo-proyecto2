@@ -148,6 +148,14 @@
   background-color: #fafafa; /* 👈 Fondo gris claro */
 }
 
+.modal-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333; /* 👈 Texto bien visible */
+}
+
+
 /* 🔹 Botones */
 .modal-btn {
   padding: 8px 14px;

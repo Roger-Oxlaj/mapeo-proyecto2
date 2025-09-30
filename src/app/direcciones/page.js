@@ -149,15 +149,29 @@ export default function DireccionesPage() {
         <div className="modal-overlay">
           <form onSubmit={guardarEdicion} className="modal-box">
             <h2 className="modal-title">Editar Dirección #{editando.ID_Direccion}</h2>
+            <label className="modal-label">Calle</label>
             <input name="calle" defaultValue={editando.Calle} className="modal-input" required />
+            <label className="modal-label">Ciudad</label>
             <input name="ciudad" defaultValue={editando.Ciudad} className="modal-input" required />
+            <label className="modal-label">Departamento</label>
             <input name="departamento" defaultValue={editando.Departamento} className="modal-input" required />
+            <label className="modal-label">Zona</label>
             <input name="zona" defaultValue={editando.Zona} className="modal-input" />
+            <label className="modal-label">Avenida</label>
             <input name="avenida" defaultValue={editando.Avenida} className="modal-input" />
+            <label className="modal-label">Número de Casa</label>
             <input name="numeroCasa" defaultValue={editando.NumeroCasa} className="modal-input" />
             <div className="flex justify-end space-x-2">
-              <button type="button" onClick={() => setEditando(null)} className="modal-btn modal-btn-cancelar">Cancelar</button>
-              <button type="submit" className="modal-btn modal-btn-guardar">Guardar</button>
+              <button
+                type="button"
+                onClick={() => setEditando(null)}
+                className="modal-btn modal-btn-cancelar"
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="modal-btn modal-btn-guardar">
+                Guardar
+              </button>
             </div>
           </form>
         </div>
