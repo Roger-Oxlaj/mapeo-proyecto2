@@ -1,228 +1,257 @@
 /* ============================= */
-/* 📋 ESTILOS DEL FORMULARIO     */
+/* 📋 FORMULARIO DE DIRECCIONES  */
 /* ============================= */
 
-/* Contenedor principal del formulario */
+/* Contenedor principal */
 .direcciones-container {
-  padding: 24px; /* separación interna del bloque */
+  padding: 24px; /* espacio interno */
 }
 
-/* Estilo para el título del formulario */
+/* Título principal */
 .direcciones-title {
-  font-size: 1.5rem; /* tamaño de letra grande */
+  font-size: 1.8rem; /* 👈 un poco más grande */
   font-weight: bold;
   margin-bottom: 16px;
-  color: #1f2937; /* gris oscuro */
+  text-align: center;
+  color: #1a1a1a; /* 👈 más legible */
 }
 
-/* Caja que encierra los inputs del formulario */
+/* Caja que encierra los inputs */
 .direcciones-form {
   margin-bottom: 24px;
-  border: 1px solid #4b5563; /* borde gris */
+  border: 1px solid #4b5563; /* gris oscuro */
   color: #1f2937;
   display: flex;
-  flex-direction: column; /* inputs apilados verticalmente */
+  flex-direction: column;
   gap: 12px; /* separación entre inputs */
+  padding: 16px;
+  border-radius: 8px; /* 👈 bordes suaves */
+  background: #fff;
 }
 
-/* Campos de texto del formulario */
+/* Campos de texto */
 .direcciones-input {
-  border: 1px solid #4b5563;
-  padding: 8px;
-  color: #1f2937;
-  width: 100%; /* ocupan todo el ancho disponible */
-  box-sizing: border-box; /* respeta padding/border en el ancho */
+  width: 100%;
+  padding: 12px; /* 👈 más espacio */
+  border: 1px solid #888; /* 👈 borde más notorio */
+  border-radius: 8px;
+  font-size: 16px; /* 👈 texto más legible */
+  color: #111; /* 👈 texto oscuro */
+  background-color: #fafafa; /* 👈 fondo gris claro */
+  box-sizing: border-box;
 }
 
-/* Botón de enviar formulario */
+.direcciones-input:focus {
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+  outline: none;
+}
+
+/* Botón enviar */
 .direcciones-btn {
   background-color: #16a34a; /* verde */
   color: white;
-  padding: 8px 16px;
-  border-radius: 6px; /* esquinas redondeadas */
+  padding: 10px 18px;
+  border-radius: 6px;
   cursor: pointer;
   border: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.direcciones-btn:hover {
+  background-color: #128636;
 }
 
 /* ============================= */
-/* 📋 ESTILOS DE LA TABLA        */
+/* 📋 TABLA DE DIRECCIONES       */
 /* ============================= */
 
 /* Tabla general */
 .direcciones-table {
-  width: 100%; /* ocupa todo el ancho */
-  border-collapse: collapse; /* fusiona bordes */
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.15); /* sombra */
-  color: #333;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+  color: #222;
 }
 
-/* Encabezado de la tabla */
+/* Encabezado */
 .direcciones-thead {
-  background: #4e2ecc; /* violeta fuerte */
-  color: #fff;
+  background: #f5f5f5; /* 👈 gris claro */
+  color: #222;         /* 👈 texto oscuro */
   font-weight: bold;
 }
 
-/* Celdas generales */
-.direcciones-th, 
+/* Celdas */
+.direcciones-th,
 .direcciones-td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ccc; /* línea gris divisoria */
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  color: #222;
 }
 
-/* 🎯 Columna "Acciones": línea divisoria más fuerte */
+/* Columna Acciones */
 .direcciones-th.acciones,
 .direcciones-td.acciones {
-  border-left: 3px solid #000; /* línea negra separadora izquierda */
-  border-bottom: 3px solid #000; /* línea negra inferior */
+  border-left: 3px solid #000;
+  border-bottom: 3px solid #000;
 }
 
-/* Efecto al pasar el ratón sobre las filas */
+/* Hover filas */
 .direcciones-tr:hover {
   background: #f2f2f2;
 }
 
-/* 📌 Botón Editar */
+/* ============================= */
+/* 🎨 BOTONES (PC + MÓVIL)       */
+/* ============================= */
+
+/* Botón editar */
 .btn-editar {
+  background-color: #007bff; /* azul */
+  color: white;
   padding: 6px 12px;
-  margin-right: 6px;
-  border: none;
   border-radius: 6px;
-  background: #28a745; /* verde */
-  color: #fff;
-  font-weight: bold;
+  border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  margin-right: 12px;
+}
+.btn-editar:hover {
+  background-color: #0056b3;
 }
 
+/* Botón eliminar */
+.btn-eliminar {
+  background-color: #dc3545; /* rojo */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-eliminar:hover {
+  background-color: #a71d2a;
+}
+
+/* ============================= */
+/* 📝 MODAL PARA EDITAR          */
+/* ============================= */
+
+/* Fondo oscuro */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; /* 👈 asegura que quede encima de todo */
+  z-index: 999;
 }
 
-/* 🔹 Caja del formulario */
+/* Caja del modal */
 .modal-box {
   background: #fff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 90%;
   max-width: 500px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   animation: fadeIn 0.3s ease-in-out;
-  color: #222; /* 👈 Texto más oscuro */
-  font-size: 16px; /* 👈 Un poco más grande */
-  line-height: 1.5; /* 👈 Más espacio entre líneas */
+  color: #222;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-/* 🔹 Título del modal */
+/* Título del modal */
 .modal-title {
-  font-size: 22px; /* 👈 Más grande */
-  font-weight: bold;
+  font-size: 24px; /* 👈 más grande */
+  font-weight: 900; /* 👈 más grueso */
   margin-bottom: 15px;
   text-align: center;
-  color: #111; /* 👈 Bien oscuro */
+  color: #1a1a1a;
 }
 
-/* 🔹 Inputs */
-.modal-input {
-  width: 100%;
-  padding: 10px; /* 👈 Un poco más grande */
-  margin-bottom: 12px;
-  border: 1px solid #888;
-  border-radius: 5px;
-  font-size: 15px; /* 👈 Texto más legible */
-  color: #222;
-  background-color: #fafafa; /* 👈 Fondo gris claro */
-}
-
+/* Labels */
 .modal-label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #333; /* 👈 Texto bien visible */
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 15px;
 }
 
+/* Inputs */
+.modal-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #111;
+  background-color: #fafafa;
+  margin-bottom: 12px;
+}
+.modal-input:focus {
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+}
 
-/* 🔹 Botones */
+/* Contenedor de botones */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Botón base */
 .modal-btn {
   padding: 8px 14px;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
 }
 
+/* Cancelar */
 .modal-btn-cancelar {
   background: #ccc;
-  color: #333;
+  color: #000;
+}
+.modal-btn-cancelar:hover {
+  background: #b3b3b3;
 }
 
+/* Guardar */
 .modal-btn-guardar {
-  background: #28a745;
+  background: #007bff;
   color: white;
 }
-
-.modal-btn:hover {
-  opacity: 0.9;
+.modal-btn-guardar:hover {
+  background: #0056b3;
 }
 
-.modal-input:focus {
-  border-color: #007bff;
-  outline: none;
-  background-color: #fff; /* 👈 Se pone más blanco al escribir */
-}
-
-/* 🔹 Animación de entrada */
+/* Animación */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.btn-editar:hover {
-  background: #1e7e34; /* verde más oscuro */
-}
-
-/* 📌 Botón Eliminar */
-.btn-eliminar {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  background: #dc3545; /* rojo */
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-eliminar:hover {
-  background: #a71d2a; /* rojo oscuro */
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* =============================== */
-/* 📱 RESPONSIVE PARA MÓVILES      */
+/* 📱 RESPONSIVO PARA MÓVILES      */
 /* =============================== */
 @media (max-width: 640px) {
-
-  /* Hacemos que cada fila y celda se comporte como bloque */
   .direcciones-table,
   .direcciones-thead,
   .direcciones-tbody,
@@ -233,21 +262,21 @@
     width: 100%;
   }
 
-  /* 🚫 Ocultamos encabezados en móvil */
+  /* Encabezado oculto */
   .direcciones-thead {
     display: none;
   }
 
-  /* Cada fila parece una tarjeta */
+  /* Fila como tarjeta */
   .direcciones-tr {
     margin-bottom: 16px;
     padding: 12px;
     border-radius: 10px;
-    background-color: #fff;
+    background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Cada celda se muestra con "etiqueta: valor" */
+  /* Celda clave-valor */
   .direcciones-td {
     display: flex;
     justify-content: space-between;
@@ -255,31 +284,22 @@
     border: none;
     border-bottom: 1px solid #eee;
   }
-
-  /* Quitamos línea en la última celda */
   .direcciones-td:last-child {
     border-bottom: none;
   }
 
-  /* Mostramos el nombre de la columna antes del valor */
+  /* Etiquetas visibles */
   .direcciones-td::before {
-    content: attr(data-label); /* saca el nombre del atributo data-label */
+    content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #4e2ecc; /* violeta */
+    color: #007bff; /* azul igual que editar */
   }
 
-  /* Mantener la columna Acciones con sus bordes fuertes */
-  .direcciones-th.acciones,
-  .direcciones-td.acciones {
-    border-left: 3px solid #000;
-    border-bottom: 3px solid #000;
-  }
-
-  /* Botones más pequeños en móvil */
+  /* Botones más compactos */
   .btn-editar,
   .btn-eliminar {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     padding: 6px 10px;
   }
 }
