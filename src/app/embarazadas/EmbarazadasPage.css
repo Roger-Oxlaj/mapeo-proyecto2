@@ -14,10 +14,19 @@
   color: #222; /* 👈 Texto más oscuro */
 }
 
+/* Título de la tabla */
+.embarazada-title {
+  font-size: 22px;           /* 👈 Más grande */
+  font-weight: bold;         /* 👈 Negrita */
+  margin-bottom: 15px;       /* 👈 Separación de la tabla */
+  text-align: center;        /* 👈 Centrado */
+  color: #1a1a1a;            /* 👈 Color oscuro para mejor legibilidad */
+}
+
 /* Encabezado */
 .embarazada-thead {
-  background: #4e2ecc; /* violeta */
-  color: #fff;
+  background: #f5f5f5; /* 👈 Color gris claro en vez de morado */
+  color: #222;         /* 👈 Texto oscuro */
   font-weight: bold;
 }
 
@@ -41,6 +50,74 @@
 /* Hover fila */
 .embarazada-tr:hover {
   background: #f2f2f2;
+}
+
+/* ============================= */
+/* 🎨 BOTONES EN PC              */
+/* ============================= */
+@media (min-width: 641px) {
+  .btn-editar {
+    background-color: #007bff; /* 👈 Azul */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-right: 12px; /* 👈 Separación entre botones */
+  }
+
+  .btn-eliminar {
+    background-color: #dc3545; /* 👈 Rojo */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+/* ============================= */
+/* 📝 MODAL PARA EDITAR          */
+/* ============================= */
+.modal-overlay {
+  position: fixed;      /* 👈 Ocupa toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* 👈 Fondo oscuro */
+  display: flex;
+  justify-content: center; /* 👈 Centrado horizontal */
+  align-items: center;     /* 👈 Centrado vertical */
+  z-index: 1000;           /* 👈 Encima de todo */
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;       /* 👈 Ancho fijo */
+  max-width: 90%;     /* 👈 Responsivo */
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
+  font-size: 16px;    /* 👈 Texto legible */
+  color: #222;
+}
+
+.modal-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* ============================= */
@@ -86,6 +163,6 @@
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #4e2ecc; /* 👈 violeta como en direcciones */
+    color: #007bff; /* 👈 Azul en móvil en lugar de violeta */
   }
 }
