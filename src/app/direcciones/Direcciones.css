@@ -122,23 +122,30 @@
   max-width: 500px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   animation: fadeIn 0.3s ease-in-out;
+  color: #222; /* 👈 Texto más oscuro */
+  font-size: 16px; /* 👈 Un poco más grande */
+  line-height: 1.5; /* 👈 Más espacio entre líneas */
 }
 
 /* 🔹 Título del modal */
 .modal-title {
-  font-size: 20px;
+  font-size: 22px; /* 👈 Más grande */
   font-weight: bold;
   margin-bottom: 15px;
   text-align: center;
+  color: #111; /* 👈 Bien oscuro */
 }
 
 /* 🔹 Inputs */
 .modal-input {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  padding: 10px; /* 👈 Un poco más grande */
+  margin-bottom: 12px;
+  border: 1px solid #888;
   border-radius: 5px;
+  font-size: 15px; /* 👈 Texto más legible */
+  color: #222;
+  background-color: #fafafa; /* 👈 Fondo gris claro */
 }
 
 /* 🔹 Botones */
@@ -162,6 +169,12 @@
 
 .modal-btn:hover {
   opacity: 0.9;
+}
+
+.modal-input:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff; /* 👈 Se pone más blanco al escribir */
 }
 
 /* 🔹 Animación de entrada */
