@@ -4,152 +4,134 @@
 
 /* Tabla general */
 .embarazada-table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 100%; /* ocupa todo el ancho */
+  border-collapse: collapse; /* elimina espacios entre celdas */
   margin-top: 20px;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
-  color: #222; /* 👈 Texto más oscuro */
+  color: #222; /* 👈 texto más oscuro */
 }
 
 /* Título de la tabla */
 .embarazada-title {
-  font-size: 22px;           /* 👈 Más grande */
-  font-weight: bold;         /* 👈 Negrita */
-  margin-bottom: 15px;       /* 👈 Separación de la tabla */
-  text-align: center;        /* 👈 Centrado */
-  color: #1a1a1a;            /* 👈 Color oscuro para mejor legibilidad */
+  font-size: 22px;       /* 👈 tamaño grande */
+  font-weight: bold;     /* 👈 negrita */
+  margin-bottom: 15px;   /* 👈 espacio inferior */
+  text-align: center;    /* 👈 centrado */
+  color: #1a1a1a;        /* 👈 legible */
 }
 
 /* Encabezado */
 .embarazada-thead {
-  background: #f5f5f5; /* 👈 Color gris claro en vez de morado */
-  color: #222;         /* 👈 Texto oscuro */
+  background: #f5f5f5; /* 👈 gris claro */
+  color: #222;         /* 👈 texto oscuro */
   font-weight: bold;
 }
 
-/* Celdas */
+/* Celdas de tabla */
 .embarazada-th,
 .embarazada-td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ccc;
   font-size: 15px;
-  color: #222; /* 👈 texto visible */
+  color: #222;
 }
 
-/* Columna acciones con línea separadora */
+/* Columna de acciones con borde extra */
 .embarazada-th.acciones,
 .embarazada-td.acciones {
   border-left: 3px solid #000;
   border-bottom: 3px solid #000;
 }
 
-/* Hover fila */
+/* Efecto hover en filas */
 .embarazada-tr:hover {
   background: #f2f2f2;
 }
 
 /* ============================= */
-/* 🎨 BOTONES EN PC              */
+/* 🎨 BOTONES (PC + MÓVIL)       */
 /* ============================= */
-@media (min-width: 641px) {
-  .btn-editar {
-    background-color: #007bff; /* 👈 Azul */
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    margin-right: 12px; /* 👈 Separación entre botones */
-  }
 
-  .btn-eliminar {
-    background-color: #dc3545; /* 👈 Rojo */
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-  }
+/* Botón editar */
+.btn-editar {
+  background-color: #007bff; /* 👈 Azul */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px; /* 👈 separación */
+}
+.btn-editar:hover {
+  background-color: #0056b3;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background-color: #dc3545; /* 👈 Rojo */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-eliminar:hover {
+  background-color: #a71d2a;
 }
 
 /* ============================= */
 /* 📝 MODAL PARA EDITAR          */
 /* ============================= */
+
+/* Fondo del modal */
 .modal-overlay {
-  position: fixed;      /* 👈 Ocupa toda la pantalla */
+  position: fixed; /* 👈 ocupa toda la pantalla */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* 👈 Fondo oscuro */
+  background: rgba(0,0,0,0.5); /* 👈 fondo oscuro */
   display: flex;
-  justify-content: center; /* 👈 Centrado horizontal */
-  align-items: center;     /* 👈 Centrado vertical */
-  z-index: 1000;           /* 👈 Encima de todo */
+  justify-content: center; /* 👈 centrado horizontal */
+  align-items: center;     /* 👈 centrado vertical */
+  z-index: 1000;           /* 👈 encima de todo */
 }
 
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 400px;       /* 👈 Ancho fijo */
-  max-width: 90%;     /* 👈 Responsivo */
-  box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
-  font-size: 16px;    /* 👈 Texto legible */
-  color: #222;
-}
-
-.modal-header {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* 🔲 Caja del modal */
+/* Caja del modal */
 .modal-box {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
   width: 400px;
-  max-width: 90%;
+  max-width: 90%; /* 👈 responsivo */
   box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
   display: flex;
   flex-direction: column;
-  gap: 12px; /* 👈 separa los elementos */
+  gap: 12px; /* 👈 separación entre elementos */
 }
 
-/* 📝 Título del modal */
+/* Título del modal */
 .modal-title {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 24px;      /* 👈 más grande */
+  font-weight: 900;     /* 👈 más grueso */
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #1a1a1a;
 }
 
-/* 🏷️ Labels */
+/* Labels del formulario */
 .modal-label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   margin-top: 8px;
   color: #333;
 }
 
-/* ✏️ Inputs */
+/* Campos de texto */
 .modal-input {
   padding: 10px;
   border: 1px solid #ccc;
@@ -162,7 +144,7 @@
   box-shadow: 0 0 4px rgba(0,123,255,0.4);
 }
 
-/* 🎛️ Acciones (botones) */
+/* Contenedor de botones */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -170,6 +152,7 @@
   margin-top: 15px;
 }
 
+/* Estilo base para botones del modal */
 .modal-btn {
   padding: 8px 14px;
   border: none;
@@ -197,11 +180,11 @@
   background: #0056b3;
 }
 
-
 /* ============================= */
 /* 📱 RESPONSIVO PARA MÓVILES    */
 /* ============================= */
 @media (max-width: 640px) {
+  /* Tabla en formato "cards" */
   .embarazada-table,
   .embarazada-thead,
   .embarazada-tbody,
@@ -212,11 +195,12 @@
     width: 100%;
   }
 
-  /* Ocultamos encabezados */
+  /* Encabezado oculto en móvil */
   .embarazada-thead {
     display: none;
   }
 
+  /* Cada fila parece tarjeta */
   .embarazada-tr {
     margin-bottom: 16px;
     padding: 12px;
@@ -225,6 +209,7 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
+  /* Celda como par clave-valor */
   .embarazada-td {
     display: flex;
     justify-content: space-between;
@@ -233,14 +218,16 @@
     border-bottom: 1px solid #eee;
   }
 
+  /* Última celda sin borde */
   .embarazada-td:last-child {
     border-bottom: none;
   }
 
+  /* Etiquetas en móvil */
   .embarazada-td::before {
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #007bff; /* 👈 Azul en móvil en lugar de violeta */
+    color: #007bff; /* 👈 azul */
   }
 }
