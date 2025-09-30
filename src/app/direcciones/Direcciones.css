@@ -251,55 +251,50 @@
 /* =============================== */
 /* 📱 RESPONSIVO PARA MÓVILES      */
 /* =============================== */
+/* ============================= */
+/* 📱 RESPONSIVO PARA MÓVILES    */
+/* ============================= */
 @media (max-width: 640px) {
-  .direcciones-table,
-  .direcciones-thead,
-  .direcciones-tbody,
-  .direcciones-tr,
-  .direcciones-th,
-  .direcciones-td {
+  .custom-table,
+  .custom-thead,
+  .custom-tbody,
+  .custom-tr,
+  .custom-th,
+  .custom-td {
     display: block;
     width: 100%;
   }
 
-  /* Encabezado oculto */
-  .direcciones-thead {
+  /* Ocultar encabezados */
+  .custom-thead {
     display: none;
   }
 
-  /* Fila como tarjeta */
-  .direcciones-tr {
+  .custom-tr {
     margin-bottom: 16px;
     padding: 12px;
     border-radius: 10px;
-    background: #fff;
+    background-color: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Celda clave-valor */
-  .direcciones-td {
+  .custom-td {
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
     border: none;
     border-bottom: 1px solid #eee;
   }
-  .direcciones-td:last-child {
+
+  .custom-td:last-child {
     border-bottom: none;
   }
 
-  /* Etiquetas visibles */
-  .direcciones-td::before {
+  .custom-td::before {
     content: attr(data-label);
     font-weight: bold;
     margin-right: 8px;
-    color: #007bff; /* azul igual que editar */
-  }
-
-  /* Botones más compactos */
-  .btn-editar,
-  .btn-eliminar {
-    font-size: 0.85rem;
-    padding: 6px 10px;
+    color: #007bff; /* 👈 Azul para el título */
   }
 }
+

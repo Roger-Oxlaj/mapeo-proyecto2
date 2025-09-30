@@ -110,7 +110,7 @@ export default function DireccionesPage() {
       </form>
 
       <h1 className="direcciones-title">Direcciones</h1>
-      <table className="direcciones-table">
+      <table className="custom-table direccion-table">
         <thead>
           <tr>
             <th className="direcciones-th">ID</th>
