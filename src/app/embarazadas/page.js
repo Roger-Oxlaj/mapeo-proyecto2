@@ -109,43 +109,34 @@ export default function EmbarazadasPage() {
     <div className="container">
       {/* Tabla de registros */}
       <h1 className="title">Lista de Embarazadas</h1>
-      <table className="direcciones-table">
-        <thead className="direcciones-thead">
-          <tr className="direcciones-tr">
-            <th className="direcciones-th">ID</th>
-            <th className="direcciones-th">Nombre</th>
-            <th className="direcciones-th">Edad</th>
-            <th className="direcciones-th">Teléfono</th>
-            <th className="direcciones-th">ID Dirección</th>
-            <th className="direcciones-th acciones">Acciones</th>
+      <table className="embarazada-table">
+        <thead className="embarazada-thead">
+          <tr className="embarazada-tr">
+            <th className="embarazada-th">ID</th>
+            <th className="embarazada-th">Nombre</th>
+            <th className="embarazada-th">Edad</th>
+            <th className="embarazada-th">Teléfono</th>
+            <th className="embarazada-th">ID Dirección</th>
+            <th className="embarazada-th acciones">Acciones</th>
           </tr>
         </thead>
-        <tbody className="direcciones-tbody">
+        <tbody className="embarazada-tbody">
           {embarazadas.map((e) => (
-            <tr key={e.ID_Embarazada} className="direcciones-tr">
-              <td className="direcciones-td">{e.ID_Embarazada}</td>
-              <td className="direcciones-td">{e.Nombre}</td>
-              <td className="direcciones-td">{e.Edad}</td>
-              <td className="direcciones-td">{e.TELEFONO}</td>
-              <td className="direcciones-td">{e.ID_Direccion}</td>
-              <td className="direcciones-td acciones">
-                <button
-                  onClick={() => setEditando(e)}
-                  className="btn-editar"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => eliminarEmbarazada(e.ID_Embarazada)}
-                  className="btn-eliminar"
-                >
-                  Eliminar
-                </button>
+            <tr key={e.ID_Embarazada} className="embarazada-tr">
+              <td className="embarazada-td" data-label="ID">{e.ID_Embarazada}</td>
+              <td className="embarazada-td" data-label="Nombre">{e.Nombre}</td>
+              <td className="embarazada-td" data-label="Edad">{e.Edad}</td>
+              <td className="embarazada-td" data-label="Teléfono">{e.TELEFONO}</td>
+              <td className="embarazada-td" data-label="ID Dirección">{e.ID_Direccion}</td>
+              <td className="embarazada-td acciones" data-label="Acciones">
+                <button onClick={() => setEditando(e)} className="btn-editar">Editar</button>
+                <button onClick={() => eliminarEmbarazada(e.ID_Embarazada)} className="btn-eliminar">Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
 
       {/* Modal de edición */}
       {editando && (

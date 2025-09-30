@@ -1,186 +1,91 @@
-/* 🔹 Contenedor principal */
-.container {
-  padding: 1.5rem;
-  max-width: 100%;
-  overflow-x: auto; /* Previene que la tabla se desborde en móviles */
-}
+/* ============================= */
+/* 📋 TABLA DE EMBARAZADAS       */
+/* ============================= */
 
-/* 🔹 Títulos */
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #1f2937; /* gris oscuro */
-  text-align: center;
-}
-
-/* 🔹 Tabla */
-.table {
+/* Tabla general */
+.embarazada-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
-
-.modal-box {
+  margin-top: 20px;
   background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease-in-out;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
   color: #222; /* 👈 Texto más oscuro */
-  font-size: 16px; /* 👈 Un poco más grande */
-  line-height: 1.5; /* 👈 Más espacio entre líneas */
 }
 
-
-.table th,
-.table td {
-  border: 1px solid #4b5563;
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  color: #1f2937;
-  white-space: nowrap; /* Mantiene las celdas en línea */
-}
-
-.table th {
-  background-color: #e5e7eb;
-  font-size: 0.95rem;
-}
-
-.table tr:hover {
-  background-color: #f9fafb;
-}
-
-/* 🔹 Botones */
-.btn {
-  padding: 0.35rem 0.75rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  margin: 0.2rem;
-  color: white;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: inline-block;
-}
-
-.btn-edit {
-  background: #2563eb;
-}
-
-.btn-edit:hover {
-  background: #1d4ed8;
-}
-
-.btn-delete {
-  background: #dc2626;
-}
-
-.btn-delete:hover {
-  background: #b91c1c;
-}
-
-.btn-cancel {
-  background: #6b7280;
-}
-
-.btn-cancel:hover {
-  background: #4b5563;
-}
-
-.btn-save {
-  background: #16a34a;
-}
-
-.btn-save:hover {
-  background: #15803d;
-}
-
-/* 🔹 Modal */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-
-.modal {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  width: 100%;
-  max-width: 24rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.modal-title {
-  font-size: 1.25rem;
+/* Encabezado */
+.embarazada-thead {
+  background: #4e2ecc; /* violeta */
+  color: #fff;
   font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
-  text-align: center;
 }
 
-.modal input {
-  border: 1px solid #d1d5db;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  width: 100%;
-  color: #111827;
+/* Celdas */
+.embarazada-th,
+.embarazada-td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  color: #222; /* 👈 texto visible */
 }
 
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 15px;
+/* Columna acciones con línea separadora */
+.embarazada-th.acciones,
+.embarazada-td.acciones {
+  border-left: 3px solid #000;
+  border-bottom: 3px solid #000;
 }
 
-/* 🔹 Responsividad */
-@media (max-width: 768px) {
-  .table {
-    font-size: 0.8rem;
-  }
-
-  .table th,
-  .table td {
-    padding: 0.4rem;
-  }
-
-  .btn {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-  }
-
-  .modal {
-    width: 100%;
-    max-width: 20rem;
-  }
+/* Hover fila */
+.embarazada-tr:hover {
+  background: #f2f2f2;
 }
 
-@media (max-width: 480px) {
-  .table {
+/* ============================= */
+/* 📱 RESPONSIVO PARA MÓVILES    */
+/* ============================= */
+@media (max-width: 640px) {
+  .embarazada-table,
+  .embarazada-thead,
+  .embarazada-tbody,
+  .embarazada-tr,
+  .embarazada-th,
+  .embarazada-td {
     display: block;
-    overflow-x: auto; /* Scroll horizontal si es necesario */
-    font-size: 0.75rem;
-  }
-
-  .btn {
-    display: block; /* Botones en columna */
     width: 100%;
-    margin: 0.25rem 0;
-    text-align: center;
   }
 
-  .modal {
-    padding: 1rem;
-    max-width: 18rem;
+  /* Ocultamos encabezados */
+  .embarazada-thead {
+    display: none;
+  }
+
+  .embarazada-tr {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .embarazada-td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .embarazada-td:last-child {
+    border-bottom: none;
+  }
+
+  .embarazada-td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 8px;
+    color: #4e2ecc; /* 👈 violeta como en direcciones */
   }
 }
