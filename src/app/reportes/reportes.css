@@ -1,36 +1,49 @@
+/* ============================= */
+/* 📊 REPORTES Y ESTADÍSTICAS    */
+/* ============================= */
+
 .reportes-container {
-  padding: 40px;
-  background-color: #f0f4f8;
+  padding: 24px;                /* 🔽 menos padding que antes */
+  background-color: #f5f7fa;
   min-height: 100vh;
-  text-align: left;
 }
 
 .reportes-title {
-  color: #2e7d32;
-  font-size: 32px;
-  margin-bottom: 30px;
-  font-weight: bold;
+  color: #1a1a1a;
+  font-size: 24px;              /* 🔽 título más compacto */
+  margin-bottom: 20px;
+  font-weight: 800;
+  text-align: center;           /* 👈 centrado como en otros módulos */
 }
 
+/* Grid de tarjetas */
 .reportes-grid {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 20px;                    /* 👈 separación uniforme */
 }
 
+/* Tarjetas */
 .report-card {
-  width: 45%;
-  margin-bottom: 30px;
-  background: white;
-  padding: 20px;
+  flex: 1 1 350px;              /* 👈 ancho mínimo, se adapta */
+  max-width: 500px;             /* 👈 límite de ancho */
+  background: #fff;
+  padding: 16px;                /* 🔽 menos padding */
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
 }
 
+.report-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Título de tarjeta */
 .report-card-title {
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  text-align: left;
+  margin-bottom: 12px;
+  font-size: 16px;              /* 🔽 más compacto */
+  font-weight: 700;
+  color: #2e7d32;
+  text-align: center;           /* 👈 centrado como en otros */
 }
