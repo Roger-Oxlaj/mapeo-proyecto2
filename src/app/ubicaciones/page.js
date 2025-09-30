@@ -139,12 +139,12 @@ export default function UbicacionesPage() {
         <tbody>
           {ubicaciones.map((u) => (
             <tr key={u.ID_Ubicacion}>
-              <td>{u.ID_Ubicacion}</td>
-              <td>{u.ID_Embarazada}</td>
-              <td>{u.Nombre}</td>
-              <td>{u.Edad}</td>
-              <td>{u.ID_Direccion}</td>
-              <td>
+              <td data-label="ID">{u.ID_Ubicacion}</td>
+              <td data-label="Embarazada">{u.ID_Embarazada}</td>
+              <td data-label="Nombre">{u.Nombre}</td>
+              <td data-label="Edad">{u.Edad}</td>
+              <td data-label="Dirección">{u.ID_Direccion}</td>
+              <td data-label="Acciones">
                 <button
                   onClick={() => eliminar(u.ID_Ubicacion)}
                   className="button-delete"
@@ -153,6 +153,7 @@ export default function UbicacionesPage() {
                 </button>
               </td>
             </tr>
+
           ))}
         </tbody>
       </table>
