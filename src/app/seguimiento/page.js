@@ -58,7 +58,6 @@ export default function SeguimientosPage() {
   return (
     <div className="contenedor">
       <h1 className="titulo">Seguimientos</h1>
-
       {/* Formulario */}
       <form
         onSubmit={async (e) => {
