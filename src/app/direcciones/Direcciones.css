@@ -2,42 +2,44 @@
 /* 📋 ESTILOS DEL FORMULARIO     */
 /* ============================= */
 
-/* Contenedor principal */
+/* Contenedor principal del formulario */
 .direcciones-container {
-  padding: 24px;
+  padding: 24px; /* separación interna del bloque */
 }
 
-/* Títulos */
+/* Estilo para el título del formulario */
 .direcciones-title {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* tamaño de letra grande */
   font-weight: bold;
   margin-bottom: 16px;
-  color: #1f2937; /* gray-900 */
+  color: #1f2937; /* gris oscuro */
 }
 
-/* Formulario */
+/* Caja que encierra los inputs del formulario */
 .direcciones-form {
   margin-bottom: 24px;
-  border: 1px solid #4b5563; /* gray-600 */
-  color: #1f2937; /* gray-800 */
+  border: 1px solid #4b5563; /* borde gris */
+  color: #1f2937;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: column; /* inputs apilados verticalmente */
+  gap: 12px; /* separación entre inputs */
 }
 
+/* Campos de texto del formulario */
 .direcciones-input {
   border: 1px solid #4b5563;
   padding: 8px;
   color: #1f2937;
-  width: 100%;
-  box-sizing: border-box;
+  width: 100%; /* ocupan todo el ancho disponible */
+  box-sizing: border-box; /* respeta padding/border en el ancho */
 }
 
+/* Botón de enviar formulario */
 .direcciones-btn {
-  background-color: #16a34a; /* green-600 */
+  background-color: #16a34a; /* verde */
   color: white;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 6px; /* esquinas redondeadas */
   cursor: pointer;
   border: none;
 }
@@ -45,48 +47,53 @@
 /* ============================= */
 /* 📋 ESTILOS DE LA TABLA        */
 /* ============================= */
+
+/* Tabla general */
 .direcciones-table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 100%; /* ocupa todo el ancho */
+  border-collapse: collapse; /* fusiona bordes */
   margin-top: 20px;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15); /* sombra */
   color: #333;
 }
 
+/* Encabezado de la tabla */
 .direcciones-thead {
   background: #4e2ecc; /* violeta fuerte */
   color: #fff;
   font-weight: bold;
 }
 
+/* Celdas generales */
 .direcciones-th, 
 .direcciones-td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; /* línea gris divisoria */
 }
 
-/* 🎯 Línea divisoria solo para Acciones */
+/* 🎯 Columna "Acciones": línea divisoria más fuerte */
 .direcciones-th.acciones,
 .direcciones-td.acciones {
-  border-left: 3px solid #000; /* línea negra separadora */
-  border-bottom: 3px solid #000;
+  border-left: 3px solid #000; /* línea negra separadora izquierda */
+  border-bottom: 3px solid #000; /* línea negra inferior */
 }
 
+/* Efecto al pasar el ratón sobre las filas */
 .direcciones-tr:hover {
   background: #f2f2f2;
 }
 
-/* 📌 Botones dentro de la tabla */
+/* 📌 Botón Editar */
 .btn-editar {
   padding: 6px 12px;
   margin-right: 6px;
   border: none;
   border-radius: 6px;
-  background: #28a745;
+  background: #28a745; /* verde */
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -94,14 +101,15 @@
 }
 
 .btn-editar:hover {
-  background: #1e7e34;
+  background: #1e7e34; /* verde más oscuro */
 }
 
+/* 📌 Botón Eliminar */
 .btn-eliminar {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
-  background: #dc3545;
+  background: #dc3545; /* rojo */
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -109,13 +117,15 @@
 }
 
 .btn-eliminar:hover {
-  background: #a71d2a;
+  background: #a71d2a; /* rojo oscuro */
 }
 
-/* ===============================
-   📱 RESPONSIVE PARA MÓVILES
-   =============================== */
+/* =============================== */
+/* 📱 RESPONSIVE PARA MÓVILES      */
+/* =============================== */
 @media (max-width: 640px) {
+
+  /* Hacemos que cada fila y celda se comporte como bloque */
   .direcciones-table,
   .direcciones-thead,
   .direcciones-tbody,
@@ -126,11 +136,12 @@
     width: 100%;
   }
 
-  /* Ocultamos encabezados */
+  /* 🚫 Ocultamos encabezados en móvil */
   .direcciones-thead {
     display: none;
   }
 
+  /* Cada fila parece una tarjeta */
   .direcciones-tr {
     margin-bottom: 16px;
     padding: 12px;
@@ -139,6 +150,7 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
+  /* Cada celda se muestra con "etiqueta: valor" */
   .direcciones-td {
     display: flex;
     justify-content: space-between;
@@ -147,25 +159,27 @@
     border-bottom: 1px solid #eee;
   }
 
+  /* Quitamos línea en la última celda */
   .direcciones-td:last-child {
     border-bottom: none;
   }
 
+  /* Mostramos el nombre de la columna antes del valor */
   .direcciones-td::before {
-    content: attr(data-label);
+    content: attr(data-label); /* saca el nombre del atributo data-label */
     font-weight: bold;
     margin-right: 8px;
-    color: #4e2ecc; /* violeta para resaltar */
+    color: #4e2ecc; /* violeta */
   }
 
+  /* Mantener la columna Acciones con sus bordes fuertes */
   .direcciones-th.acciones,
   .direcciones-td.acciones {
-    border-left: 3px solid #000; /* línea negra separadora */
+    border-left: 3px solid #000;
     border-bottom: 3px solid #000;
   }
 
-
-  /* Botones compactos */
+  /* Botones más pequeños en móvil */
   .btn-editar,
   .btn-eliminar {
     font-size: 0.8rem;
