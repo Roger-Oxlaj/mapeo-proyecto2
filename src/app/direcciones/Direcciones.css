@@ -270,11 +270,4 @@
     margin-right: 8px;
     color: #007bff; /* azul igual que editar */
   }
-
-  /* Botones más compactos */
-  .btn-editar,
-  .btn-eliminar {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-  }
 }
