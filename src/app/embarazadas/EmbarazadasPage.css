@@ -22,6 +22,20 @@
   font-size: 0.9rem;
 }
 
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+  color: #222; /* 👈 Texto más oscuro */
+  font-size: 16px; /* 👈 Un poco más grande */
+  line-height: 1.5; /* 👈 Más espacio entre líneas */
+}
+
+
 .table th,
 .table td {
   border: 1px solid #4b5563;
