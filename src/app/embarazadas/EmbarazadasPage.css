@@ -2,6 +2,11 @@
 /* 📋 TABLA DE EMBARAZADAS       */
 /* ============================= */
 
+/* Contenedor principal */
+.container {
+  padding: 24px; /* espacio interno */
+}
+
 /* Tabla general */
 .embarazada-table {
   width: 100%; /* ocupa todo el ancho */
