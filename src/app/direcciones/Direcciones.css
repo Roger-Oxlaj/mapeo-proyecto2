@@ -3,7 +3,9 @@
 /* ============================= */
 
 /* Contenedor principal del formulario */
-
+.direcciones-container {
+  padding: 24px; /* separación interna del bloque */
+}
 
 /* Estilo para el título del formulario */
 .direcciones-title {
