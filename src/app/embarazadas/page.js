@@ -109,32 +109,35 @@ export default function EmbarazadasPage() {
     <div className="container">
       {/* Tabla de registros */}
       <h1 className="title">Lista de Embarazadas</h1>
-      <table className="table shadow-lg rounded-lg">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>Telefono</th>
-            <th>ID Dirección</th>
-            <th>Acciones</th>
+      <table className="direcciones-table">
+        <thead className="direcciones-thead">
+          <tr className="direcciones-tr">
+            <th className="direcciones-th">ID</th>
+            <th className="direcciones-th">Nombre</th>
+            <th className="direcciones-th">Edad</th>
+            <th className="direcciones-th">Teléfono</th>
+            <th className="direcciones-th">ID Dirección</th>
+            <th className="direcciones-th acciones">Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="direcciones-tbody">
           {embarazadas.map((e) => (
-            <tr key={e.ID_Embarazada}>
-              <td>{e.ID_Embarazada}</td>
-              <td>{e.Nombre}</td>
-              <td>{e.Edad}</td>
-              <td>{e.TELEFONO}</td>
-              <td>{e.ID_Direccion}</td>
-              <td>
-                <button onClick={() => setEditando(e)} className="btn btn-edit">
+            <tr key={e.ID_Embarazada} className="direcciones-tr">
+              <td className="direcciones-td">{e.ID_Embarazada}</td>
+              <td className="direcciones-td">{e.Nombre}</td>
+              <td className="direcciones-td">{e.Edad}</td>
+              <td className="direcciones-td">{e.TELEFONO}</td>
+              <td className="direcciones-td">{e.ID_Direccion}</td>
+              <td className="direcciones-td acciones">
+                <button
+                  onClick={() => setEditando(e)}
+                  className="btn-editar"
+                >
                   Editar
                 </button>
                 <button
                   onClick={() => eliminarEmbarazada(e.ID_Embarazada)}
-                  className="btn btn-delete"
+                  className="btn-eliminar"
                 >
                   Eliminar
                 </button>
@@ -147,41 +150,54 @@ export default function EmbarazadasPage() {
       {/* Modal de edición */}
       {editando && (
         <div className="modal-overlay">
-          <form onSubmit={guardarEdicion} className="modal">
+          <form onSubmit={guardarEdicion} className="modal-box">
             <h2 className="modal-title">
               Editar embarazada #{editando.ID_Embarazada}
             </h2>
 
-            <label>Nombre</label>
-            <input name="nombre" defaultValue={editando.Nombre} required />
+            <label className="modal-label">Nombre</label>
+            <input
+              name="nombre"
+              defaultValue={editando.Nombre}
+              required
+              className="modal-input"
+            />
 
-            <label>Edad</label>
-            <input name="edad" type="number" defaultValue={editando.Edad} required />
+            <label className="modal-label">Edad</label>
+            <input
+              name="edad"
+              type="number"
+              defaultValue={editando.Edad}
+              required
+              className="modal-input"
+            />
 
-            <label>Telefono</label>
+            <label className="modal-label">Teléfono</label>
             <input
               name="telefono"
               type="number"
               defaultValue={editando.TELEFONO}
               required
+              className="modal-input"
             />
 
-            <label>ID Dirección</label>
+            <label className="modal-label">ID Dirección</label>
             <input
               name="direccion"
               type="number"
               defaultValue={editando.ID_Direccion}
+              className="modal-input"
             />
 
             <div className="modal-actions">
               <button
                 type="button"
                 onClick={() => setEditando(null)}
-                className="btn btn-cancel"
+                className="modal-btn modal-btn-cancelar"
               >
                 Cancelar
               </button>
-              <button type="submit" className="btn btn-save">
+              <button type="submit" className="modal-btn modal-btn-guardar">
                 Guardar
               </button>
             </div>
