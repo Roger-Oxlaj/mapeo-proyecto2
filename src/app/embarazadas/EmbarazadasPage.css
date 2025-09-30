@@ -89,16 +89,16 @@
 
 /* Fondo del modal */
 .modal-overlay {
-  position: fixed; /* 👈 ocupa toda la pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* 👈 fondo oscuro */
+  background: rgba(0,0,0,0.5);
   display: flex;
-  justify-content: center; /* 👈 centrado horizontal */
-  align-items: center;     /* 👈 centrado vertical */
-  z-index: 1000;           /* 👈 encima de todo */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 /* Caja del modal */
@@ -133,13 +133,13 @@
 
 /* Campos de texto */
 .modal-input {
-  width: 100%;                 /* 👈 Que ocupen todo el ancho */
-  padding: 12px;               /* 👈 Más espacio interno */
-  border: 1px solid #bbb;      /* 👈 Borde más visible */
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
   border-radius: 8px;
-  font-size: 16px;             /* 👈 Texto un poco más grande */
-  color: #111;                 /* 👈 Texto más oscuro */
-  background-color: #fafafa;   /* 👈 Fondo gris muy claro */
+  font-size: 16px;
+  color: #111;
+  background-color: #fafafa;
   outline: none;
 }
 

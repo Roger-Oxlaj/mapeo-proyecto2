@@ -111,7 +111,7 @@ export default function DireccionesPage() {
 
       <h1 className="direcciones-title">Direcciones</h1>
       <table className="direcciones-table">
-        <thead>
+        <thead className="direcciones-thead">
           <tr>
             <th className="direcciones-th">ID</th>
             <th className="direcciones-th">Calle</th>
