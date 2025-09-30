@@ -12,7 +12,7 @@ import {
   BarElement,
 } from "chart.js";
 
-import "./reportes.css"; // 👈 Importamos los estilos
+import "./reportes.css"; // 👈 Importacion de los estilos
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, BarElement);
 
