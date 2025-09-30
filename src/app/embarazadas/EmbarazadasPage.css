@@ -133,15 +133,20 @@
 
 /* Campos de texto */
 .modal-input {
-  padding: 10px;
-  border: 1px solid #ccc;
+  width: 100%;                 /* 👈 Que ocupen todo el ancho */
+  padding: 12px;               /* 👈 Más espacio interno */
+  border: 1px solid #bbb;      /* 👈 Borde más visible */
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 16px;             /* 👈 Texto un poco más grande */
+  color: #111;                 /* 👈 Texto más oscuro */
+  background-color: #fafafa;   /* 👈 Fondo gris muy claro */
   outline: none;
 }
+
 .modal-input:focus {
   border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0,123,255,0.4);
+  background-color: #fff;      /* 👈 Fondo blanco para resaltar */
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
 }
 
 /* Contenedor de botones */
