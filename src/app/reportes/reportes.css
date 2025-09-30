@@ -3,7 +3,7 @@
 /* ============================= */
 
 .reportes-container {
-  padding: 24px;                /* 🔽 menos padding que antes */
+  padding: 20px;                /* 🔽 menos padding que antes */
   background-color: #f5f7fa;
   min-height: 100vh;
 }
