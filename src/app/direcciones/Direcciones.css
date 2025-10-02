@@ -271,7 +271,6 @@
     margin-right: 8px;
     color: #007bff;
   }
-  
   /* Evitar scroll lateral */
   html, body {
     overflow-x: hidden;
