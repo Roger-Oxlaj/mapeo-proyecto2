@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./Direcciones.css"; // 👈 Estilos actualizados
+import "./Direcciones.css"; // 👈 Importamos estilos
 
 export default function DireccionesPage() {
   const [direcciones, setDirecciones] = useState([]);
@@ -30,6 +30,7 @@ export default function DireccionesPage() {
 
   const agregarDireccion = async (e) => {
     e.preventDefault();
+
     const data = {
       Calle: e.target.calle.value,
       Ciudad: e.target.ciudad.value,
@@ -67,6 +68,7 @@ export default function DireccionesPage() {
 
   const guardarEdicion = async (e) => {
     e.preventDefault();
+
     const data = {
       Calle: e.target.calle.value,
       Ciudad: e.target.ciudad.value,
@@ -92,67 +94,84 @@ export default function DireccionesPage() {
   };
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p className="text-error">⚠ {error}</p>;
+  if (error) return <p className="text-red-600">⚠ {error}</p>;
 
   return (
     <div className="direcciones-container">
-      <h2 className="title">Agregar Dirección</h2>
-      <form onSubmit={agregarDireccion} className="form">
-        <input name="calle" placeholder="Calle" className="input" required />
-        <input name="ciudad" placeholder="Ciudad" className="input" required />
-        <input name="departamento" placeholder="Departamento" className="input" required />
-        <input name="zona" placeholder="Zona (opcional)" className="input" />
-        <input name="avenida" placeholder="Avenida (opcional)" className="input" />
-        <input name="numeroCasa" placeholder="Número de casa" className="input" />
-        <button className="button">Guardar</button>
+      <h2 className="direcciones-title">Agregar Dirección</h2>
+      <form onSubmit={agregarDireccion} className="direcciones-form">
+        <input name="calle" placeholder="Calle" className="direcciones-input" required />
+        <input name="ciudad" placeholder="Ciudad" className="direcciones-input" required />
+        <input name="departamento" placeholder="Departamento" className="direcciones-input" required />
+        <input name="zona" placeholder="Zona (opcional)" className="direcciones-input" />
+        <input name="avenida" placeholder="Avenida (opcional)" className="direcciones-input" />
+        <input name="numeroCasa" placeholder="Número de casa" className="direcciones-input" />
+        <button className="direcciones-btn">Guardar</button>
       </form>
 
-      <h1 className="subtitle">Direcciones</h1>
-      <table className="table">
-        <thead>
+      <h1 className="direcciones-title">Direcciones</h1>
+      <table className="direcciones-table">
+        <thead className="direcciones-thead">
           <tr>
-            <th>ID</th>
-            <th>Calle</th>
-            <th>Ciudad</th>
-            <th>Departamento</th>
-            <th>Zona</th>
-            <th>Avenida</th>
-            <th>Número de Casa</th>
-            <th>Acciones</th>
+            <th className="direcciones-th">ID</th>
+            <th className="direcciones-th">Calle</th>
+            <th className="direcciones-th">Ciudad</th>
+            <th className="direcciones-th">Departamento</th>
+            <th className="direcciones-th">Zona</th>
+            <th className="direcciones-th">Avenida</th>
+            <th className="direcciones-th">Número de Casa</th>
+            {/* 👇 Aquí le ponemos la clase acciones */}
+            <th className="direcciones-th acciones">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {direcciones.map((d) => (
-            <tr key={d.ID_Direccion}>
-              <td>{d.ID_Direccion}</td>
-              <td>{d.Calle}</td>
-              <td>{d.Ciudad}</td>
-              <td>{d.Departamento}</td>
-              <td>{d.Zona || "-"}</td>
-              <td>{d.Avenida || "-"}</td>
-              <td>{d.NumeroCasa || "-"}</td>
-              <td>
-                <button onClick={() => setEditando(d)} className="btn-edit">Editar</button>
-                <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-delete">Eliminar</button>
+            <tr key={d.ID_Direccion} className="direcciones-tr">
+              <td className="direcciones-td" data-label="ID">{d.ID_Direccion}</td>
+              <td className="direcciones-td" data-label="Calle">{d.Calle}</td>
+              <td className="direcciones-td" data-label="Ciudad">{d.Ciudad}</td>
+              <td className="direcciones-td" data-label="Departamento">{d.Departamento}</td>
+              <td className="direcciones-td" data-label="Zona">{d.Zona || "-"}</td>
+              <td className="direcciones-td" data-label="Avenida">{d.Avenida || "-"}</td>
+              <td className="direcciones-td" data-label="Número de Casa">{d.NumeroCasa || "-"}</td>
+              <td className="direcciones-td acciones" data-label="Acciones">
+                <button onClick={() => setEditando(d)} className="btn-editar">Editar</button>
+                <button onClick={() => eliminarDireccion(d.ID_Direccion)} className="btn-eliminar">Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
+
+
       </table>
 
       {editando && (
         <div className="modal-overlay">
-          <form onSubmit={guardarEdicion} className="modal">
-            <h2 className="title">Editar Dirección #{editando.ID_Direccion}</h2>
+          <form onSubmit={guardarEdicion} className="modal-box">
+            <h2 className="modal-title">Editar Dirección #{editando.ID_Direccion}</h2>
+            <label className="modal-label">Calle</label>
             <input name="calle" defaultValue={editando.Calle} className="modal-input" required />
+            <label className="modal-label">Ciudad</label>
             <input name="ciudad" defaultValue={editando.Ciudad} className="modal-input" required />
+            <label className="modal-label">Departamento</label>
             <input name="departamento" defaultValue={editando.Departamento} className="modal-input" required />
+            <label className="modal-label">Zona</label>
             <input name="zona" defaultValue={editando.Zona} className="modal-input" />
+            <label className="modal-label">Avenida</label>
             <input name="avenida" defaultValue={editando.Avenida} className="modal-input" />
+            <label className="modal-label">Número de Casa</label>
             <input name="numeroCasa" defaultValue={editando.NumeroCasa} className="modal-input" />
-            <div className="modal-actions">
-              <button type="button" onClick={() => setEditando(null)} className="btn-cancel">Cancelar</button>
-              <button type="submit" className="btn-save">Guardar</button>
+            <div className="flex justify-end space-x-2">
+              <button
+                type="button"
+                onClick={() => setEditando(null)}
+                className="modal-btn modal-btn-cancelar"
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="modal-btn modal-btn-guardar">
+                Guardar
+              </button>
             </div>
           </form>
         </div>
