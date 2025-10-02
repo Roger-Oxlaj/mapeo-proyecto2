@@ -174,13 +174,13 @@ export default function UsuariosPage() {
         <tbody>
           {usuarios.map((u) => (
             <tr key={u.ID_Usuario}>
-              <td>{u.ID_Usuario}</td>
-              <td>{u.Nombre}</td>
-              <td>{u.CorreoElectronico}</td>
-              <td>{u.DPI}</td>
-              <td>{u.TELEFONO}</td>
-              <td>{u.Rol}</td>
-              <td>
+              <td data-label="ID">{u.ID_Usuario}</td>
+              <td data-label="Nombre">{u.Nombre}</td>
+              <td data-label="Correo">{u.CorreoElectronico}</td>
+              <td data-label="DPI">{u.DPI}</td>
+              <td data-label="Teléfono">{u.TELEFONO}</td>
+              <td data-label="Rol">{u.Rol}</td>
+              <td data-label="Acciones">
                 <button onClick={() => setEditando(u)} className="btn-edit">Editar</button>
                 <button onClick={() => eliminarUsuario(u.ID_Usuario)} className="btn-delete">Eliminar</button>
               </td>
