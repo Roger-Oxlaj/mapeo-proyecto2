@@ -21,12 +21,12 @@
 /* Campos de texto */
 .direcciones-input {
   width: 100%;
-  padding: 12px; /* 👈 más espacio */
-  border: 1px solid #888; /* 👈 borde más notorio */
+  padding: 12px;
+  border: 1px solid #888;
   border-radius: 8px;
-  font-size: 16px; /* 👈 texto más legible */
-  color: #111; /* 👈 texto oscuro */
-  background-color: #fafafa; /* 👈 fondo gris claro */
+  font-size: 16px;
+  color: #111;
+  background-color: #fafafa;
   box-sizing: border-box;
 }
 
@@ -39,7 +39,7 @@
 
 /* Botón enviar */
 .direcciones-btn {
-  background-color: #16a34a; /* verde */
+  background-color: #16a34a;
   color: white;
   padding: 10px 18px;
   border-radius: 6px;
