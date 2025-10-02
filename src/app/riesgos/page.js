@@ -111,12 +111,12 @@ export default function RiesgosPage() {
         <tbody>
           {riesgos.map((r) => (
             <tr key={r.ID_Riesgo}>
-              <td>{r.ID_Riesgo}</td>
-              <td>{r.ID_Embarazada}</td>
-              <td>{r.NombreEmbarazada}</td>
-              <td>{r.Fecha_Riesgo}</td>
-              <td>{r.Nivel}</td>
-              <td>
+              <td data-label="ID">{r.ID_Riesgo}</td>
+              <td data-label="Embarazada">{r.ID_Embarazada}</td>
+              <td data-label="Nombre">{r.NombreEmbarazada}</td>
+              <td data-label="Fecha">{r.Fecha_Riesgo}</td>
+              <td data-label="Nivel">{r.Nivel}</td>
+              <td data-label="Acciones">
                 <button onClick={() => eliminar(r.ID_Riesgo)} className="btn-delete">
                   Eliminar
                 </button>
@@ -124,6 +124,7 @@ export default function RiesgosPage() {
             </tr>
           ))}
         </tbody>
+
       </table>
     </div>
   );
