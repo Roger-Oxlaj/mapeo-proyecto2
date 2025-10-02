@@ -271,4 +271,24 @@
     margin-right: 8px;
     color: #007bff;
   }
+  
+  /* Evitar scroll lateral */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Asegurar que las tarjetas nunca excedan el ancho */
+  .card, .tabla-container {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Si usas display flex en el contenedor */
+  .contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+  }  
 }
