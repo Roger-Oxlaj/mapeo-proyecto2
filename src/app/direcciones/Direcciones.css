@@ -1,7 +1,6 @@
-/* ============================= */
-/* 📋 FORMULARIO DE DIRECCIONES  */
-/* ============================= */
-
+/* ================================================== */
+/* 🌍 CONTENEDOR GENERAL                              */
+/* ================================================== */
 .direcciones-container {
   padding: 24px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -9,16 +8,28 @@
   margin: 0 auto;
 }
 
-/* Título principal */
+/* ================================================== */
+/* 🏷️ TITULOS                                         */
+/* ================================================== */
 .direcciones-title {
-  font-size: 1.8rem; /* 👈 un poco más grande */
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 16px;
   text-align: center;
-  color: #1a1a1a; /* 👈 más legible */
+  color: #1a1a1a;
 }
 
-/* Campos de texto */
+.embarazada-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+/* ================================================== */
+/* 📋 FORMULARIO DE DIRECCIONES                       */
+/* ================================================== */
 .direcciones-input {
   width: 100%;
   padding: 12px;
@@ -37,7 +48,6 @@
   outline: none;
 }
 
-/* Botón enviar */
 .direcciones-btn {
   background-color: #16a34a;
   color: white;
@@ -52,11 +62,9 @@
   background-color: #128636;
 }
 
-/* ============================= */
-/* 📋 TABLA DE DIRECCIONES       */
-/* ============================= */
-
-/* Tabla general */
+/* ================================================== */
+/* 📊 TABLA DE DIRECCIONES                            */
+/* ================================================== */
 .direcciones-table {
   width: 100%;
   border-collapse: collapse;
@@ -68,23 +76,12 @@
   color: #222;
 }
 
-/* Título de la tabla */
-.embarazada-title {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-  color: #1a1a1a;
-}
-
-/* Encabezado */
 .direcciones-thead {
   background: #f5f5f5;
   color: #222;
   font-weight: bold;
 }
 
-/* Celdas */
 .direcciones-th,
 .direcciones-td {
   padding: 12px 15px;
@@ -106,13 +103,11 @@
   background: #f2f2f2;
 }
 
-/* ============================= */
-/* 🎨 BOTONES (PC + MÓVIL)       */
-/* ============================= */
-
-/* Botón editar */
+/* ================================================== */
+/* 🎨 BOTONES (Editar / Eliminar)                     */
+/* ================================================== */
 .btn-editar {
-  background-color: #007bff; /* azul */
+  background-color: #007bff;
   color: white;
   padding: 6px 12px;
   border-radius: 6px;
@@ -124,9 +119,8 @@
   background-color: #0056b3;
 }
 
-/* Botón eliminar */
 .btn-eliminar {
-  background-color: #dc3545; /* rojo */
+  background-color: #dc3545;
   color: white;
   padding: 6px 12px;
   border-radius: 6px;
@@ -137,11 +131,9 @@
   background-color: #a71d2a;
 }
 
-/* ============================= */
-/* 📝 MODAL PARA EDITAR          */
-/* ============================= */
-
-/* Fondo oscuro */
+/* ================================================== */
+/* 📝 MODAL PARA EDITAR DIRECCIONES                   */
+/* ================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -155,20 +147,18 @@
   z-index: 999;
 }
 
-/* Caja del modal */
 .modal-box {
   background: #fff;
   padding: 14px;
   border-radius: 12px;
   width: 320px;
-  max-width: 90%; /* 👈 responsivo */
+  max-width: 90%;
   box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 👈 separación entre elementos */
+  gap: 8px;
 }
 
-/* Título del modal */
 .modal-title {
   font-size: 24px;
   font-weight: 900;
@@ -177,7 +167,6 @@
   color: #1a1a1a;
 }
 
-/* Labels */
 .modal-label {
   font-size: 13px;
   font-weight: 600;
@@ -186,7 +175,6 @@
   color: #333;
 }
 
-/* Inputs */
 .modal-input {
   width: 100%;
   padding: 8px;
@@ -197,14 +185,12 @@
   background-color: #fafafa;
   outline: none;
 }
-
 .modal-input:focus {
   border-color: #007bff;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0,123,255,0.4);
 }
 
-/* Contenedor de botones */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -212,7 +198,6 @@
   margin-top: 15px;
 }
 
-/* Botón base */
 .modal-btn {
   padding: 8px 14px;
   border: none;
@@ -240,9 +225,9 @@
   background: #0056b3;
 }
 
-/* =============================== */
-/* 📱 RESPONSIVO PARA MÓVILES      */
-/* =============================== */
+/* ================================================== */
+/* 📱 RESPONSIVO (MÓVIL)                              */
+/* ================================================== */
 @media (max-width: 640px) {
   .direcciones-table,
   .direcciones-thead,
@@ -254,7 +239,7 @@
     width: 100%;
   }
 
-  /* Encabezado oculto */
+  /* Ocultar encabezado */
   .direcciones-thead {
     display: none;
   }
@@ -276,7 +261,8 @@
     border: none;
     border-bottom: 1px solid #eee;
   }
-   /* Última celda sin borde */
+
+  /* Última celda sin borde */
   .direcciones-td:last-child {
     border-bottom: none;
   }
