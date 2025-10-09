@@ -8,8 +8,8 @@ export default function SeguimientosPage() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [editando, setEditando] = useState(null); // 🟢 Objeto seguimiento a editar
-  const [showModal, setShowModal] = useState(false); // 🟢 Controla la visibilidad del modal
+  const [editando, setEditando] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const API = "https://backend-demo-xowfm.ondigitalocean.app";
 
@@ -56,19 +56,16 @@ export default function SeguimientosPage() {
     else alert("⚠ Error al eliminar");
   };
 
-  // 🟢 Abrir modal con datos del seguimiento
   const abrirModal = (seguimiento) => {
     setEditando(seguimiento);
     setShowModal(true);
   };
 
-  // 🟢 Cerrar modal
   const cerrarModal = () => {
     setEditando(null);
     setShowModal(false);
   };
 
-  // 🟢 Actualizar seguimiento
   const handleActualizar = async (e) => {
     e.preventDefault();
     const data = {
@@ -94,7 +91,6 @@ export default function SeguimientosPage() {
     }
   };
 
-  // 🟢 Crear seguimiento nuevo
   const handleCrear = async (e) => {
     e.preventDefault();
     const data = {
@@ -123,6 +119,7 @@ export default function SeguimientosPage() {
 
       {/* Formulario principal */}
       <form onSubmit={handleCrear} className="formulario">
+        <label className="label">Embarazada:</label>
         <select name="ID_Embarazada" className="select" required>
           <option value="">-- Seleccionar Embarazada --</option>
           {embarazadas.map((e) => (
@@ -132,6 +129,7 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
+        <label className="label">Usuario:</label>
         <select name="ID_Usuario" className="select" required>
           <option value="">-- Seleccionar Usuario --</option>
           {usuarios.map((u) => (
@@ -141,8 +139,13 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
+        <label className="label">Fecha del seguimiento:</label>
         <input type="date" name="Fecha_Seguimiento" className="input" required />
+
+        <label className="label">Observaciones:</label>
         <input name="Observaciones" placeholder="Observaciones" className="input" />
+
+        <label className="label">Signos de alarma:</label>
         <input name="Signos_Alarma" placeholder="Signos de alarma" className="input" />
 
         <button className="boton-guardar">Guardar</button>
@@ -186,12 +189,13 @@ export default function SeguimientosPage() {
         </tbody>
       </table>
 
-      {/* 🟢 Modal flotante para editar */}
+      {/* 🟢 Modal flotante con labels */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-contenido">
             <h2>Editar Seguimiento #{editando?.ID_Seguimiento}</h2>
             <form onSubmit={handleActualizar}>
+              <label className="label">Embarazada:</label>
               <select
                 name="ID_Embarazada"
                 className="select"
@@ -206,6 +210,7 @@ export default function SeguimientosPage() {
                 ))}
               </select>
 
+              <label className="label">Usuario:</label>
               <select
                 name="ID_Usuario"
                 className="select"
@@ -220,6 +225,7 @@ export default function SeguimientosPage() {
                 ))}
               </select>
 
+              <label className="label">Fecha del seguimiento:</label>
               <input
                 type="date"
                 name="Fecha_Seguimiento"
@@ -227,12 +233,16 @@ export default function SeguimientosPage() {
                 defaultValue={editando?.Fecha_Seguimiento?.split("T")[0]}
                 required
               />
+
+              <label className="label">Observaciones:</label>
               <input
                 name="Observaciones"
                 placeholder="Observaciones"
                 className="input"
                 defaultValue={editando?.Observaciones}
               />
+
+              <label className="label">Signos de alarma:</label>
               <input
                 name="Signos_Alarma"
                 placeholder="Signos de alarma"

@@ -193,6 +193,13 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+/* Etiquetas arriba de los inputs */
+.label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
 
 /* =============================== */
 /* 📱 RESPONSIVO PARA MÓVILES      */
