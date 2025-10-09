@@ -185,7 +185,7 @@ export default function SeguimientosPage() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-contenido">
-            <h2>Editar Seguimiento #{editando?.ID_Seguimiento}</h2>
+            <h2 className="modal-title">Editar Seguimiento #{editando?.ID_Seguimiento}</h2>
             <form onSubmit={handleActualizar}>
               <label className="label">Embarazada:</label>
               <select

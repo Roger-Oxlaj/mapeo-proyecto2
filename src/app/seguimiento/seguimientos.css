@@ -150,7 +150,7 @@
 }
 
 /* ============================= */
-/* 🪟 MODAL FLOANTE PARA EDITAR  */
+/* 🪟 MODAL PARA EDITAR  */
 /* ============================= */
 .modal-overlay {
   position: fixed;
@@ -162,7 +162,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1000;
 }
 
 .modal-contenido {
@@ -179,6 +179,14 @@
   margin-bottom: 20px;
   text-align: center;
   color: #111;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #1a1a1a;
 }
 
 .modal-botones {
