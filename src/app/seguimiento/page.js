@@ -119,7 +119,6 @@ export default function SeguimientosPage() {
 
       {/* Formulario principal */}
       <form onSubmit={handleCrear} className="formulario">
-        <label className="label">Embarazada:</label>
         <select name="ID_Embarazada" className="select" required>
           <option value="">-- Seleccionar Embarazada --</option>
           {embarazadas.map((e) => (
@@ -129,7 +128,6 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
-        <label className="label">Usuario:</label>
         <select name="ID_Usuario" className="select" required>
           <option value="">-- Seleccionar Usuario --</option>
           {usuarios.map((u) => (
@@ -138,14 +136,8 @@ export default function SeguimientosPage() {
             </option>
           ))}
         </select>
-
-        <label className="label">Fecha del seguimiento:</label>
         <input type="date" name="Fecha_Seguimiento" className="input" required />
-
-        <label className="label">Observaciones:</label>
         <input name="Observaciones" placeholder="Observaciones" className="input" />
-
-        <label className="label">Signos de alarma:</label>
         <input name="Signos_Alarma" placeholder="Signos de alarma" className="input" />
 
         <button className="boton-guardar">Guardar</button>
