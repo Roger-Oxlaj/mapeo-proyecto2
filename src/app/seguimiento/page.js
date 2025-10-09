@@ -8,6 +8,7 @@ export default function SeguimientosPage() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [editando, setEditando] = useState(null); // 🟢 Guarda el seguimiento que se está editando
 
   const fetchData = () => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/seguimientos")
@@ -55,35 +56,67 @@ export default function SeguimientosPage() {
     else alert("⚠ Error al eliminar");
   };
 
+  // 🟢 Nuevo: Manejo del envío del formulario (crear o actualizar)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      ID_Embarazada: e.target.ID_Embarazada.value,
+      ID_Usuario: e.target.ID_Usuario.value,
+      Fecha_Seguimiento: e.target.Fecha_Seguimiento.value,
+      Observaciones: e.target.Observaciones.value,
+      Signos_Alarma: e.target.Signos_Alarma.value,
+    };
+
+    if (editando) {
+      // Actualizar
+      const res = await fetch(
+        `https://backend-demo-xowfm.ondigitalocean.app/seguimientos/${editando.ID_Seguimiento}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+      if (res.ok) {
+        alert("✅ Seguimiento actualizado correctamente");
+        setEditando(null);
+        e.target.reset();
+        fetchData();
+      } else alert("⚠ Error al actualizar");
+    } else {
+      // Crear
+      const res = await fetch(
+        "https://backend-demo-xowfm.ondigitalocean.app/seguimientos",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+      if (res.ok) {
+        fetchData();
+        e.target.reset();
+      } else alert("⚠ Error al agregar");
+    }
+  };
+
+  // 🟢 Nuevo: Cargar datos al formulario al editar
+  const editar = (seguimiento) => {
+    setEditando(seguimiento);
+    const form = document.getElementById("formSeguimiento");
+    form.ID_Embarazada.value = seguimiento.ID_Embarazada;
+    form.ID_Usuario.value = seguimiento.ID_Usuario;
+    form.Fecha_Seguimiento.value = seguimiento.Fecha_Seguimiento.split("T")[0];
+    form.Observaciones.value = seguimiento.Observaciones;
+    form.Signos_Alarma.value = seguimiento.Signos_Alarma;
+  };
+
   return (
     <div className="contenedor">
       <h1 className="titulo">Seguimientos</h1>
+
       {/* Formulario */}
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const data = {
-            ID_Embarazada: e.target.ID_Embarazada.value,
-            ID_Usuario: e.target.ID_Usuario.value,
-            Fecha_Seguimiento: e.target.Fecha_Seguimiento.value,
-            Observaciones: e.target.Observaciones.value,
-            Signos_Alarma: e.target.Signos_Alarma.value,
-          };
-          const res = await fetch(
-            "https://backend-demo-xowfm.ondigitalocean.app/seguimientos",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            }
-          );
-          if (res.ok) {
-            fetchData();
-            e.target.reset();
-          } else alert("⚠ Error al agregar");
-        }}
-        className="formulario"
-      >
+      <form id="formSeguimiento" onSubmit={handleSubmit} className="formulario">
         <select name="ID_Embarazada" className="select" required>
           <option value="">-- Seleccionar Embarazada --</option>
           {embarazadas.map((e) => (
@@ -102,24 +135,28 @@ export default function SeguimientosPage() {
           ))}
         </select>
 
-        <input
-          type="date"
-          name="Fecha_Seguimiento"
-          className="input"
-          required
-        />
-        <input
-          name="Observaciones"
-          placeholder="Observaciones"
-          className="input"
-        />
-        <input
-          name="Signos_Alarma"
-          placeholder="Signos de alarma"
-          className="input"
-        />
+        <input type="date" name="Fecha_Seguimiento" className="input" required />
+        <input name="Observaciones" placeholder="Observaciones" className="input" />
+        <input name="Signos_Alarma" placeholder="Signos de alarma" className="input" />
 
-        <button className="boton-guardar">Guardar</button>
+        {/* 🟢 Cambia texto según si está editando */}
+        <button className="boton-guardar">
+          {editando ? "Actualizar" : "Guardar"}
+        </button>
+
+        {/* 🟢 Botón cancelar */}
+        {editando && (
+          <button
+            type="button"
+            onClick={() => {
+              setEditando(null);
+              document.getElementById("formSeguimiento").reset();
+            }}
+            className="boton-cancelar"
+          >
+            Cancelar
+          </button>
+        )}
       </form>
 
       {/* Tabla */}
@@ -141,10 +178,19 @@ export default function SeguimientosPage() {
               <td data-label="ID">{s.ID_Seguimiento}</td>
               <td data-label="ID Embarazada">{s.ID_Embarazada}</td>
               <td data-label="Usuario">{s.ID_Usuario}</td>
-              <td data-label="Fecha">{s.Fecha_Seguimiento}</td>
+              <td data-label="Fecha">
+                {s.Fecha_Seguimiento?.split("T")[0]}
+              </td>
               <td data-label="Observaciones">{s.Observaciones}</td>
               <td data-label="Signos">{s.Signos_Alarma}</td>
               <td data-label="Acciones">
+                {/* 🟢 Nuevo botón Editar */}
+                <button
+                  onClick={() => editar(s)}
+                  className="boton-editar"
+                >
+                  Editar
+                </button>
                 <button
                   onClick={() => eliminar(s.ID_Seguimiento)}
                   className="boton-eliminar"
@@ -153,7 +199,6 @@ export default function SeguimientosPage() {
                 </button>
               </td>
             </tr>
-
           ))}
         </tbody>
       </table>
