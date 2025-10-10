@@ -242,9 +242,9 @@ export default function UbicacionesPage() {
       {editando && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Editar Ubicación #{editando}</h3>
+            <h3 className="modal-title">Editar Ubicación #{editando}</h3>
             <form onSubmit={guardarEdicion}>
-              <label>ID Embarazada:</label>
+              <label className="label">ID Embarazada:</label>
               <input
                 type="number"
                 value={idEmbarazadaEdit}
@@ -253,7 +253,7 @@ export default function UbicacionesPage() {
                 className="input"
               />
 
-              <label>ID Dirección:</label>
+              <label className="label">ID Dirección:</label>
               <input
                 type="number"
                 value={idDireccionEdit}
