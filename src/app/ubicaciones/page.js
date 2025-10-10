@@ -4,12 +4,17 @@ import "./ubicaciones.css";
 
 export default function UbicacionesPage() {
   const [ubicaciones, setUbicaciones] = useState([]);
-  const [embarazadas, setEmbarazadas] = useState([]); // <-- NUEVO: lista de embarazadas
+  const [embarazadas, setEmbarazadas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [nombreEmbarazada, setNombreEmbarazada] = useState("");
-  const [edad, setEdad] = useState(""); // <-- NUEVO
-  const [idDireccion, setIdDireccion] = useState(""); // <-- NUEVO
+  const [edad, setEdad] = useState("");
+  const [idDireccion, setIdDireccion] = useState("");
+
+  // Estados para edición
+  const [editando, setEditando] = useState(null);
+  const [idEmbarazadaEdit, setIdEmbarazadaEdit] = useState("");
+  const [idDireccionEdit, setIdDireccionEdit] = useState("");
 
   // === Cargar ubicaciones ===
   const fetchData = () => {
@@ -65,8 +70,8 @@ export default function UbicacionesPage() {
       if (res.ok) {
         const data = await res.json();
         setNombreEmbarazada(data.Nombre);
-        setEdad(data.Edad); // <-- NUEVO
-        setIdDireccion(data.ID_Direccion); // <-- NUEVO
+        setEdad(data.Edad);
+        setIdDireccion(data.ID_Direccion);
       } else {
         setNombreEmbarazada("");
         setEdad("");
@@ -79,10 +84,39 @@ export default function UbicacionesPage() {
     }
   };
 
+  // === GUARDAR EDICIÓN ===
+  const guardarEdicion = async (e) => {
+    e.preventDefault();
+    if (!editando) return;
+
+    const data = {
+      ID_Embarazada: idEmbarazadaEdit,
+      ID_Direccion: idDireccionEdit,
+    };
+
+    const res = await fetch(
+      `https://backend-demo-xowfm.ondigitalocean.app/ubicaciones/${editando}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (res.ok) {
+      alert("✅ Ubicación actualizada correctamente");
+      fetchData();
+      setEditando(null);
+    } else {
+      alert("⚠ Error al actualizar");
+    }
+  };
+
   return (
     <div className="container">
       <h1 className="title">Ubicaciones</h1>
 
+      {/* === FORMULARIO DE NUEVA UBICACIÓN === */}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -110,8 +144,6 @@ export default function UbicacionesPage() {
         }}
         className="form"
       >
-
-        {/* ======= CAMBIO: Combobox de Embarazadas ======= */}
         <select
           name="ID_Embarazada"
           className="input"
@@ -163,6 +195,7 @@ export default function UbicacionesPage() {
         <button className="button-save">Guardar</button>
       </form>
 
+      {/* === TABLA DE UBICACIONES === */}
       <table className="table">
         <thead>
           <tr>
@@ -179,10 +212,20 @@ export default function UbicacionesPage() {
             <tr key={u.ID_Ubicacion}>
               <td data-label="ID">{u.ID_Ubicacion}</td>
               <td data-label="Embarazada">{u.ID_Embarazada}</td>
-              <td data-label="Nombre">{u.Nombre}</td>
+              <td data-label="Nombre">{u.NombreEmbarazada}</td>
               <td data-label="Edad">{u.Edad}</td>
               <td data-label="Dirección">{u.ID_Direccion}</td>
               <td data-label="Acciones">
+                <button
+                  onClick={() => {
+                    setEditando(u.ID_Ubicacion);
+                    setIdEmbarazadaEdit(u.ID_Embarazada);
+                    setIdDireccionEdit(u.ID_Direccion);
+                  }}
+                  className="button-edit"
+                >
+                  Editar
+                </button>
                 <button
                   onClick={() => eliminar(u.ID_Ubicacion)}
                   className="button-delete"
@@ -194,6 +237,47 @@ export default function UbicacionesPage() {
           ))}
         </tbody>
       </table>
+
+      {/* === MODAL DE EDICIÓN === */}
+      {editando && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Editar Ubicación #{editando}</h3>
+            <form onSubmit={guardarEdicion}>
+              <label>ID Embarazada:</label>
+              <input
+                type="number"
+                value={idEmbarazadaEdit}
+                onChange={(e) => setIdEmbarazadaEdit(e.target.value)}
+                required
+                className="input"
+              />
+
+              <label>ID Dirección:</label>
+              <input
+                type="number"
+                value={idDireccionEdit}
+                onChange={(e) => setIdDireccionEdit(e.target.value)}
+                required
+                className="input"
+              />
+
+              <div className="modal-buttons">
+                <button type="submit" className="button-save">
+                  Guardar cambios
+                </button>
+                <button
+                  type="button"
+                  className="button-cancel"
+                  onClick={() => setEditando(null)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
