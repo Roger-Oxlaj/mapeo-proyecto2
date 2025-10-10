@@ -183,9 +183,9 @@ export default function RiesgosPage() {
       {editando && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Editar Riesgo #{editando}</h3>
+            <h3 className="modal-title">Editar Riesgo #{editando}</h3>
             <form onSubmit={guardarEdicion}>
-              <label>ID Embarazada:</label>
+              <label className="label">ID Embarazada:</label>
               <select
                 value={idEmbarazadaEdit}
                 onChange={(e) => setIdEmbarazadaEdit(e.target.value)}
@@ -200,7 +200,7 @@ export default function RiesgosPage() {
                 ))}
               </select>
 
-              <label>Fecha de Riesgo:</label>
+              <label className="label">Fecha de Riesgo:</label>
               <input
                 type="date"
                 value={fechaRiesgoEdit}
@@ -209,7 +209,7 @@ export default function RiesgosPage() {
                 required
               />
 
-              <label>Nivel:</label>
+              <label className="label">Nivel:</label>
               <select
                 value={nivelEdit}
                 onChange={(e) => setNivelEdit(e.target.value)}

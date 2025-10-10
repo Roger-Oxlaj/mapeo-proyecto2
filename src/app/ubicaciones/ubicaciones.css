@@ -145,7 +145,7 @@
 
 /* Modal flotante */
 .modal {
-   position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -158,7 +158,7 @@
 }
 
 .modal-content {
- background: white;
+  background: white;
   padding: 25px;
   border-radius: 12px;
   width: 95%;
