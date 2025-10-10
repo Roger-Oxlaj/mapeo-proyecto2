@@ -193,10 +193,15 @@ export default function UsuariosPage() {
         <div className="modal-overlay">
           <form onSubmit={guardarEdicion} className="modal">
             <h2 className="title">Editar Usuario #{editando.ID_Usuario}</h2>
+            <label className="label">Nombre:</label>
             <input name="nombre" defaultValue={editando.Nombre} className="modal-input" required />
+            <label className="label">Correo:</label>
             <input name="correo" defaultValue={editando.CorreoElectronico} className="modal-input" required />
+            <label className="label">DPI:</label>
             <input name="dpi" defaultValue={editando.DPI} className="modal-input" required />
+            <label className="label">Telefono:</label>
             <input name="telefono" defaultValue={editando.TELEFONO} className="modal-input" required />
+            <label className="label">Rol:</label>
             <select name="rol" defaultValue={editando.Rol} className="modal-input" required>
               <option value="">-- Seleccionar Rol --</option>
               {rolesDisponibles.map((rol) => (
