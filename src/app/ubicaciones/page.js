@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./ubicaciones.css"; // <-- Importa el CSS aquí
+import "./ubicaciones.css";
 
 export default function UbicacionesPage() {
   const [ubicaciones, setUbicaciones] = useState([]);
+  const [embarazadas, setEmbarazadas] = useState([]); // <-- NUEVO: lista de embarazadas
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [nombreEmbarazada, setNombreEmbarazada] = useState("");
+  const [edad, setEdad] = useState(""); // <-- NUEVO
+  const [idDireccion, setIdDireccion] = useState(""); // <-- NUEVO
 
+  // === Cargar ubicaciones ===
   const fetchData = () => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/ubicaciones")
       .then((res) => res.json())
@@ -21,8 +25,17 @@ export default function UbicacionesPage() {
       });
   };
 
+  // === Cargar embarazadas ===
+  const fetchEmbarazadas = () => {
+    fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas")
+      .then((res) => res.json())
+      .then((data) => setEmbarazadas(data))
+      .catch((err) => console.error("Error cargando embarazadas:", err));
+  };
+
   useEffect(() => {
     fetchData();
+    fetchEmbarazadas();
   }, []);
 
   if (loading) return <p className="text-loading">Cargando datos...</p>;
@@ -32,9 +45,7 @@ export default function UbicacionesPage() {
     if (!confirm("¿Seguro de eliminar esta ubicación?")) return;
     const res = await fetch(
       `https://backend-demo-xowfm.ondigitalocean.app/ubicaciones/${id}`,
-      {
-        method: "DELETE",
-      }
+      { method: "DELETE" }
     );
     if (res.ok) fetchData();
     else alert("⚠ Error al eliminar");
@@ -43,6 +54,8 @@ export default function UbicacionesPage() {
   const buscarNombreEmbarazada = async (id) => {
     if (!id) {
       setNombreEmbarazada("");
+      setEdad("");
+      setIdDireccion("");
       return;
     }
     try {
@@ -52,11 +65,17 @@ export default function UbicacionesPage() {
       if (res.ok) {
         const data = await res.json();
         setNombreEmbarazada(data.Nombre);
+        setEdad(data.Edad); // <-- NUEVO
+        setIdDireccion(data.ID_Direccion); // <-- NUEVO
       } else {
         setNombreEmbarazada("");
+        setEdad("");
+        setIdDireccion("");
       }
     } catch (err) {
       setNombreEmbarazada("");
+      setEdad("");
+      setIdDireccion("");
     }
   };
 
@@ -85,17 +104,30 @@ export default function UbicacionesPage() {
             fetchData();
             e.target.reset();
             setNombreEmbarazada("");
+            setEdad("");
+            setIdDireccion("");
           } else alert("⚠ Error al agregar");
         }}
         className="form"
       >
-        <input
+
+        {/* ======= CAMBIO: Combobox de Embarazadas ======= */}
+        <select
           name="ID_Embarazada"
-          placeholder="ID Embarazada"
           className="input"
           required
-          onBlur={(e) => buscarNombreEmbarazada(e.target.value)}
-        />
+          onChange={(e) => buscarNombreEmbarazada(e.target.value)}
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Selecciona una embarazada
+          </option>
+          {embarazadas.map((emb) => (
+            <option key={emb.ID_Embarazada} value={emb.ID_Embarazada}>
+              {emb.ID_Embarazada} - {emb.Nombre}
+            </option>
+          ))}
+        </select>
 
         <input
           name="Nombre"
@@ -112,7 +144,10 @@ export default function UbicacionesPage() {
           name="Edad"
           placeholder="Edad"
           className="input"
+          value={edad}
+          onChange={(e) => setEdad(e.target.value)}
           required
+          readOnly
         />
 
         <input
@@ -120,6 +155,9 @@ export default function UbicacionesPage() {
           name="ID_Direccion"
           placeholder="ID Dirección"
           className="input"
+          value={idDireccion}
+          onChange={(e) => setIdDireccion(e.target.value)}
+          readOnly
         />
 
         <button className="button-save">Guardar</button>
@@ -153,7 +191,6 @@ export default function UbicacionesPage() {
                 </button>
               </td>
             </tr>
-
           ))}
         </tbody>
       </table>
