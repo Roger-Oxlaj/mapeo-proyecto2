@@ -132,9 +132,6 @@ export default function Mapa() {
         <button className="mapa-btn" onClick={handleRecentrar}>
           Centrar en mi ubicación
         </button>
-        <button className="mapa-btn" onClick={handleTrazarRuta}>
-          razar ruta
-        </button>
       </div>
 
       <MapContainer center={[14.533, -91.503]} zoom={13} className="mapa-leaflet">
@@ -190,16 +187,7 @@ export default function Mapa() {
           </Marker>
         )}
 
-        {/* 🧭 Trazar ruta (solo ejemplo visual) */}
-        {selectedRuta && (
-          <Polyline
-            positions={[
-              [selectedRuta.start.lat, selectedRuta.start.lng],
-              [selectedRuta.end.lat, selectedRuta.end.lng],
-            ]}
-            color="red"
-          />
-        )}
+        
 
         <ClickHandler setTempMarker={setTempMarker} />
       </MapContainer>
