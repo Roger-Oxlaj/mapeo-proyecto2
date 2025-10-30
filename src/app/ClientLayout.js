@@ -139,17 +139,7 @@ export default function ClientLayout({ children }) {
       <main className="flex-1 bg-gray-100 p-6">{children}</main>
 
       {/* Imagen decorativa */}
-      {showMenu && (
-        <div className="absolute bottom-4 right-4">
-          <Image
-            src="/Logotipos.png"
-            alt="Decoración"
-            width={150}
-            height={150}
-            className="hover:hidden transition-all duration-300"
-          />
-        </div>
-      )}
+      
     </div>
   );
 }
