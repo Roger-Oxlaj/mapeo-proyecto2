@@ -88,10 +88,12 @@ export default function Mapa() {
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* ✅ botón flotante */}
-      <button className="btn-ubicacion" onClick={handleUbicacion}>
-        📍 Mi ubicación
-      </button>
+       {/* ✅ Botón ahora debajo del título */}
+      <div className="mapa-topbar">
+        <button className="btn-ubicacion" onClick={handleUbicacion}>
+          Mi ubicación
+        </button>
+      </div>
 
       <MapContainer center={[14.533, -91.503]} zoom={13} className="mapa-leaflet">
         <TileLayer
