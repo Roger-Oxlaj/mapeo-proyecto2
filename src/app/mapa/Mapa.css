@@ -53,3 +53,14 @@
 .btn-ubicacion:hover {
   background-color: #005FCC;
 }
+
+/* Elimina espacio extra arriba de la tabla */
+.embarazadas-table-container {
+  margin-top: 0; 
+  padding-top: 0;
+}
+
+/* Asegura que la tabla se muestre completa sin quedar escondida */
+.embarazadas-table {
+  margin-top: 10px; /* Ajuste leve */
+}
