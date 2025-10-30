@@ -54,13 +54,23 @@
   background-color: #005FCC;
 }
 
-/* Elimina espacio extra arriba de la tabla */
-.embarazadas-table-container {
-  margin-top: 0; 
-  padding-top: 0;
+.btn-ubicacion {
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  z-index: 9999;
+  padding: 12px 18px;
+  background-color: #007AFF;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
 }
 
-/* Asegura que la tabla se muestre completa sin quedar escondida */
-.embarazadas-table {
-  margin-top: 10px; /* Ajuste leve */
+.btn-ubicacion:hover {
+  background-color: #005FCC;
 }
+
