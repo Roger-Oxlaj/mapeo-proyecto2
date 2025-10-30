@@ -127,13 +127,13 @@ export default function Mapa() {
       {/* 🔝 Barra de controles */}
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
-          📍 Ver mi ubicación
+          Ver mi ubicación
         </button>
         <button className="mapa-btn" onClick={handleRecentrar}>
-          🎯 Centrar en mi ubicación
+          Centrar en mi ubicación
         </button>
         <button className="mapa-btn" onClick={handleTrazarRuta}>
-          🗺️ Trazar ruta
+          razar ruta
         </button>
       </div>
 
@@ -174,7 +174,7 @@ export default function Mapa() {
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
-              📍 Nueva ubicación seleccionada
+              Nueva ubicación seleccionada
               <br />
               <button
                 className="popup-button"
