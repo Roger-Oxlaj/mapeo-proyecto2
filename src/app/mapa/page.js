@@ -1,11 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+  useMap,
+  Polyline,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import "./Mapa.css"; // 👈 Importa los estilos
+import "./Mapa.css";
 
-// Iconos personalizados
+// 🎯 Iconos personalizados
 const iconAgregar = new L.Icon({
   iconUrl: "/Agregar.png",
   iconSize: [30, 30],
@@ -22,14 +30,12 @@ const iconAlto = new L.Icon({
   iconUrl: "/Alto.png",
   iconSize: [30, 30],
 });
-
-// Icono para tu ubicación 📍
 const iconUsuario = new L.Icon({
   iconUrl: "/MiUbicacion.png",
   iconSize: [35, 35],
 });
 
-// Componente para manejar clic en el mapa
+// 🖱️ Componente para manejar clic en el mapa
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
     click(e) {
@@ -40,15 +46,15 @@ function ClickHandler({ setTempMarker }) {
   return null;
 }
 
-// ✅ Componente para manejar movimiento cuando hay ubicación de usuario
-function UbicacionHandler({ userPosition }) {
+// 📍 Componente para mover el mapa según la ubicación
+function UbicacionHandler({ userPosition, recenter }) {
   const map = useMap();
 
   useEffect(() => {
-    if (userPosition) {
-      map.flyTo([userPosition.lat, userPosition.lng], 16); // Zoom + movimiento animado
+    if (userPosition && recenter) {
+      map.flyTo([userPosition.lat, userPosition.lng], 16);
     }
-  }, [userPosition]);
+  }, [recenter, userPosition]);
 
   return null;
 }
@@ -57,8 +63,10 @@ export default function Mapa() {
   const [embarazadas, setEmbarazadas] = useState([]);
   const [tempMarker, setTempMarker] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
+  const [recenter, setRecenter] = useState(false);
+  const [selectedRuta, setSelectedRuta] = useState(null);
 
-  // Obtener embarazadas desde el backend
+  // 🚀 Obtener embarazadas desde el backend
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
@@ -66,7 +74,7 @@ export default function Mapa() {
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
   }, []);
 
-  // ✅ Función para obtener ubicación
+  // 📍 Obtener ubicación del usuario
   const handleUbicacion = () => {
     if (!navigator.geolocation) {
       alert("⚠ Tu dispositivo no soporta geolocalización.");
@@ -77,6 +85,7 @@ export default function Mapa() {
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setUserPosition({ lat: latitude, lng: longitude });
+        setRecenter(true);
       },
       () => {
         alert("⚠ Activa la ubicación y da permisos al navegador.");
@@ -84,14 +93,47 @@ export default function Mapa() {
     );
   };
 
+  // 🎯 Volver a centrar el mapa
+  const handleRecentrar = () => {
+    if (!userPosition) {
+      alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
+      return;
+    }
+    setRecenter(true);
+    setTimeout(() => setRecenter(false), 100); // evita bucles
+  };
+
+  // 🗺️ Simular trazado de ruta (ejemplo)
+  const handleTrazarRuta = () => {
+    if (!userPosition) {
+      alert("Primero obtén tu ubicación para trazar una ruta.");
+      return;
+    }
+    const destino = embarazadas[0]; // por ahora, toma la primera como ejemplo
+    if (!destino) {
+      alert("No hay embarazadas registradas.");
+      return;
+    }
+    setSelectedRuta({
+      start: userPosition,
+      end: { lat: destino.Latitud, lng: destino.Longitud },
+    });
+  };
+
   return (
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-       {/* ✅ Botón ahora debajo del título */}
+      {/* 🔝 Barra de controles */}
       <div className="mapa-topbar">
-        <button className="btn-ubicacion" onClick={handleUbicacion}>
-          Mi ubicación
+        <button className="mapa-btn" onClick={handleUbicacion}>
+          📍 Ver mi ubicación
+        </button>
+        <button className="mapa-btn" onClick={handleRecentrar}>
+          🎯 Centrar en mi ubicación
+        </button>
+        <button className="mapa-btn" onClick={handleTrazarRuta}>
+          🗺️ Trazar ruta
         </button>
       </div>
 
@@ -101,17 +143,17 @@ export default function Mapa() {
           attribution="&copy; OpenStreetMap contributors"
         />
 
-        {/* 🔄 Si se actualiza la ubicación → mover el mapa */}
-        <UbicacionHandler userPosition={userPosition} />
+        {/* Movimiento según ubicación */}
+        <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
-        {/* 📍 Tu ubicación */}
+        {/* 📌 Tu ubicación */}
         {userPosition && (
           <Marker position={[userPosition.lat, userPosition.lng]} icon={iconUsuario}>
             <Popup>📌 Aquí estás tú</Popup>
           </Marker>
         )}
 
-        {/* Marcadores dinámicos BD */}
+        {/* 👩‍🍼 Marcadores BD */}
         {embarazadas.map((e) => {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
@@ -128,7 +170,7 @@ export default function Mapa() {
           );
         })}
 
-        {/* Marcador temporal cuando clicas en el mapa */}
+        {/* 📍 Nuevo marcador temporal */}
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
@@ -146,6 +188,17 @@ export default function Mapa() {
               </button>
             </Popup>
           </Marker>
+        )}
+
+        {/* 🧭 Trazar ruta (solo ejemplo visual) */}
+        {selectedRuta && (
+          <Polyline
+            positions={[
+              [selectedRuta.start.lat, selectedRuta.start.lng],
+              [selectedRuta.end.lat, selectedRuta.end.lng],
+            ]}
+            color="red"
+          />
         )}
 
         <ClickHandler setTempMarker={setTempMarker} />
