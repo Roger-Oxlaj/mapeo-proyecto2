@@ -210,3 +210,21 @@
     padding: 8px 12px;
   }
 }
+
+/* 🖼️ Ícono dentro de los botones */
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  filter: brightness(0) invert(1); /* lo vuelve blanco si tu ícono es oscuro */
+}
+
+/* En pantallas pequeñas reducimos el ícono */
+@media (max-width: 600px) {
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+  }
+}
