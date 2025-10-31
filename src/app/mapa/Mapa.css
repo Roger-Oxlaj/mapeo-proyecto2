@@ -171,6 +171,13 @@
   transition: all 0.2s ease-in-out;
 }
 
+.mapa-btn {
+  display: flex;
+  align-items: center; /* centra verticalmente el texto y el icono */
+  justify-content: center; /* centra el contenido dentro del botón */
+  gap: 8px; /* espacio entre icono y texto */
+}
+
 .mapa-btn:hover {
   background-color: #005fcc;
   transform: scale(1.05);
