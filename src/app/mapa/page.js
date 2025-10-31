@@ -128,7 +128,7 @@ export default function Mapa() {
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
           <img src="/UbicacionIcono.png" alt="icono ubicacion" className="btn-icon" />
-          Ver mi ubicación
+          
         </button>
         <button className="mapa-btn" onClick={handleRecentrar}>
           Centrar en mi ubicación
