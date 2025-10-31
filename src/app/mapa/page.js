@@ -127,6 +127,7 @@ export default function Mapa() {
       {/* 🔝 Barra de controles */}
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
+          <img src="/UbicacionIcono.png" alt="icono ubicacion" className="btn-icon" />
           Ver mi ubicación
         </button>
         <button className="mapa-btn" onClick={handleRecentrar}>
