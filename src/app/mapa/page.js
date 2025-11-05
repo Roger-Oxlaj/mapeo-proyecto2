@@ -209,7 +209,7 @@ export default function Mapa() {
             position={gifPosition}
             icon={L.divIcon({
               className: "gif-overlay",
-              html: `<img src="/UbicacionGif.gif" style="width:90px;height:90px;transform:translate(-50%,-50%);"/>`,
+              html: `<img src="/CentrarBusqueda.gif" style="width:90px;height:90px;transform:translate(-50%,-50%);"/>`,
               iconSize: [90, 90],
               iconAnchor: [45, 45],
             })}
