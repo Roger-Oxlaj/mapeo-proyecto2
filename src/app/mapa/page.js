@@ -34,11 +34,11 @@ const iconUsuario = new L.Icon({
   iconSize: [35, 35],
 });
 const iconSeleccionada = new L.Icon({
-  iconUrl: "/Seleccion.png", // Puedes crear un icono amarillo o diferente
+  iconUrl: "/Seleccion.png", // crea un ícono diferente para resaltar
   iconSize: [40, 40],
 });
 
-// 🖱️ Componente para manejar clics
+// 🖱️ Clic en mapa
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
     click(e) {
@@ -49,16 +49,14 @@ function ClickHandler({ setTempMarker }) {
   return null;
 }
 
-// 📍 Componente para mover el mapa según la ubicación
+// 📍 Control para centrar mapa según ubicación
 function UbicacionHandler({ userPosition, recenter }) {
   const map = useMap();
-
   useEffect(() => {
     if (userPosition && recenter) {
       map.flyTo([userPosition.lat, userPosition.lng], 16);
     }
   }, [recenter, userPosition]);
-
   return null;
 }
 
@@ -70,8 +68,9 @@ export default function Mapa() {
   const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const mapRef = useRef(null);
+  const popupRef = useRef(null);
 
-  // 🚀 Obtener embarazadas desde backend
+  // 🚀 Obtener datos del backend
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
@@ -79,13 +78,12 @@ export default function Mapa() {
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
   }, []);
 
-  // 📍 Obtener ubicación del usuario
+  // 📍 Ubicación del usuario
   const handleUbicacion = () => {
     if (!navigator.geolocation) {
       alert("⚠ Tu dispositivo no soporta geolocalización.");
       return;
     }
-
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
@@ -98,7 +96,7 @@ export default function Mapa() {
     );
   };
 
-  // 🔁 Recentrar mapa
+  // 🔁 Recentrar mapa en el usuario
   const handleRecentrar = () => {
     if (!userPosition) {
       alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
@@ -108,7 +106,7 @@ export default function Mapa() {
     setTimeout(() => setRecenter(false), 100);
   };
 
-  // 🔍 Buscar embarazada
+  // 🔍 Buscar embarazada y centrar mapa
   const handleBuscar = () => {
     if (!searchTerm.trim()) return;
 
@@ -121,17 +119,22 @@ export default function Mapa() {
       return;
     }
 
-    setSelectedEmbarazada(encontrada);
+    // ✅ Centrar mapa en la embarazada encontrada
     if (mapRef.current) {
-      mapRef.current.flyTo([encontrada.Latitud, encontrada.Longitud], 17);
+      mapRef.current.flyTo([encontrada.Latitud, encontrada.Longitud], 17, {
+        duration: 1.5,
+      });
     }
+
+    // ✅ Guardar selección para resaltar marcador y abrir popup
+    setSelectedEmbarazada(encontrada);
   };
 
   return (
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* 🔝 Barra superior con búsqueda */}
+      {/* 🔝 Barra superior */}
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
           <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon" />
@@ -143,7 +146,7 @@ export default function Mapa() {
           Centrar en mi ubicación
         </button>
 
-        {/* 🔍 Búsqueda */}
+        {/* 🔍 Buscar embarazada */}
         <input
           type="text"
           placeholder="Buscar embarazada..."
@@ -169,7 +172,7 @@ export default function Mapa() {
 
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
-        {/* 📌 Usuario */}
+        {/* 📍 Usuario */}
         {userPosition && (
           <Marker position={[userPosition.lat, userPosition.lng]} icon={iconUsuario}>
             <Popup>📍 Aquí estás tú</Popup>
@@ -181,12 +184,24 @@ export default function Mapa() {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
           if (e.Nivel === "Alto") icono = iconAlto;
-          if (selectedEmbarazada && selectedEmbarazada.ID_Embarazada === e.ID_Embarazada)
+          if (selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada)
             icono = iconSeleccionada;
 
           return (
-            <Marker key={e.ID_Embarazada} position={[e.Latitud, e.Longitud]} icon={icono}>
-              <Popup autoOpen={selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada}>
+            <Marker
+              key={e.ID_Embarazada}
+              position={[e.Latitud, e.Longitud]}
+              icon={icono}
+              eventHandlers={{
+                add: (m) => {
+                  if (selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada) {
+                    m.openPopup();
+                    popupRef.current = m;
+                  }
+                },
+              }}
+            >
+              <Popup>
                 <b>{e.Nombre}</b> <br />
                 Edad: {e.Edad} años <br />
                 Riesgo: {e.Nivel}
