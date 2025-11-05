@@ -12,31 +12,44 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./Mapa.css";
 
-// 🎯 Iconos personalizados
-const iconAgregar = new L.Icon({
-  iconUrl: "/Agregar.png",
-  iconSize: [30, 30],
-});
-const iconBajo = new L.Icon({
-  iconUrl: "/Bajo.png",
-  iconSize: [30, 30],
-});
-const iconMedio = new L.Icon({
-  iconUrl: "/Medio.png",
-  iconSize: [30, 30],
-});
-const iconAlto = new L.Icon({
-  iconUrl: "/Alto.png",
-  iconSize: [30, 30],
-});
-const iconUsuario = new L.Icon({
-  iconUrl: "/MiUbicacion.png",
-  iconSize: [35, 35],
-});
-const iconSeleccionada = new L.Icon({
-  iconUrl: "/Seleccion.png",
-  iconSize: [40, 40],
-});
+// 🎬 Componente para mostrar el GIF sobre la embarazada seleccionada
+function GifOverlay({ embarazada, gifName }) {
+  const map = useMap();
+  const [screenPos, setScreenPos] = useState(null);
+
+  useEffect(() => {
+    if (!embarazada) return;
+
+    const { Latitud, Longitud } = embarazada;
+    const latlng = L.latLng(Latitud, Longitud);
+    const point = map.latLngToContainerPoint(latlng);
+    setScreenPos(point);
+
+    // 🎞️ Ocultar el GIF después de 3 segundos
+    const timer = setTimeout(() => setScreenPos(null), 3000);
+    return () => clearTimeout(timer);
+  }, [embarazada, map]);
+
+  if (!screenPos) return null;
+
+  return (
+    <img
+      src={`/${gifName}`} // 👈 Aquí pones el nombre de tu gif, ej: Brillo.gif
+      alt="Efecto seleccionada"
+      style={{
+        position: "absolute",
+        top: `${screenPos.y}px`,
+        left: `${screenPos.x}px`,
+        width: "80px",
+        height: "80px",
+        transform: "translate(-50%, -50%)",
+        pointerEvents: "none",
+        zIndex: 1000,
+        animation: "fadeOut 3s ease forwards",
+      }}
+    />
+  );
+}
 
 // 🖱️ Detectar clics en el mapa
 function ClickHandler({ setTempMarker }) {
@@ -63,11 +76,13 @@ function UbicacionHandler({ userPosition, recenter }) {
 // 🧭 Mover mapa a la embarazada seleccionada
 function FlyToEmbarazada({ embarazada }) {
   const map = useMap();
+
   useEffect(() => {
     if (embarazada) {
       map.flyTo([embarazada.Latitud, embarazada.Longitud], 17, { duration: 1.2 });
     }
   }, [embarazada]);
+
   return null;
 }
 
@@ -78,7 +93,28 @@ export default function Mapa() {
   const [recenter, setRecenter] = useState(false);
   const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [gifPosition, setGifPosition] = useState(null); // 🌟 posición del GIF animado
+
+  // 🎯 Iconos personalizados
+  const iconAgregar = new L.Icon({
+    iconUrl: "/Agregar.png",
+    iconSize: [30, 30],
+  });
+  const iconBajo = new L.Icon({
+    iconUrl: "/Bajo.png",
+    iconSize: [30, 30],
+  });
+  const iconMedio = new L.Icon({
+    iconUrl: "/Medio.png",
+    iconSize: [30, 30],
+  });
+  const iconAlto = new L.Icon({
+    iconUrl: "/Alto.png",
+    iconSize: [30, 30],
+  });
+  const iconUsuario = new L.Icon({
+    iconUrl: "/MiUbicacion.png",
+    iconSize: [35, 35],
+  });
 
   // 🚀 Obtener embarazadas
   useEffect(() => {
@@ -130,9 +166,7 @@ export default function Mapa() {
       return;
     }
 
-    setSelectedEmbarazada(encontrada);
-    setGifPosition([encontrada.Latitud, encontrada.Longitud]); // 🎆 mostrar GIF
-    setTimeout(() => setGifPosition(null), 5000); // ocultar GIF después de 5s
+    setSelectedEmbarazada(encontrada); // activa FlyToEmbarazada y el GIF
   };
 
   return (
@@ -171,6 +205,7 @@ export default function Mapa() {
 
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
+        {/* 👩‍🍼 Centrar mapa en embarazada seleccionada */}
         <FlyToEmbarazada embarazada={selectedEmbarazada} />
 
         {/* 📍 Tu ubicación */}
@@ -185,16 +220,10 @@ export default function Mapa() {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
           if (e.Nivel === "Alto") icono = iconAlto;
-          if (selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada)
-            icono = iconSeleccionada;
 
           return (
-            <Marker
-              key={e.ID_Embarazada}
-              position={[e.Latitud, e.Longitud]}
-              icon={icono}
-            >
-              <Popup open={selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada}>
+            <Marker key={e.ID_Embarazada} position={[e.Latitud, e.Longitud]} icon={icono}>
+              <Popup>
                 <b>{e.Nombre}</b> <br />
                 Edad: {e.Edad} años <br />
                 Riesgo: {e.Nivel}
@@ -202,19 +231,6 @@ export default function Mapa() {
             </Marker>
           );
         })}
-
-        {/* 🌟 GIF temporal sobre el marcador buscado */}
-        {gifPosition && (
-          <Marker
-            position={gifPosition}
-            icon={L.divIcon({
-              className: "gif-overlay",
-              html: `<img src="/CentrarBusqueda.gif" style="width:90px;height:90px;transform:translate(-50%,-50%);"/>`,
-              iconSize: [90, 90],
-              iconAnchor: [45, 45],
-            })}
-          />
-        )}
 
         {/* 📍 Nuevo marcador temporal */}
         {tempMarker && (
@@ -237,6 +253,9 @@ export default function Mapa() {
         )}
 
         <ClickHandler setTempMarker={setTempMarker} />
+
+        {/* ✨ GIF overlay (Brillo.gif en /public) */}
+        <GifOverlay embarazada={selectedEmbarazada} gifName="CentrarBusqueda.gif" />
       </MapContainer>
     </div>
   );
