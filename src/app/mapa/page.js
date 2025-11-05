@@ -34,7 +34,7 @@ function GifOverlay({ embarazada, gifName }) {
 
   return (
     <img
-      src={`/${gifName}`} // 👈 Aquí pones el nombre de tu gif, ej: Brillo.gif
+      src={`/${gifName}`} // 👈 Aquí tu GIF (por ejemplo: CentrarBusqueda.gif)
       alt="Efecto seleccionada"
       style={{
         position: "absolute",
@@ -42,7 +42,7 @@ function GifOverlay({ embarazada, gifName }) {
         left: `${screenPos.x}px`,
         width: "80px",
         height: "80px",
-        transform: "translate(-50%, -50%)",
+        transform: "translate(-50%, -100%)", // 👈 centra y sube el gif justo encima
         pointerEvents: "none",
         zIndex: 1000,
         animation: "fadeOut 3s ease forwards",
@@ -204,8 +204,6 @@ export default function Mapa() {
         />
 
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
-
-        {/* 👩‍🍼 Centrar mapa en embarazada seleccionada */}
         <FlyToEmbarazada embarazada={selectedEmbarazada} />
 
         {/* 📍 Tu ubicación */}
@@ -254,7 +252,7 @@ export default function Mapa() {
 
         <ClickHandler setTempMarker={setTempMarker} />
 
-        {/* ✨ GIF overlay (Brillo.gif en /public) */}
+        {/* ✨ GIF overlay */}
         <GifOverlay embarazada={selectedEmbarazada} gifName="CentrarBusqueda.gif" />
       </MapContainer>
     </div>
