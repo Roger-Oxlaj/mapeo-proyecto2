@@ -34,7 +34,7 @@ const iconUsuario = new L.Icon({
   iconSize: [35, 35],
 });
 const iconSeleccionada = new L.Icon({
-  iconUrl: "/Seleccion.png", // ícono diferente para resaltar
+  iconUrl: "/Seleccion.png",
   iconSize: [40, 40],
 });
 
@@ -63,13 +63,11 @@ function UbicacionHandler({ userPosition, recenter }) {
 // 🧭 Mover mapa a la embarazada seleccionada
 function FlyToEmbarazada({ embarazada }) {
   const map = useMap();
-
   useEffect(() => {
     if (embarazada) {
       map.flyTo([embarazada.Latitud, embarazada.Longitud], 17, { duration: 1.2 });
     }
   }, [embarazada]);
-
   return null;
 }
 
@@ -80,6 +78,7 @@ export default function Mapa() {
   const [recenter, setRecenter] = useState(false);
   const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [gifPosition, setGifPosition] = useState(null); // 🌟 posición del GIF animado
 
   // 🚀 Obtener embarazadas
   useEffect(() => {
@@ -131,7 +130,9 @@ export default function Mapa() {
       return;
     }
 
-    setSelectedEmbarazada(encontrada); // esto activa FlyToEmbarazada
+    setSelectedEmbarazada(encontrada);
+    setGifPosition([encontrada.Latitud, encontrada.Longitud]); // 🎆 mostrar GIF
+    setTimeout(() => setGifPosition(null), 5000); // ocultar GIF después de 5s
   };
 
   return (
@@ -170,7 +171,6 @@ export default function Mapa() {
 
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
-        {/* 👩‍🍼 Centrar mapa en embarazada seleccionada */}
         <FlyToEmbarazada embarazada={selectedEmbarazada} />
 
         {/* 📍 Tu ubicación */}
@@ -202,6 +202,19 @@ export default function Mapa() {
             </Marker>
           );
         })}
+
+        {/* 🌟 GIF temporal sobre el marcador buscado */}
+        {gifPosition && (
+          <Marker
+            position={gifPosition}
+            icon={L.divIcon({
+              className: "gif-overlay",
+              html: `<img src="/UbicacionGif.gif" style="width:90px;height:90px;transform:translate(-50%,-50%);"/>`,
+              iconSize: [90, 90],
+              iconAnchor: [45, 45],
+            })}
+          />
+        )}
 
         {/* 📍 Nuevo marcador temporal */}
         {tempMarker && (
