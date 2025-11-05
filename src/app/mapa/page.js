@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -7,7 +7,6 @@ import {
   Popup,
   useMapEvents,
   useMap,
-  Polyline,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -34,8 +33,12 @@ const iconUsuario = new L.Icon({
   iconUrl: "/MiUbicacion.png",
   iconSize: [35, 35],
 });
+const iconSeleccionada = new L.Icon({
+  iconUrl: "/Seleccion.png", // Puedes crear un icono amarillo o diferente
+  iconSize: [40, 40],
+});
 
-// 🖱️ Componente para manejar clic en el mapa
+// 🖱️ Componente para manejar clics
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
     click(e) {
@@ -64,9 +67,11 @@ export default function Mapa() {
   const [tempMarker, setTempMarker] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
   const [recenter, setRecenter] = useState(false);
-  const [selectedRuta, setSelectedRuta] = useState(null);
+  const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const mapRef = useRef(null);
 
-  // 🚀 Obtener embarazadas desde el backend
+  // 🚀 Obtener embarazadas desde backend
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
@@ -93,74 +98,95 @@ export default function Mapa() {
     );
   };
 
-  // 🎯 Volver a centrar el mapa
+  // 🔁 Recentrar mapa
   const handleRecentrar = () => {
     if (!userPosition) {
       alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
       return;
     }
     setRecenter(true);
-    setTimeout(() => setRecenter(false), 100); // evita bucles
+    setTimeout(() => setRecenter(false), 100);
   };
 
-  // 🗺️ Simular trazado de ruta (ejemplo)
-  const handleTrazarRuta = () => {
-    if (!userPosition) {
-      alert("Primero obtén tu ubicación para trazar una ruta.");
+  // 🔍 Buscar embarazada
+  const handleBuscar = () => {
+    if (!searchTerm.trim()) return;
+
+    const encontrada = embarazadas.find((e) =>
+      e.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (!encontrada) {
+      alert("No se encontró ninguna embarazada con ese nombre.");
       return;
     }
-    const destino = embarazadas[0]; // por ahora, toma la primera como ejemplo
-    if (!destino) {
-      alert("No hay embarazadas registradas.");
-      return;
+
+    setSelectedEmbarazada(encontrada);
+    if (mapRef.current) {
+      mapRef.current.flyTo([encontrada.Latitud, encontrada.Longitud], 17);
     }
-    setSelectedRuta({
-      start: userPosition,
-      end: { lat: destino.Latitud, lng: destino.Longitud },
-    });
   };
 
   return (
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* 🔝 Barra de controles */}
+      {/* 🔝 Barra superior con búsqueda */}
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
-          <img src="/UbicacionIcono.png" alt="icono ubicacion" className="btn-icon" />
+          <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon" />
           Ver mi ubicación
         </button>
+
         <button className="mapa-btn" onClick={handleRecentrar}>
           <img src="/CentrarIcono.png" alt="centrar" className="btn-icon" />
           Centrar en mi ubicación
         </button>
+
+        {/* 🔍 Búsqueda */}
+        <input
+          type="text"
+          placeholder="Buscar embarazada..."
+          className="mapa-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="mapa-btn" onClick={handleBuscar}>
+          🔍 Buscar
+        </button>
       </div>
 
-      <MapContainer center={[14.533, -91.503]} zoom={13} className="mapa-leaflet">
+      <MapContainer
+        center={[14.533, -91.503]}
+        zoom={13}
+        className="mapa-leaflet"
+        whenCreated={(map) => (mapRef.current = map)}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
 
-        {/* Movimiento según ubicación */}
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
-        {/* 📌 Tu ubicación */}
+        {/* 📌 Usuario */}
         {userPosition && (
           <Marker position={[userPosition.lat, userPosition.lng]} icon={iconUsuario}>
-            <Popup>📌 Aquí estás tú</Popup>
+            <Popup>📍 Aquí estás tú</Popup>
           </Marker>
         )}
 
-        {/* 👩‍🍼 Marcadores BD */}
+        {/* 👩‍🍼 Embarazadas */}
         {embarazadas.map((e) => {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
           if (e.Nivel === "Alto") icono = iconAlto;
+          if (selectedEmbarazada && selectedEmbarazada.ID_Embarazada === e.ID_Embarazada)
+            icono = iconSeleccionada;
 
           return (
             <Marker key={e.ID_Embarazada} position={[e.Latitud, e.Longitud]} icon={icono}>
-              <Popup>
+              <Popup autoOpen={selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada}>
                 <b>{e.Nombre}</b> <br />
                 Edad: {e.Edad} años <br />
                 Riesgo: {e.Nivel}
@@ -169,7 +195,7 @@ export default function Mapa() {
           );
         })}
 
-        {/* 📍 Nuevo marcador temporal */}
+        {/* 📍 Marcador temporal */}
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
@@ -188,8 +214,6 @@ export default function Mapa() {
             </Popup>
           </Marker>
         )}
-
-        
 
         <ClickHandler setTempMarker={setTempMarker} />
       </MapContainer>
