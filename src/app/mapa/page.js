@@ -42,7 +42,7 @@ function GifOverlay({ embarazada, gifName }) {
         left: `${screenPos.x}px`,
         width: "80px",
         height: "80px",
-        transform: "translate(-50%, -50%)", // 👈 centra y sube el gif justo encima
+        transform: "translate(-50%, -30%)", // 👈 centra y sube el gif justo encima
         pointerEvents: "none",
         zIndex: 1000,
         animation: "fadeOut 3s ease forwards",
