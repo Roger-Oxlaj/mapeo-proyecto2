@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
   Marker,
   Popup,
-  useMapEvents,
   useMap,
+  useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -34,11 +34,11 @@ const iconUsuario = new L.Icon({
   iconSize: [35, 35],
 });
 const iconSeleccionada = new L.Icon({
-  iconUrl: "/Seleccion.png", // crea un ícono diferente para resaltar
+  iconUrl: "/Seleccion.png", // ícono diferente para resaltar
   iconSize: [40, 40],
 });
 
-// 🖱️ Clic en mapa
+// 🖱️ Detectar clics en el mapa
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
     click(e) {
@@ -49,7 +49,7 @@ function ClickHandler({ setTempMarker }) {
   return null;
 }
 
-// 📍 Control para centrar mapa según ubicación
+// 📍 Mover mapa cuando cambia ubicación del usuario
 function UbicacionHandler({ userPosition, recenter }) {
   const map = useMap();
   useEffect(() => {
@@ -60,6 +60,19 @@ function UbicacionHandler({ userPosition, recenter }) {
   return null;
 }
 
+// 🧭 Mover mapa a la embarazada seleccionada
+function FlyToEmbarazada({ embarazada }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (embarazada) {
+      map.flyTo([embarazada.Latitud, embarazada.Longitud], 17, { duration: 1.2 });
+    }
+  }, [embarazada]);
+
+  return null;
+}
+
 export default function Mapa() {
   const [embarazadas, setEmbarazadas] = useState([]);
   const [tempMarker, setTempMarker] = useState(null);
@@ -67,10 +80,8 @@ export default function Mapa() {
   const [recenter, setRecenter] = useState(false);
   const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const mapRef = useRef(null);
-  const popupRef = useRef(null);
 
-  // 🚀 Obtener datos del backend
+  // 🚀 Obtener embarazadas
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
@@ -78,12 +89,13 @@ export default function Mapa() {
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
   }, []);
 
-  // 📍 Ubicación del usuario
+  // 📍 Obtener ubicación del usuario
   const handleUbicacion = () => {
     if (!navigator.geolocation) {
       alert("⚠ Tu dispositivo no soporta geolocalización.");
       return;
     }
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
@@ -96,7 +108,7 @@ export default function Mapa() {
     );
   };
 
-  // 🔁 Recentrar mapa en el usuario
+  // 🔁 Recentrar mapa en usuario
   const handleRecentrar = () => {
     if (!userPosition) {
       alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
@@ -119,22 +131,14 @@ export default function Mapa() {
       return;
     }
 
-    // ✅ Centrar mapa en la embarazada encontrada
-    if (mapRef.current) {
-      mapRef.current.flyTo([encontrada.Latitud, encontrada.Longitud], 17, {
-        duration: 1.5,
-      });
-    }
-
-    // ✅ Guardar selección para resaltar marcador y abrir popup
-    setSelectedEmbarazada(encontrada);
+    setSelectedEmbarazada(encontrada); // esto activa FlyToEmbarazada
   };
 
   return (
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* 🔝 Barra superior */}
+      {/* 🔝 Barra de botones */}
       <div className="mapa-topbar">
         <button className="mapa-btn" onClick={handleUbicacion}>
           <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon" />
@@ -146,7 +150,6 @@ export default function Mapa() {
           Centrar en mi ubicación
         </button>
 
-        {/* 🔍 Buscar embarazada */}
         <input
           type="text"
           placeholder="Buscar embarazada..."
@@ -159,12 +162,7 @@ export default function Mapa() {
         </button>
       </div>
 
-      <MapContainer
-        center={[14.533, -91.503]}
-        zoom={13}
-        className="mapa-leaflet"
-        whenCreated={(map) => (mapRef.current = map)}
-      >
+      <MapContainer center={[14.533, -91.503]} zoom={13} className="mapa-leaflet">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
@@ -172,14 +170,17 @@ export default function Mapa() {
 
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
 
-        {/* 📍 Usuario */}
+        {/* 👩‍🍼 Centrar mapa en embarazada seleccionada */}
+        <FlyToEmbarazada embarazada={selectedEmbarazada} />
+
+        {/* 📍 Tu ubicación */}
         {userPosition && (
           <Marker position={[userPosition.lat, userPosition.lng]} icon={iconUsuario}>
             <Popup>📍 Aquí estás tú</Popup>
           </Marker>
         )}
 
-        {/* 👩‍🍼 Embarazadas */}
+        {/* 👩‍🍼 Marcadores */}
         {embarazadas.map((e) => {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
@@ -192,16 +193,8 @@ export default function Mapa() {
               key={e.ID_Embarazada}
               position={[e.Latitud, e.Longitud]}
               icon={icono}
-              eventHandlers={{
-                add: (m) => {
-                  if (selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada) {
-                    m.openPopup();
-                    popupRef.current = m;
-                  }
-                },
-              }}
             >
-              <Popup>
+              <Popup open={selectedEmbarazada?.ID_Embarazada === e.ID_Embarazada}>
                 <b>{e.Nombre}</b> <br />
                 Edad: {e.Edad} años <br />
                 Riesgo: {e.Nivel}
@@ -210,7 +203,7 @@ export default function Mapa() {
           );
         })}
 
-        {/* 📍 Marcador temporal */}
+        {/* 📍 Nuevo marcador temporal */}
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
