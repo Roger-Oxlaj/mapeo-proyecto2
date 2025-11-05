@@ -12,45 +12,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./Mapa.css";
 
-// 🎬 Componente para mostrar el GIF sobre la embarazada seleccionada
-function GifOverlay({ embarazada, gifName }) {
-  const map = useMap();
-  const [screenPos, setScreenPos] = useState(null);
-
-  useEffect(() => {
-    if (!embarazada) return;
-
-    const { Latitud, Longitud } = embarazada;
-    const latlng = L.latLng(Latitud, Longitud);
-    const point = map.latLngToContainerPoint(latlng);
-    setScreenPos(point);
-
-    // 🎞️ Ocultar el GIF después de 3 segundos
-    const timer = setTimeout(() => setScreenPos(null), 3000);
-    return () => clearTimeout(timer);
-  }, [embarazada, map]);
-
-  if (!screenPos) return null;
-
-  return (
-    <img
-      src={`/${gifName}`} // 👈 Aquí tu GIF (por ejemplo: CentrarBusqueda.gif)
-      alt="Efecto seleccionada"
-      style={{
-        position: "absolute",
-        top: `${screenPos.y}px`,
-        left: `${screenPos.x}px`,
-        width: "80px",
-        height: "80px",
-        transform: "translate(-40%, -20%)", // 👈 centra y sube el gif justo encima
-        pointerEvents: "none",
-        zIndex: 1000,
-        animation: "fadeOut 3s ease forwards",
-      }}
-    />
-  );
-}
-
 // 🖱️ Detectar clics en el mapa
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
@@ -166,7 +127,7 @@ export default function Mapa() {
       return;
     }
 
-    setSelectedEmbarazada(encontrada); // activa FlyToEmbarazada y el GIF
+    setSelectedEmbarazada(encontrada); // activa FlyToEmbarazada
   };
 
   return (
@@ -251,9 +212,6 @@ export default function Mapa() {
         )}
 
         <ClickHandler setTempMarker={setTempMarker} />
-
-        {/* ✨ GIF overlay */}
-        <GifOverlay embarazada={selectedEmbarazada} gifName="CentrarBusqueda.gif" />
       </MapContainer>
     </div>
   );
