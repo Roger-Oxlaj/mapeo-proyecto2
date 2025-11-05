@@ -15,10 +15,9 @@ export default function ClientLayout({ children }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch(
-          "https://backend-demo-xowfm.ondigitalocean.app/check-session",
-          { credentials: "include" }
-        );
+        const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/check-session", {
+          credentials: "include",
+        });
 
         if (!res.ok) throw new Error("Error de red en check-session");
 
@@ -27,6 +26,7 @@ export default function ClientLayout({ children }) {
         if (data.loggedIn) {
           setIsLoggedIn(true);
         } else {
+          // Si no está logueado y NO estamos en login, lo mandamos al login
           if (pathname !== "/") {
             router.push("/");
           }
@@ -66,95 +66,80 @@ export default function ClientLayout({ children }) {
     );
   }
 
+  // Si estamos en login ("/"), no mostramos el menú lateral
   const showMenu = isLoggedIn && pathname !== "/";
 
   return (
-    <div className="min-h-screen flex flex-col relative">
-      {/* Barra superior */}
+    <div className="min-h-screen flex relative">
+      {/* Botón hamburguesa */}
       {showMenu && (
-        <header
-          className={`fixed top-0 left-0 w-full bg-green-800 text-white p-4 z-[9999]
-          transform ${menuOpen ? "translate-y-0" : "-translate-y-full"} 
-          lg:translate-y-0 transition-transform duration-300 flex flex-col lg:flex-row lg:items-center lg:justify-between`}
+        <button
+          className="lg:hidden fixed top-4 left-4 z-50 bg-green-700 text-white p-2 rounded"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          {/* Encabezado con botón hamburguesa */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-white bg-blue-300 px-4 py-1 rounded">
-              MENU
-            </h2>
-            <button
-              className="lg:hidden text-white bg-green-700 p-2 rounded ml-4"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              ☰
-            </button>
-          </div>
+          ☰
+        </button>
+      )}
 
-          {/* Navegación */}
-          <nav
-            className={`flex flex-col lg:flex-row lg:space-x-4 mt-3 lg:mt-0 ${
-              menuOpen ? "block" : "hidden lg:flex"
-            }`}
-          >
-            <Link
-              href="/mapa"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+      {/* Overlay */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setMenuOpen(false)}
+        ></div>
+      )}
+
+      {/* Menú lateral */}
+      {showMenu && (
+        <aside
+          className={`fixed lg:static top-0 left-0 h-full w-64 bg-green-800 text-white p-6 z-[9999]
+          transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
+          lg:translate-x-0 transition-transform duration-300 z-50`}
+        >
+          <h2 className="text-2xl font-bold text-white bg-blue-300 px-4 py-2 text-center rounded">
+            MENU
+          </h2>
+          <nav className="space-y-3 mt-4">
+            <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
               MAPA
             </Link>
-            <Link
-              href="/embarazadas"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+            <Link href="/embarazadas" className="block hover:bg-green-600 p-1 rounded font-bold">
               EMBARAZADAS
             </Link>
-            <Link
-              href="/seguimiento"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+            <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
               SEGUIMIENTOS
             </Link>
-            <Link
-              href="/ubicaciones"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+            <Link href="/ubicaciones" className="block hover:bg-green-600 p-1 rounded font-bold">
               UBICACIONES
             </Link>
-            <Link
-              href="/riesgos"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+            <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
               RIESGOS
             </Link>
-            <Link
-              href="/direcciones"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+            <Link href="/direcciones" className="block hover:bg-green-600 p-1 rounded font-bold">
               DIRECCIONES
             </Link>
-            <Link
-              href="/reportes"
-              className="hover:bg-green-600 px-3 py-1 rounded font-bold"
-            >
+        
+            <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
               REPORTES
             </Link>
 
             <button
               onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-500 text-white px-3 py-1 font-bold rounded-full mt-2 lg:mt-0"
+              className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-4"
             >
               Cerrar Sesión
             </button>
 
-            <div className="mt-2 lg:mt-0">
-              <PaypalDonateButton />
-            </div>
+            <PaypalDonateButton />
           </nav>
-        </header>
+        </aside>
       )}
-
+      
       {/* Contenido principal */}
-      <main className="flex-1 bg-gray-100 p-6 mt-24">{children}</main>
+      <main className="flex-1 bg-gray-100 p-6">{children}</main>
+
+      {/* Imagen decorativa */}
+      
     </div>
   );
 }
