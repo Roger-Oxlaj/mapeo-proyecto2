@@ -77,6 +77,11 @@ export default function Mapa() {
     iconSize: [35, 35],
   });
 
+  const iconBuscar = new L.Icon({
+    iconUrl: "/BuscarIcono.png",
+    iconSize: [35, 35],
+  });
+
   // 🚀 Obtener embarazadas
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
@@ -154,7 +159,8 @@ export default function Mapa() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button className="mapa-btn" onClick={handleBuscar}>
-          🔍 Buscar
+          <img src="/BuscarIcono.png" alt="ubicacion" className="btn-icon" />
+          Buscar
         </button>
       </div>
 
