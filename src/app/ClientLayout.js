@@ -25,7 +25,6 @@ export default function ClientLayout({ children }) {
         if (data.loggedIn) {
           setIsLoggedIn(true);
         } else {
-          // Si no está logueado y NO estamos en login, lo mandamos al login
           if (pathname !== "/") {
             router.push("/");
           }
@@ -65,7 +64,6 @@ export default function ClientLayout({ children }) {
     );
   }
 
-  // Si estamos en login ("/"), no mostramos el menú lateral
   const showMenu = isLoggedIn && pathname !== "/";
 
   return (
@@ -91,13 +89,14 @@ export default function ClientLayout({ children }) {
       {/* Menú lateral */}
       {showMenu && (
         <aside
-          className={`fixed lg:static top-0 left-0 h-full w-64 bg-pink-800 text-white p-6 z-[9999]
+          className={`fixed lg:static top-0 left-0 min-h-screen w-64 bg-pink-800 text-white p-6 z-[9999]
           transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
           lg:translate-x-0 transition-transform duration-300 z-50`}
         >
-          <h2 className="text-2xl font-bold text-white bg-blue-300 px-4 py-2 text-center rounded">
+          <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
             MENU
           </h2>
+
           <nav className="space-y-3 mt-4">
             <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
               MAPA
@@ -114,7 +113,6 @@ export default function ClientLayout({ children }) {
             <Link href="/direcciones" className="block hover:bg-green-600 p-1 rounded font-bold">
               DIRECCIONES
             </Link>
-        
             <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
               REPORTES
             </Link>
@@ -128,7 +126,7 @@ export default function ClientLayout({ children }) {
           </nav>
         </aside>
       )}
-      
+
       {/* Contenido principal */}
       <main className="flex-1 bg-gray-100 p-6">{children}</main>
     </div>
