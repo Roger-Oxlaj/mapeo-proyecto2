@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./Direcciones.css"; // 👈 Importamos estilos
+import "./Direcciones.css";
 
 export default function DireccionesPage() {
   const [direcciones, setDirecciones] = useState([]);
@@ -27,33 +27,6 @@ export default function DireccionesPage() {
   useEffect(() => {
     cargarDirecciones();
   }, []);
-
-  const agregarDireccion = async (e) => {
-    e.preventDefault();
-
-    const data = {
-      Calle: e.target.calle.value,
-      Ciudad: e.target.ciudad.value,
-      Departamento: e.target.departamento.value,
-      Zona: e.target.zona.value || null,
-      Avenida: e.target.avenida.value || null,
-      NumeroCasa: e.target.numeroCasa.value || null,
-    };
-
-    const res = await fetch("https://backend-demo-xowfm.ondigitalocean.app/direcciones", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (res.ok) {
-      alert("✅ Dirección agregada");
-      e.target.reset();
-      cargarDirecciones();
-    } else {
-      alert("⚠ Error al agregar");
-    }
-  };
 
   const eliminarDireccion = async (id) => {
     if (!confirm("¿Eliminar esta dirección?")) return;
@@ -98,17 +71,6 @@ export default function DireccionesPage() {
 
   return (
     <div className="direcciones-container">
-      <h2 className="direcciones-title">Agregar Dirección</h2>
-      <form onSubmit={agregarDireccion} className="direcciones-form">
-        <input name="calle" placeholder="Calle" className="direcciones-input" required />
-        <input name="ciudad" placeholder="Ciudad" className="direcciones-input" required />
-        <input name="departamento" placeholder="Departamento" className="direcciones-input" required />
-        <input name="zona" placeholder="Zona (opcional)" className="direcciones-input" />
-        <input name="avenida" placeholder="Avenida (opcional)" className="direcciones-input" />
-        <input name="numeroCasa" placeholder="Número de casa" className="direcciones-input" />
-        <button className="direcciones-btn">Guardar</button>
-      </form>
-
       <h1 className="direcciones-title">Direcciones</h1>
       <table className="direcciones-table">
         <thead className="direcciones-thead">
@@ -120,7 +82,6 @@ export default function DireccionesPage() {
             <th className="direcciones-th">Zona</th>
             <th className="direcciones-th">Avenida</th>
             <th className="direcciones-th">Número de Casa</th>
-            {/* 👇 Aquí le ponemos la clase acciones */}
             <th className="direcciones-th acciones">Acciones</th>
           </tr>
         </thead>
@@ -141,8 +102,6 @@ export default function DireccionesPage() {
             </tr>
           ))}
         </tbody>
-
-
       </table>
 
       {editando && (
@@ -162,11 +121,7 @@ export default function DireccionesPage() {
             <label className="modal-label">Número de Casa</label>
             <input name="numeroCasa" defaultValue={editando.NumeroCasa} className="modal-input" />
             <div className="flex justify-end space-x-2">
-              <button
-                type="button"
-                onClick={() => setEditando(null)}
-                className="modal-btn modal-btn-cancelar"
-              >
+              <button type="button" onClick={() => setEditando(null)} className="modal-btn modal-btn-cancelar">
                 Cancelar
               </button>
               <button type="submit" className="modal-btn modal-btn-guardar">
