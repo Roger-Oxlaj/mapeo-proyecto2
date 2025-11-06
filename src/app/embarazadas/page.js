@@ -212,7 +212,7 @@ export default function EmbarazadasPage() {
       {editandoEmbarazada && (
         <div className="modal-overlay">
           <form onSubmit={guardarEdicionEmbarazada} className="modal-box">
-            <h2 className="modal-title">
+            <h2 className="title">
               Editar embarazada #{editandoEmbarazada.ID_Embarazada}
             </h2>
             <label className="modal-label">Nombre</label>
@@ -241,7 +241,7 @@ export default function EmbarazadasPage() {
       {editandoDireccion && (
         <div className="modal-overlay">
           <form onSubmit={guardarEdicionDireccion} className="modal-box">
-            <h2 className="modal-title">Editar Dirección #{editandoDireccion.ID_Direccion}</h2>
+            <h2 className="title">Editar Dirección #{editandoDireccion.ID_Direccion}</h2>
             <label className="modal-label">Calle</label>
             <input name="calle" defaultValue={editandoDireccion.Calle} className="modal-input" required />
             <label className="modal-label">Ciudad</label>
