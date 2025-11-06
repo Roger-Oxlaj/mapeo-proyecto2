@@ -110,9 +110,6 @@ export default function ClientLayout({ children }) {
             <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
               RIESGOS
             </Link>
-            <Link href="/direcciones" className="block hover:bg-green-600 p-1 rounded font-bold">
-              DIRECCIONES
-            </Link>
             <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
               REPORTES
             </Link>
