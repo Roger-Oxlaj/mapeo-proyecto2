@@ -1,5 +1,5 @@
 /* ============================= */
-/* RIESGOS*/
+/* 📍 RIESGOS (igual que UBICACIONES) */
 /* ============================= */
 
 /* Contenedor */
@@ -29,6 +29,55 @@
   color: #dc2626;
   text-align: center;
   font-weight: 500;
+}
+
+/* ============================= */
+/* FORMULARIO */
+/* ============================= */
+.riesgos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #888;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #111;
+  background-color: #fafafa;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+  outline: none;
+}
+
+/* Botón Guardar */
+.btn-submit {
+  background-color: #16a34a;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: fit-content;
+}
+
+.btn-submit:hover {
+  background-color: #128636;
 }
 
 /* ============================= */
