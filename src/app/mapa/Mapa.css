@@ -8,17 +8,43 @@
   overflow: hidden;
 }
 
-/* 🧭 Título */
-.mapa-title {
+/* 🏷️ Encabezado con 3 líneas */
+.mapa-header {
   text-align: center;
-  color: #ffffff;
-  padding: 15px;
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin: 0;
   background: linear-gradient(90deg, #2400d6, #3307f3);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
+/* 🧭 Título principal */
+.mapa-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.1;
+  position: relative;
+  top: -5px; /* lo sube un poquito */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* 🖥️ Subtítulo (un poco más pequeño) */
+.mapa-subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 5px 0 0 0;
+  letter-spacing: 0.5px;
+}
+
+/* 💜 Programa (aún más pequeño) */
+.mapa-programa {
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 3px 0 8px 0;
+  opacity: 0.9;
+}
+
 
 /* 🔝 Barra superior (botón debajo del título) */
 .mapa-topbar {

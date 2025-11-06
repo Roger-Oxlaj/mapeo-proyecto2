@@ -137,7 +137,11 @@ export default function Mapa() {
 
   return (
     <div className="mapa-container">
-      <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
+      <div className="mapa-header">
+        <h1 className="mapa-title">DDRISS DE SUCHITEPEQUEZ</h1>
+        <h2 className="mapa-subtitle">DEPARTAMENTO DE TECNOLOGÍAS DE LA INFORMACIÓN</h2>
+        <h3 className="mapa-programa">PROGRAMA DE SALUD REPRODUCTIVA</h3>
+      </div>
 
       {/* Barra de botones */}
       <div className="mapa-topbar">
