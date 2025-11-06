@@ -8,15 +8,15 @@
   overflow: hidden;
 }
 
-/* 🏷️ Encabezado más delgado */
+/* 🏷️ Encabezado más compacto */
 .mapa-header {
   text-align: center;
   background: linear-gradient(90deg, #2400d6, #3307f3);
   color: #fff;
-  padding-top: 6px;     /* antes 10px */
-  padding-bottom: 4px;  /* antes 5px */
+  padding-top: 5px;
+  padding-bottom: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  line-height: 1.1;
+  line-height: 1;
 }
 
 /* 🧭 Título principal */
@@ -24,8 +24,9 @@
   font-size: 2.3rem;
   font-weight: 800;
   margin: 0;
+  line-height: 1;
   position: relative;
-  top: -3px; /* lo sube un poquito más */
+  top: -3px; /* lo sube un poquito */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
@@ -33,7 +34,7 @@
 .mapa-subtitle {
   font-size: 1.05rem;
   font-weight: 500;
-  margin: 2px 0 0 0;
+  margin: 0; /* ❗ sin espacio entre título y subtítulo */
   letter-spacing: 0.5px;
 }
 
@@ -41,10 +42,10 @@
 .mapa-programa {
   font-size: 0.9rem;
   font-weight: 400;
-  margin: 2px 0 5px 0;
+  margin: 0;
+  margin-top: 2px; /* deja solo un mínimo espacio */
   opacity: 0.9;
 }
-
 
 
 /* 🔝 Barra superior (botón debajo del título) */
