@@ -228,3 +228,8 @@
   }
 }
 
+.subtitulo {
+  margin-top: 40px;
+  border-top: 2px solid #ddd;
+  padding-top: 20px;
+}
