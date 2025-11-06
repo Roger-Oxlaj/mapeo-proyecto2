@@ -155,10 +155,12 @@ export default function Mapa() {
 
         <button className="mapa-btn" onClick={handleUbicacion}>
           <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon"/>
+          Mi Ubicacion
         </button>
 
         <button className="mapa-btn" onClick={handleRecentrar}>
           <img src="/CentrarIcono.png" alt="centrar" className="btn-icon"/>
+          Centrar
         </button>
       </div>
 
