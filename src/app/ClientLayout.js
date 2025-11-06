@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import PaypalDonateButton from "./PaypalDonateButton";
 
 export default function ClientLayout({ children }) {
   const [cargando, setCargando] = useState(true);
@@ -126,8 +125,6 @@ export default function ClientLayout({ children }) {
             >
               Cerrar Sesión
             </button>
-
-            <PaypalDonateButton />
           </nav>
         </aside>
       )}
