@@ -61,7 +61,7 @@ export default function ClientLayout({ children }) {
   if (cargando) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-xl text-gray-600">🔄 Verificando sesión...</p>
+        <p className="text-xl text-gray-600">Verificando sesión...</p>
       </div>
     );
   }
@@ -92,7 +92,7 @@ export default function ClientLayout({ children }) {
       {/* Menú lateral */}
       {showMenu && (
         <aside
-          className={`fixed lg:static top-0 left-0 h-full w-64 bg-green-800 text-white p-6 z-[9999]
+          className={`fixed lg:static top-0 left-0 h-full w-64 bg-pink-800 text-white p-6 z-[9999]
           transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
           lg:translate-x-0 transition-transform duration-300 z-50`}
         >
