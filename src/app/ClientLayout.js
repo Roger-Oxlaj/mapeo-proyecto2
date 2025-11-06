@@ -109,9 +109,6 @@ export default function ClientLayout({ children }) {
             <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
               SEGUIMIENTOS
             </Link>
-            <Link href="/ubicaciones" className="block hover:bg-green-600 p-1 rounded font-bold">
-              UBICACIONES
-            </Link>
             <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
               RIESGOS
             </Link>
