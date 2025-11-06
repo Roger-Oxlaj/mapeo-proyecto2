@@ -109,7 +109,7 @@ export default function Mapa() {
     );
   };
 
-  // 🔁 Recentrar mapa en usuario
+  // Recentrar mapa en usuario
   const handleRecentrar = () => {
     if (!userPosition) {
       alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
@@ -119,7 +119,7 @@ export default function Mapa() {
     setTimeout(() => setRecenter(false), 100);
   };
 
-  // 🔍 Buscar embarazada y centrar mapa
+  // Buscar embarazada y centrar mapa
   const handleBuscar = () => {
     if (!searchTerm.trim()) return;
 
@@ -139,18 +139,8 @@ export default function Mapa() {
     <div className="mapa-container">
       <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* 🔝 Barra de botones */}
+      {/* Barra de botones */}
       <div className="mapa-topbar">
-        <button className="mapa-btn" onClick={handleUbicacion}>
-          <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon" />
-          Ver mi ubicación
-        </button>
-
-        <button className="mapa-btn" onClick={handleRecentrar}>
-          <img src="/CentrarIcono.png" alt="centrar" className="btn-icon" />
-          Centrar en mi ubicación
-        </button>
-
         <input
           type="text"
           placeholder="Buscar embarazada..."
@@ -161,6 +151,14 @@ export default function Mapa() {
         <button className="mapa-btn" onClick={handleBuscar}>
           <img src="/BuscarIcono.png" alt="ubicacion" className="btn-icon" />
           Buscar
+        </button>
+
+        <button className="mapa-btn" onClick={handleUbicacion}>
+          <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon"/>
+        </button>
+
+        <button className="mapa-btn" onClick={handleRecentrar}>
+          <img src="/CentrarIcono.png" alt="centrar" className="btn-icon"/>
         </button>
       </div>
 
