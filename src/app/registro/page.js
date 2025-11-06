@@ -26,6 +26,7 @@ export default function RegistrarEmbarazada() {
       Telefono: e.target.Telefono.value,
       Calle: e.target.Calle.value,
       Ciudad: e.target.Ciudad.value,
+      Municipio: e.target.Municipio.value,
       Departamento: e.target.Departamento.value,
       Zona: e.target.Zona.value || null,
       Avenida: e.target.Avenida.value || null,
@@ -76,6 +77,7 @@ export default function RegistrarEmbarazada() {
 
         <input name="Calle" placeholder="Calle" className="input" required />
         <input name="Ciudad" placeholder="Ciudad" className="input" required />
+        <input name="Municipio" placeholder="Municipio" className="input" required />
         <input name="Departamento" placeholder="Departamento" className="input" required />
 
         {/* 🔹 Nuevos campos */}
