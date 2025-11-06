@@ -272,3 +272,54 @@
   80% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+/* 🧭 Nuevos títulos */
+.titulo-contenedor {
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+}
+
+.titulo-principal {
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-top: 5px;
+}
+
+.titulo-secundario {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+  color: #e0e0e0;
+}
+
+.titulo-terciario {
+  font-size: 1rem;
+  color: #cfcfcf;
+  margin-bottom: 8px;
+}
+
+/* Botones secundarios (Mi ubicación / Centrar) */
+.botones-secundarios {
+  display: none; /* Ocultos por defecto (solo móviles) */
+  justify-content: center;
+  gap: 10px;
+  background-color: #3307f3;
+  padding: 8px;
+}
+
+@media (max-width: 600px) {
+  .mapa-topbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-buscar {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .botones-secundarios {
+    display: flex;
+  }
+}
