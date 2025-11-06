@@ -12,6 +12,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./Mapa.css";
 
+// 🖱️ Detectar clics en el mapa
 function ClickHandler({ setTempMarker }) {
   useMapEvents({
     click(e) {
@@ -22,6 +23,7 @@ function ClickHandler({ setTempMarker }) {
   return null;
 }
 
+// 📍 Mover mapa cuando cambia ubicación del usuario
 function UbicacionHandler({ userPosition, recenter }) {
   const map = useMap();
   useEffect(() => {
@@ -32,6 +34,7 @@ function UbicacionHandler({ userPosition, recenter }) {
   return null;
 }
 
+// 🧭 Mover mapa a la embarazada seleccionada
 function FlyToEmbarazada({ embarazada }) {
   const map = useMap();
 
@@ -52,12 +55,34 @@ export default function Mapa() {
   const [selectedEmbarazada, setSelectedEmbarazada] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const iconAgregar = new L.Icon({ iconUrl: "/Agregar.png", iconSize: [30, 30] });
-  const iconBajo = new L.Icon({ iconUrl: "/Bajo.png", iconSize: [30, 30] });
-  const iconMedio = new L.Icon({ iconUrl: "/Medio.png", iconSize: [30, 30] });
-  const iconAlto = new L.Icon({ iconUrl: "/Alto.png", iconSize: [30, 30] });
-  const iconUsuario = new L.Icon({ iconUrl: "/MiUbicacion.png", iconSize: [35, 35] });
+  // 🎯 Iconos personalizados
+  const iconAgregar = new L.Icon({
+    iconUrl: "/Agregar.png",
+    iconSize: [30, 30],
+  });
+  const iconBajo = new L.Icon({
+    iconUrl: "/Bajo.png",
+    iconSize: [30, 30],
+  });
+  const iconMedio = new L.Icon({
+    iconUrl: "/Medio.png",
+    iconSize: [30, 30],
+  });
+  const iconAlto = new L.Icon({
+    iconUrl: "/Alto.png",
+    iconSize: [30, 30],
+  });
+  const iconUsuario = new L.Icon({
+    iconUrl: "/MiUbicacion.png",
+    iconSize: [35, 35],
+  });
 
+  const iconBuscar = new L.Icon({
+    iconUrl: "/BuscarIcono.png",
+    iconSize: [35, 35],
+  });
+
+  // 🚀 Obtener embarazadas
   useEffect(() => {
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
@@ -65,6 +90,7 @@ export default function Mapa() {
       .catch((err) => console.error("⚠ Error cargando embarazadas:", err));
   }, []);
 
+  // 📍 Obtener ubicación del usuario
   const handleUbicacion = () => {
     if (!navigator.geolocation) {
       alert("⚠ Tu dispositivo no soporta geolocalización.");
@@ -83,6 +109,7 @@ export default function Mapa() {
     );
   };
 
+  // Recentrar mapa en usuario
   const handleRecentrar = () => {
     if (!userPosition) {
       alert("Primero obtén tu ubicación con el botón 'Mi ubicación'");
@@ -92,6 +119,7 @@ export default function Mapa() {
     setTimeout(() => setRecenter(false), 100);
   };
 
+  // Buscar embarazada y centrar mapa
   const handleBuscar = () => {
     if (!searchTerm.trim()) return;
 
@@ -104,19 +132,14 @@ export default function Mapa() {
       return;
     }
 
-    setSelectedEmbarazada(encontrada);
+    setSelectedEmbarazada(encontrada); // activa FlyToEmbarazada
   };
 
   return (
     <div className="mapa-container">
-      {/* 🔷 NUEVOS TÍTULOS */}
-      <div className="titulo-contenedor">
-        <h1 className="titulo-principal">DDRISS DE SUCHITEPEQUEZ</h1>
-        <h2 className="titulo-secundario">DEPARTAMENTO DE TECNOLOGIAS DE LA INFORMACION</h2>
-        <h3 className="titulo-terciario">PROGRAMA DE SALUD REPRODUCTIVA</h3>
-      </div>
+      <h1 className="mapa-title">MAPA GEORREFERENCIAL</h1>
 
-      {/* 🔍 Barra de búsqueda y botones */}
+      {/* Barra de botones */}
       <div className="mapa-topbar">
         <input
           type="text"
@@ -125,20 +148,18 @@ export default function Mapa() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="mapa-btn btn-buscar" onClick={handleBuscar}>
-          <img src="/BuscarIcono.png" alt="buscar" className="btn-icon" />
+        <button className="mapa-btn" onClick={handleBuscar}>
+          <img src="/BuscarIcono.png" alt="ubicacion" className="btn-icon" />
           Buscar
         </button>
-      </div>
 
-      {/* 📍 Botones fuera del cuadro azul (solo en móviles) */}
-      <div className="botones-secundarios">
         <button className="mapa-btn" onClick={handleUbicacion}>
-          <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon" />
-          Mi Ubicación
+          <img src="/UbicacionIcono.png" alt="ubicacion" className="btn-icon"/>
+          Mi Ubicacion
         </button>
+
         <button className="mapa-btn" onClick={handleRecentrar}>
-          <img src="/CentrarIcono.png" alt="centrar" className="btn-icon" />
+          <img src="/CentrarIcono.png" alt="centrar" className="btn-icon"/>
           Centrar
         </button>
       </div>
@@ -152,12 +173,14 @@ export default function Mapa() {
         <UbicacionHandler userPosition={userPosition} recenter={recenter} />
         <FlyToEmbarazada embarazada={selectedEmbarazada} />
 
+        {/* 📍 Tu ubicación */}
         {userPosition && (
           <Marker position={[userPosition.lat, userPosition.lng]} icon={iconUsuario}>
             <Popup>📍 Aquí estás tú</Popup>
           </Marker>
         )}
 
+        {/* 👩‍🍼 Marcadores */}
         {embarazadas.map((e) => {
           let icono = iconBajo;
           if (e.Nivel === "Medio") icono = iconMedio;
@@ -174,6 +197,7 @@ export default function Mapa() {
           );
         })}
 
+        {/* 📍 Nuevo marcador temporal */}
         {tempMarker && (
           <Marker position={[tempMarker.lat, tempMarker.lng]} icon={iconAgregar}>
             <Popup>
