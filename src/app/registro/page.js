@@ -7,6 +7,30 @@ export default function RegistrarEmbarazada() {
   const [error, setError] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
 
+  const municipios = [
+    "Chicacao",
+    "Cuyotenango",
+    "Mazatenango",
+    "Patulul",
+    "Pueblo Nuevo",
+    "Río Bravo",
+    "Samayac",
+    "San Antonio Suchitepéquez",
+    "San Bernardino",
+    "San Francisco Zapotitlán",
+    "San Gabriel",
+    "San José El Ídolo",
+    "San Juan Bautista",
+    "San Lorenzo",
+    "San Miguel Panán",
+    "San Pablo Jocopilas",
+    "Santa Bárbara",
+    "Santo Domingo Suchitepéquez",
+    "Santo Tomás La Unión",
+    "Zunilito",
+    "San Andrés Villa Seca",
+  ];
+
   useEffect(() => {
     const lat = localStorage.getItem("lat");
     const lng = localStorage.getItem("lng");
@@ -77,10 +101,20 @@ export default function RegistrarEmbarazada() {
 
         <input name="Calle" placeholder="Calle" className="input" required />
         <input name="Ciudad" placeholder="Ciudad" className="input" required />
-        <input name="Municipio" placeholder="Municipio" className="input" required />
+
+        {/* 🔹 ComboBox de Municipio */}
+        <select name="Municipio" className="input" required>
+          <option value="">Seleccione un municipio</option>
+          {municipios.map((mun) => (
+            <option key={mun} value={mun}>
+              {mun}
+            </option>
+          ))}
+        </select>
+
         <input name="Departamento" placeholder="Departamento" className="input" required />
 
-        {/* 🔹 Nuevos campos */}
+        {/* 🔹 Campos opcionales */}
         <input name="Zona" placeholder="Zona (opcional)" className="input" />
         <input name="Avenida" placeholder="Avenida (opcional)" className="input" />
         <input name="NumeroCasa" placeholder="Número de casa" className="input" required />
