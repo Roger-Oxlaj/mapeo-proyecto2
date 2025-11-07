@@ -16,7 +16,10 @@
   text-align: center;
 }
 
-/* Grid de tarjetas */
+/* ============================= */
+/* GRID DE TARJETAS              */
+/* ============================= */
+
 .reportes-grid {
   display: grid;
   justify-content: center;
@@ -25,7 +28,16 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
-/* Tarjetas */
+/* 🎯 Centrar la gráfica de pastel (solo la primera sección) */
+.reportes-grid:first-of-type {
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================= */
+/* TARJETAS DE GRÁFICAS          */
+/* ============================= */
+
 .report-card {
   flex: 0 1 400px;
   max-width: 500px;
@@ -43,14 +55,16 @@
 /* Título de tarjeta */
 .report-card-title {
   margin-bottom: 12px;
-  font-size: 16px;              /* 🔽 más compacto */
+  font-size: 16px;
   font-weight: 700;
   color: #2e7d32;
-  text-align: center;           /* 👈 centrado como en otros */
+  text-align: center;
 }
+
 /* ============================= */
-/* BUSCADOR DE MUNICIPIOS     */
+/* 🔍 BUSCADOR DE MUNICIPIOS     */
 /* ============================= */
+
 .buscador-container {
   display: flex;
   justify-content: center;
@@ -67,9 +81,9 @@
   width: 250px;
   outline: none;
   transition: all 0.2s;
-  color: #000;
-  font-weight: bold;
-  background-color: #fff;
+  color: #000;              /* texto negro */
+  font-weight: bold;        /* texto en negrita */
+  background-color: #fff;   /* fondo blanco */
 }
 
 .buscador-input:focus {
@@ -89,4 +103,13 @@
 
 .buscador-btn:hover {
   background-color: #1b5e20;
+}
+
+/* ============================= */
+/* RESPONSIVE                    */
+/* ============================= */
+@media (max-width: 768px) {
+  .reportes-grid {
+    grid-template-columns: 1fr;
+  }
 }
