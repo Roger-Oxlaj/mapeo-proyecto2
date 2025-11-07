@@ -6,8 +6,8 @@ import { useRouter, usePathname } from "next/navigation";
 export default function ClientLayout({ children }) {
   const [cargando, setCargando] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [rol, setRol] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [rol, setRol] = useState(null); // 👈 Nuevo estado para el rol del usuario
   const router = useRouter();
   const pathname = usePathname();
 
@@ -19,12 +19,11 @@ export default function ClientLayout({ children }) {
         });
 
         if (!res.ok) throw new Error("Error de red en check-session");
-
         const data = await res.json();
 
         if (data.loggedIn) {
           setIsLoggedIn(true);
-          setRol(data.user?.Rol || null); // 👈 Guarda el rol
+          setRol(data.user?.Rol || null);
         } else {
           if (pathname !== "/") router.push("/");
         }
@@ -49,7 +48,6 @@ export default function ClientLayout({ children }) {
       console.error("❌ Error cerrando sesión:", err);
     } finally {
       setIsLoggedIn(false);
-      setRol(null);
       router.push("/");
     }
   }
@@ -66,7 +64,7 @@ export default function ClientLayout({ children }) {
 
   return (
     <div className="min-h-screen flex relative">
-      {/* Botón hamburguesa (solo móviles) */}
+      {/* Botón hamburguesa */}
       {showMenu && (
         <button
           className="lg:hidden fixed top-4 left-4 z-50 bg-green-700 text-white p-2 rounded"
@@ -76,7 +74,7 @@ export default function ClientLayout({ children }) {
         </button>
       )}
 
-      {/* Overlay cuando el menú está abierto en móvil */}
+      {/* Overlay */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -87,55 +85,46 @@ export default function ClientLayout({ children }) {
       {/* Menú lateral */}
       {showMenu && (
         <aside
-          className={`fixed lg:static top-0 left-0 min-h-screen w-64 bg-pink-800 text-white p-6 
+          className={`fixed lg:static top-0 left-0 min-h-screen w-64 bg-pink-800 text-white p-6 z-[9999]
           transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
-          lg:translate-x-0 transition-transform duration-300 z-[9999] flex flex-col justify-between`}
+          lg:translate-x-0 transition-transform duration-300 z-50`}
         >
-          <div>
-            <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
-              MENU
-            </h2>
+          <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
+            MENU
+          </h2>
 
-            {/* Mostrar el rol actual */}
-            {rol && (
-              <p className="text-sm text-center mt-2 opacity-80">
-                Rol: <span className="font-bold">{rol}</span>
-              </p>
-            )}
-
-            <nav className="space-y-3 mt-6">
-              <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
-                MAPA
-              </Link>
-              <Link href="/embarazadas" className="block hover:bg-green-600 p-1 rounded font-bold">
-                EMBARAZADAS
-              </Link>
-              <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
-                SEGUIMIENTOS
-              </Link>
-              <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
-                RIESGOS
-              </Link>
-              <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
-                REPORTES
-              </Link>
-
-              {/* 👇 Solo visible si el usuario es Admin */}
-              {rol === "Admin" && (
-                <Link href="/usuarios" className="block hover:bg-green-600 p-1 rounded font-bold">
-                  USUARIOS
-                </Link>
-              )}
-            </nav>
-          </div>
-
-          {/* Botón cerrar sesión abajo */}
+          {/* 🔹 Botón de cerrar sesión arriba */}
           <button
             onClick={handleLogout}
-            className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-6"
+            className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-4"
           >
             Cerrar Sesión
           </button>
+
+          <nav className="space-y-3 mt-6">
+            <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
+              MAPA
+            </Link>
+            <Link href="/embarazadas" className="block hover:bg-green-600 p-1 rounded font-bold">
+              EMBARAZADAS
+            </Link>
+            <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
+              SEGUIMIENTOS
+            </Link>
+            <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
+              RIESGOS
+            </Link>
+            <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
+              REPORTES
+            </Link>
+
+            {/* 🔹 Enlace solo visible si el usuario es Admin */}
+            {rol === "Admin" && (
+              <Link href="/usuarios" className="block hover:bg-green-600 p-1 rounded font-bold">
+                USUARIOS
+              </Link>
+            )}
+          </nav>
         </aside>
       )}
 
