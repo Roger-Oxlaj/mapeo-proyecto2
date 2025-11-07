@@ -107,6 +107,7 @@ export default function EmbarazadasPage() {
     const data = {
       Calle: e.target.calle.value,
       Ciudad: e.target.ciudad.value,
+      Municipio: e.target.Municipio.value,
       Departamento: e.target.departamento.value,
       Zona: e.target.zona.value || null,
       Avenida: e.target.avenida.value || null,
@@ -179,6 +180,7 @@ export default function EmbarazadasPage() {
             <th className="embarazada-th">ID</th>
             <th className="embarazada-th">Calle</th>
             <th className="embarazada-th">Ciudad</th>
+            <th className="embarazada-th">Municipio</th>
             <th className="embarazada-th">Departamento</th>
             <th className="embarazada-th">Zona</th>
             <th className="embarazada-th">Avenida</th>
@@ -192,6 +194,7 @@ export default function EmbarazadasPage() {
               <td className="embarazada-td" data-label="ID">{d.ID_Direccion}</td>
               <td className="embarazada-td" data-label="Calle">{d.Calle}</td>
               <td className="embarazada-td" data-label="Ciudad">{d.Ciudad}</td>
+              <td className="embarazada-td" data-label="Municipio">{d.Municipio}</td>
               <td className="embarazada-td" data-label="Departamento">{d.Departamento}</td>
               <td className="embarazada-td" data-label="Zona">{d.Zona || "-"}</td>
               <td className="embarazada-td" data-label="Avenida">{d.Avenida || "-"}</td>
@@ -246,6 +249,8 @@ export default function EmbarazadasPage() {
             <input name="calle" defaultValue={editandoDireccion.Calle} className="modal-input" required />
             <label className="modal-label">Ciudad</label>
             <input name="ciudad" defaultValue={editandoDireccion.Ciudad} className="modal-input" required />
+            <label className="modal-label">Municipio</label>
+            <input name="Municipio" defaultValue={editandoDireccion.Municipio} className="modal-input" required />
             <label className="modal-label">Departamento</label>
             <input name="departamento" defaultValue={editandoDireccion.Departamento} className="modal-input" required />
             <label className="modal-label">Zona</label>
