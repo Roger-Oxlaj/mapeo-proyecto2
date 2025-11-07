@@ -87,47 +87,47 @@ export default function ClientLayout({ children }) {
       )}
 
       {/* Menú lateral */}
-    {showMenu && (
-      <aside
-        className={`fixed lg:static top-0 left-0 min-h-screen w-64 bg-pink-800 text-white p-6 z-[9999]
-        flex flex-col justify-between   /* 👈 esto lo alinea verticalmente */
-        transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
-        lg:translate-x-0 transition-transform duration-300 z-50`}
+  {showMenu && (
+    <aside
+      className={`fixed lg:static top-0 left-0 min-h-screen w-64 bg-pink-800 text-white p-6 z-[9999]
+      flex flex-col justify-between   /* 👈 esto lo alinea verticalmente */
+      transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
+      lg:translate-x-0 transition-transform duration-300 z-50`}
+    >
+      {/* Encabezado y links */}
+      <div>
+        <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
+          MENU
+        </h2>
+
+        <nav className="space-y-3 mt-4">
+          <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
+            MAPA
+          </Link>
+          <Link href="/embarazadas" className="block hover:bg-green-600 p-1 rounded font-bold">
+            EMBARAZADAS
+          </Link>
+          <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
+            SEGUIMIENTOS
+          </Link>
+          <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
+            RIESGOS
+          </Link>
+          <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
+            REPORTES
+          </Link>
+        </nav>
+      </div>
+
+      {/* Botón de cerrar sesión (abajo fijo) */}
+      <button
+        onClick={handleLogout}
+        className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-6"
       >
-        {/* Encabezado y links */}
-        <div>
-          <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
-            MENU
-          </h2>
-
-          <nav className="space-y-3 mt-4">
-            <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
-              MAPA
-            </Link>
-            <Link href="/embarazadas" className="block hover:bg-green-600 p-1 rounded font-bold">
-              EMBARAZADAS
-            </Link>
-            <Link href="/seguimiento" className="block hover:bg-green-600 p-1 rounded font-bold">
-              SEGUIMIENTOS
-            </Link>
-            <Link href="/riesgos" className="block hover:bg-green-600 p-1 rounded font-bold">
-              RIESGOS
-            </Link>
-            <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
-              REPORTES
-            </Link>
-          </nav>
-        </div>
-
-        {/* Botón de cerrar sesión (abajo fijo) */}
-        <button
-          onClick={handleLogout}
-          className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-6"
-        >
-          Cerrar Sesión
-        </button>
-      </aside>
-    )}
+        Cerrar Sesión
+      </button>
+    </aside>
+  )}
 
 
       {/* Contenido principal */}
