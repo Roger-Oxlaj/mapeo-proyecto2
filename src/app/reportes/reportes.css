@@ -48,3 +48,42 @@
   color: #2e7d32;
   text-align: center;           /* 👈 centrado como en otros */
 }
+/* ============================= */
+/* BUSCADOR DE MUNICIPIOS     */
+/* ============================= */
+.buscador-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.buscador-input {
+  padding: 8px 12px;
+  border: 2px solid #2e7d32;
+  border-radius: 8px;
+  width: 250px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.buscador-input:focus {
+  border-color: #388e3c;
+  box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+}
+
+.buscador-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.buscador-btn:hover {
+  background-color: #1b5e20;
+}

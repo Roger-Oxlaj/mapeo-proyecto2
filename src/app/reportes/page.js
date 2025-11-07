@@ -19,6 +19,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale,
 export default function Reportes() {
   const [riesgosGlobales, setRiesgosGlobales] = useState({ bajo: 0, medio: 0, alto: 0 });
   const [riesgosPorMunicipio, setRiesgosPorMunicipio] = useState({});
+  const [busqueda, setBusqueda] = useState(""); // 🔍 nuevo estado
 
   const MUNICIPIOS = [
     "Chicacao", "Cuyotenango", "Mazatenango", "Patulul", "Pueblo Nuevo",
@@ -30,29 +31,24 @@ export default function Reportes() {
   ];
 
   useEffect(() => {
-    // Cargar datos combinados desde el endpoint listo
     fetch("https://backend-demo-xowfm.ondigitalocean.app/embarazadas-con-direccion")
       .then((res) => res.json())
       .then((data) => {
-        // Inicializar estructura para conteos por municipio
         const conteosMunicipios = {};
         MUNICIPIOS.forEach((m) => {
           conteosMunicipios[m] = { Bajo: 0, Medio: 0, Alto: 0 };
         });
 
-        // Inicializar conteos globales
         const global = { bajo: 0, medio: 0, alto: 0 };
 
         data.forEach((item) => {
           const muni = item.Municipio;
           const nivel = item.Nivel;
 
-          // Conteo global
           if (nivel === "Bajo") global.bajo++;
           if (nivel === "Medio") global.medio++;
           if (nivel === "Alto") global.alto++;
 
-          // Conteo por municipio
           if (conteosMunicipios[muni]) {
             conteosMunicipios[muni][nivel]++;
           }
@@ -64,7 +60,6 @@ export default function Reportes() {
       .catch((err) => console.error("Error cargando datos:", err));
   }, []);
 
-  // 🎯 Datos para el pastel global
   const dataPastel = {
     labels: ["Bajo", "Medio", "Alto"],
     datasets: [
@@ -75,11 +70,16 @@ export default function Reportes() {
     ],
   };
 
+  // 🔎 Filtrar municipios según búsqueda
+  const municipiosFiltrados = Object.entries(riesgosPorMunicipio).filter(([muni]) =>
+    muni.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div className="reportes-container">
       <h1 className="reportes-title">REPORTES Y ESTADÍSTICAS</h1>
 
-      {/* 📊 Gráfica global de pastel */}
+      {/* 📊 Gráfica global */}
       <div className="reportes-grid">
         <div className="report-card">
           <h3 className="report-card-title">Proporción de embarazadas (General)</h3>
@@ -87,32 +87,56 @@ export default function Reportes() {
         </div>
       </div>
 
-      {/* 🏙️ Gráficas por municipio */}
-      <h2 className="reportes-title" style={{ marginTop: "30px" }}>
+      {/* 🔍 Buscador */}
+      <div className="buscador-container">
+        <input
+          type="text"
+          placeholder="Buscar municipio..."
+          className="buscador-input"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+        <button
+          className="buscador-btn"
+          onClick={() => setBusqueda("")}
+        >
+          Mostrar todos
+        </button>
+      </div>
+
+      {/* 🏙️ Gráficas filtradas */}
+      <h2 className="reportes-title" style={{ marginTop: "20px" }}>
         Riesgo por Municipio
       </h2>
+
       <div className="reportes-grid">
-        {Object.entries(riesgosPorMunicipio).map(([muni, valores]) => (
-          <div key={muni} className="report-card">
-            <h3 className="report-card-title">{muni}</h3>
-            <Bar
-              data={{
-                labels: ["Bajo", "Medio", "Alto"],
-                datasets: [
-                  {
-                    label: "Cantidad de embarazadas",
-                    data: [valores.Bajo, valores.Medio, valores.Alto],
-                    backgroundColor: ["#4caf50", "#ffb300", "#e53935"],
-                  },
-                ],
-              }}
-              options={{
-                scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
-                plugins: { legend: { display: false } },
-              }}
-            />
-          </div>
-        ))}
+        {municipiosFiltrados.length === 0 ? (
+          <p style={{ textAlign: "center", width: "100%", color: "#777" }}>
+            No se encontró ningún municipio con ese nombre.
+          </p>
+        ) : (
+          municipiosFiltrados.map(([muni, valores]) => (
+            <div key={muni} className="report-card">
+              <h3 className="report-card-title">{muni}</h3>
+              <Bar
+                data={{
+                  labels: ["Bajo", "Medio", "Alto"],
+                  datasets: [
+                    {
+                      label: "Cantidad de embarazadas",
+                      data: [valores.Bajo, valores.Medio, valores.Alto],
+                      backgroundColor: ["#4caf50", "#ffb300", "#e53935"],
+                    },
+                  ],
+                }}
+                options={{
+                  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+                  plugins: { legend: { display: false } },
+                }}
+              />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
