@@ -18,10 +18,11 @@
 
 /* Grid de tarjetas */
 .reportes-grid {
-  display: flex;
+  display: grid;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;                    /* 👈 separación uniforme */
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
 /* Tarjetas */
