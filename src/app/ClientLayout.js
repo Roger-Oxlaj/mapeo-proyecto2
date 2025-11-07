@@ -29,6 +29,12 @@ export default function ClientLayout({ children }) {
             router.push("/");
           }
         }
+
+        if (data.loggedIn) {
+          setIsLoggedIn(true);
+          setRol(data.user.Rol);
+        }
+
       } catch (err) {
         console.error("Error verificando sesión:", err);
         if (pathname !== "/") {
@@ -113,7 +119,11 @@ export default function ClientLayout({ children }) {
             <Link href="/reportes" className="block hover:bg-green-600 p-1 rounded font-bold">
               REPORTES
             </Link>
-
+            {rol === "Admin" && (
+              <Link href="/usuarios" className="block hover:bg-green-600 p-1 rounded font-bold">
+                USUARIOS
+              </Link>
+            )}
             <button
               onClick={handleLogout}
               className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-4"
