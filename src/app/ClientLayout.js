@@ -93,14 +93,6 @@ export default function ClientLayout({ children }) {
             MENU
           </h2>
 
-          {/* 🔹 Botón de cerrar sesión arriba */}
-          <button
-            onClick={handleLogout}
-            className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-4"
-          >
-            Cerrar Sesión
-          </button>
-
           <nav className="space-y-3 mt-6">
             <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
               MAPA
@@ -125,6 +117,14 @@ export default function ClientLayout({ children }) {
               </Link>
             )}
           </nav>
+          {/* 🔹 Botón de cerrar sesión arriba */}
+          <button
+            onClick={handleLogout}
+            className="block w-full text-center bg-red-600 hover:bg-red-500 text-white p-2 font-bold rounded-full mt-4"
+          >
+            Cerrar Sesión
+          </button>
+
         </aside>
       )}
 
