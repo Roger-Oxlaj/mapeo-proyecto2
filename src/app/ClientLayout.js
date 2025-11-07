@@ -92,7 +92,12 @@ export default function ClientLayout({ children }) {
           <h2 className="text-2xl font-bold text-white bg-black px-4 py-2 text-center rounded">
             MENU
           </h2>
-
+          {/* Mostrar el rol actual */}
+            {rol && (
+              <p className="text-sm text-center mt-2 opacity-80">
+                Rol: <span className="font-bold">{rol}</span>
+              </p>
+            )}
           <nav className="space-y-3 mt-6">
             <Link href="/mapa" className="block hover:bg-green-600 p-1 rounded font-bold">
               MAPA
