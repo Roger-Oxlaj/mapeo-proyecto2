@@ -3,17 +3,17 @@
 /* ============================= */
 
 .reportes-container {
-  padding: 20px;                /* 🔽 menos padding que antes */
+  padding: 20px;
   background-color: #f5f7fa;
   min-height: 100vh;
 }
 
 .reportes-title {
   color: #1a1a1a;
-  font-size: 24px;              /* 🔽 título más compacto */
+  font-size: 24px;
   margin-bottom: 20px;
   font-weight: 800;
-  text-align: center;           /* 👈 centrado como en otros módulos */
+  text-align: center;
 }
 
 /* Grid de tarjetas */
@@ -27,10 +27,10 @@
 
 /* Tarjetas */
 .report-card {
-  flex: 1 1 350px;              /* 👈 ancho mínimo, se adapta */
-  max-width: 500px;             /* 👈 límite de ancho */
+  flex: 0 1 400px;
+  max-width: 500px;
   background: #fff;
-  padding: 16px;                /* 🔽 menos padding */
+  padding: 16px;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
@@ -67,6 +67,9 @@
   width: 250px;
   outline: none;
   transition: all 0.2s;
+  color: #000;
+  font-weight: bold;
+  background-color: #fff;
 }
 
 .buscador-input:focus {
